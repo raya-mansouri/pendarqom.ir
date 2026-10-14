@@ -17,6 +17,7 @@ const { title, description, ogImage, jsonLd = [] } = Astro.props;
 <html lang="fa" dir="rtl">
   <head>
     <BaseHead title={title} description={description} ogImage={ogImage} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     {jsonLd.map((data) => <JsonLd data={data} />)}
   </head>
   <body class="flex min-h-screen flex-col">

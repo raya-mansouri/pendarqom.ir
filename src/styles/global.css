@@ -117,8 +117,12 @@ h1, h2, h3, h4 {
   }
 }
 
-/* Scroll-reveal (JS adds .is-visible; disabled for reduced-motion users via media query above) */
-.reveal {
+/* Scroll-reveal. The hidden state is gated behind .js (added by a tiny inline
+   script in <head> before first paint) so content is never hidden when JS
+   fails to run. .reveal.is-visible only sets visible styles, so it needs no
+   prefix; the reduced-motion override must match the .js specificity to keep
+   winning over the hidden state. */
+.js .reveal {
   opacity: 0;
   translate: 0 16px;
   transition: opacity 0.45s ease-out, translate 0.45s ease-out;
@@ -128,5 +132,5 @@ h1, h2, h3, h4 {
   translate: 0 0;
 }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; translate: none; }
+  .js .reveal { opacity: 1; translate: none; }
 }

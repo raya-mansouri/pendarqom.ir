@@ -20,7 +20,8 @@
   --color-primary-800: #264741;
   --color-primary-900: #1f3a35;
 
-  --color-clay: #8c5a3c;
+  /* Muted logo-gold accent (royal blue + gold nastaliq logo) — AA ≥4.5:1 on cream #faf8f4 and white */
+  --color-clay: #8a6d1f;
   --color-status-open: #2e7d4f;
   --color-status-open-bg: #e6f4ec;
   --color-status-full: #9a6b1f;

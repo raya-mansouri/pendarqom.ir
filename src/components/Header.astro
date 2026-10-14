@@ -1,3 +1,84 @@
 ---
+import { site } from "../data/site";
+import { telHref } from "../utils/links";
+
+const nav = [
+  { href: "/", label: "خانه" },
+  { href: "/services/", label: "خدمات" },
+  { href: "/therapists/", label: "درمانگران" },
+  { href: "/workshops/", label: "کارگاه‌ها" },
+  { href: "/articles/", label: "مقالات" },
+  { href: "/about/", label: "درباره ما" },
+  { href: "/contact/", label: "تماس" },
+];
+const current = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? current === "/" : current.startsWith(href);
+const primaryPhone = site.phones[0];
 ---
-<header></header>
+<header class="sticky top-0 z-40 border-b border-primary-100 bg-bg/90 backdrop-blur">
+  <div class="container-site flex h-16 items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-2 text-lg font-extrabold text-primary-700">
+      <span aria-hidden="true" class="grid size-9 place-items-center rounded-xl bg-primary-600 text-white">پ</span>
+      <span class="hidden sm:inline">{site.shortName}</span>
+    </a>
+
+    <nav aria-label="ناوبری اصلی" class="hidden items-center gap-1 lg:flex">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          aria-current={isActive(item.href) ? "page" : undefined}
+          class:list={[
+            "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+            isActive(item.href) ? "bg-primary-100 text-primary-800" : "text-ink-muted hover:bg-primary-50 hover:text-primary-700",
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href={telHref(primaryPhone.number)} class="btn btn-primary hidden sm:inline-flex">رزرو نوبت</a>
+      <button
+        id="menu-toggle"
+        type="button"
+        class="btn btn-secondary lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="sr-only">باز کردن منو</span>
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="fixed inset-y-0 start-0 z-50 w-72 translate-x-full bg-surface p-6 shadow-soft transition-transform duration-300 lg:hidden"
+  >
+    <div class="mb-6 flex items-center justify-between">
+      <span class="text-lg font-extrabold text-primary-700">{site.shortName}</span>
+      <button id="menu-close" type="button" class="btn btn-ghost px-2 py-1" >
+        <span class="sr-only">بستن منو</span>
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <nav aria-label="ناوبری موبایل" class="flex flex-col gap-1">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          aria-current={isActive(item.href) ? "page" : undefined}
+          class:list={[
+            "rounded-lg px-3 py-2.5 text-base font-medium",
+            isActive(item.href) ? "bg-primary-100 text-primary-800" : "text-ink hover:bg-primary-50",
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a href={telHref(primaryPhone.number)} class="btn btn-primary mt-4">رزرو نوبت</a>
+    </nav>
+  </div>
+  <div id="menu-backdrop" class="fixed inset-0 z-40 hidden bg-ink/40 lg:hidden"></div>
+</header>

@@ -1,0 +1,15 @@
+---
+import { site } from "../data/site";
+import { toPersianDigits } from "../utils/persian";
+import { telHref } from "../utils/links";
+---
+<div class="bg-primary-900 text-primary-50">
+  <div class="container-site flex flex-wrap items-center justify-center gap-x-6 gap-y-1 py-3 text-sm">
+    <span class="font-semibold">در شرایط بحرانی تنها نیستید:</span>
+    {site.crisisLines.map((line) => (
+      <a href={telHref(line.number)} class="inline-flex items-center gap-1 underline underline-offset-4 hover:text-white">
+        {line.label}: <bdi>{toPersianDigits(line.number)}</bdi>
+      </a>
+    ))}
+  </div>
+</div>

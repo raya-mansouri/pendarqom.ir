@@ -1,3 +1,61 @@
 ---
+import { site } from "../data/site";
+import { telHref, whatsappLink } from "../utils/links";
+import { toPersianDigits } from "../utils/persian";
+import CrisisStrip from "./CrisisStrip.astro";
+
+const year = toPersianDigits(site.foundedYear);
 ---
-<footer></footer>
+<footer class="mt-auto border-t border-primary-100 bg-surface">
+  <div class="container-site grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
+    <section aria-label="درباره کلینیک">
+      <p class="text-lg font-extrabold text-primary-700">{site.shortName}</p>
+      <p class="mt-2 text-sm text-ink-muted">{site.tagline}</p>
+      <p class="mt-4 text-xs text-ink-muted">
+        {site.licenses.map((l) => `${l.org} — ${l.number}`).join(" · ")}
+      </p>
+    </section>
+
+    <nav aria-label="پیوندهای سریع">
+      <p class="mb-3 font-bold">دسترسی سریع</p>
+      <ul class="space-y-2 text-sm text-ink-muted">
+        <li><a class="hover:text-primary-700" href="/services/">خدمات</a></li>
+        <li><a class="hover:text-primary-700" href="/therapists/">درمانگران</a></li>
+        <li><a class="hover:text-primary-700" href="/workshops/">کارگاه‌ها</a></li>
+        <li><a class="hover:text-primary-700" href="/articles/">مقالات</a></li>
+        <li><a class="hover:text-primary-700" href="/faq/">سؤالات متداول</a></li>
+        <li><a class="hover:text-primary-700" href="/about/">درباره ما</a></li>
+      </ul>
+    </nav>
+
+    <section aria-label="تماس">
+      <p class="mb-3 font-bold">تماس با ما</p>
+      <ul class="space-y-2 text-sm text-ink-muted">
+        {site.phones.map((p) => (
+          <li><a class="hover:text-primary-700" href={telHref(p.number)}><bdi>{toPersianDigits(p.number)}</bdi></a></li>
+        ))}
+        {site.whatsapp && (
+          <li><a class="hover:text-primary-700" href={whatsappLink(site.whatsapp)}>واتساپ کلینیک</a></li>
+        )}
+        <li class="leading-6">{site.address}</li>
+      </ul>
+    </section>
+
+    <section aria-label="ساعت کاری">
+      <p class="mb-3 font-bold">ساعت کاری</p>
+      <ul class="space-y-1.5 text-sm text-ink-muted">
+        {site.hours.map((h) => (
+          <li class="flex justify-between gap-4"><span>{h.days}</span><span>{h.time}</span></li>
+        ))}
+      </ul>
+    </section>
+  </div>
+
+  <CrisisStrip />
+
+  <div class="border-t border-primary-100 py-4">
+    <p class="container-site text-center text-xs text-ink-muted">
+      © {year} کلینیک علمی روانشناسی پندار نیم رخ — کلیه حقوق محفوظ است.
+    </p>
+  </div>
+</footer>

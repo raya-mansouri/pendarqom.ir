@@ -83,7 +83,7 @@ const whyUs = [
   <!-- ۲. خدمات -->
   <section class="section bg-surface" aria-labelledby="services-title">
     <div class="container-site">
-      <SectionHeading eyebrow="خدمات ما" title="خدمات تخصصی کلینیک" lead="از درمان فردی تا ارزیابی کودک — با روش‌های علمی و مبتنی بر شواهد" />
+      <SectionHeading id="services-title" eyebrow="خدمات ما" title="خدمات تخصصی کلینیک" lead="از درمان فردی تا ارزیابی کودک — با روش‌های علمی و مبتنی بر شواهد" />
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((s) => (
           <ServiceCard
@@ -101,7 +101,7 @@ const whyUs = [
   <!-- ۳. چرا ما -->
   <section class="section" aria-labelledby="why-title">
     <div class="container-site">
-      <SectionHeading eyebrow="چرا پندار نیم رخ" title="اعتماد شما، مسئولیت ما" />
+      <SectionHeading id="why-title" eyebrow="چرا پندار نیم رخ" title="اعتماد شما، مسئولیت ما" />
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {whyUs.map((item) => (
           <div class="card reveal p-6">
@@ -116,7 +116,7 @@ const whyUs = [
   <!-- ۴. درمانگران -->
   <section class="section bg-surface" aria-labelledby="team-title">
     <div class="container-site">
-      <SectionHeading eyebrow="تیم ما" title="درمانگران کلینیک" lead="با متخصصان ما آشنا شوید" />
+      <SectionHeading id="team-title" eyebrow="تیم ما" title="درمانگران کلینیک" lead="با متخصصان ما آشنا شوید" />
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {therapists.map((t) => (
           <TherapistCard id={t.id} name={t.data.name} title={t.data.title} specialties={t.data.specialties} />
@@ -131,7 +131,7 @@ const whyUs = [
   <!-- ۵. کارگاه‌ها -->
   <section class="section" aria-labelledby="workshops-title">
     <div class="container-site">
-      <SectionHeading eyebrow="آموزش" title="کارگاه‌های پیشِ رو" lead="مهارت‌های روانی را در محیطی گروهی و کاربردی تمرین کنید" />
+      <SectionHeading id="workshops-title" eyebrow="آموزش" title="کارگاه‌های پیشِ رو" lead="مهارت‌های روانی را در محیطی گروهی و کاربردی تمرین کنید" />
       <div class="grid gap-6 md:grid-cols-3">
         {workshops.map((w) => (
           <WorkshopCard
@@ -152,7 +152,7 @@ const whyUs = [
   <!-- ۶. نظرات مراجعین -->
   <section class="section bg-surface" aria-labelledby="testimonials-title">
     <div class="container-site">
-      <SectionHeading eyebrow="تجربه مراجعین" title="آنچه مراجعان ما می‌گویند" />
+      <SectionHeading id="testimonials-title" eyebrow="تجربه مراجعین" title="آنچه مراجعان ما می‌گویند" />
       <div class="grid gap-6 md:grid-cols-3">
         {shownTestimonials.map((t) => (
           <TestimonialCard quote={t.quote} attribution={t.attribution} />
@@ -164,7 +164,7 @@ const whyUs = [
   <!-- ۷. مقالات -->
   <section class="section" aria-labelledby="articles-title">
     <div class="container-site">
-      <SectionHeading eyebrow="خواندنی‌ها" title="آخرین مقالات" />
+      <SectionHeading id="articles-title" eyebrow="خواندنی‌ها" title="آخرین مقالات" />
       <div class="grid gap-6 md:grid-cols-3">
         {articles.map((a) => (
           <ArticleCard

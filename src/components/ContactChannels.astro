@@ -1,0 +1,33 @@
+---
+import { site } from "../data/site";
+import { telHref, whatsappLink } from "../utils/links";
+import Icon from "./Icon.astro";
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+
+const primaryPhone = site.phones[0];
+const channels = [
+  site.whatsapp && {
+    label: "واتساپ",
+    href: whatsappLink(site.whatsapp),
+    icon: "whatsapp",
+    cls: "btn-whatsapp",
+  },
+  { label: primaryPhone.label, href: telHref(primaryPhone.number), icon: "phone", cls: "btn-call" },
+  site.telegram && { label: "تلگرام", href: site.telegram, icon: "telegram", cls: "btn-secondary" },
+  site.instagram && { label: "اینستاگرام", href: site.instagram, icon: "instagram", cls: "btn-secondary" },
+  site.eitea && { label: "ایتا", href: site.eitea, icon: "chat", cls: "btn-secondary" },
+  site.bale && { label: "بله", href: site.bale, icon: "chat", cls: "btn-secondary" },
+].filter(Boolean) as { label: string; href: string; icon: string; cls: string }[];
+---
+<div class:list={["flex flex-wrap gap-3", compact && "gap-2"]}>
+  {channels.map((c) => (
+    <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener" class:list={["btn", c.cls, compact && "px-3.5 py-2 text-xs"]}>
+      <Icon name={c.icon} size={compact ? 16 : 18} />
+      {c.label}
+    </a>
+  ))}
+</div>

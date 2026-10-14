@@ -1,0 +1,32 @@
+---
+import { articleCovers } from "../../utils/assets";
+import { toPersianDigits } from "../../utils/persian";
+
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  dateDisplay: string;
+  category: string;
+  readingTime: number;
+}
+const { id, title, description, dateDisplay, category, readingTime } = Astro.props;
+const cover = articleCovers[id];
+---
+<a href={`/articles/${id}/`} class="card reveal group overflow-hidden transition-transform hover:-translate-y-1">
+  {cover ? (
+    <img src={cover.src} alt="" width="1200" height="630" loading="lazy" class="aspect-[1200/630] w-full object-cover" />
+  ) : (
+    <div class="aspect-[1200/630] w-full bg-gradient-to-bl from-primary-200 to-primary-50" aria-hidden="true"></div>
+  )}
+  <div class="p-5">
+    <div class="flex items-center gap-2 text-xs text-ink-muted">
+      <span class="badge bg-primary-50 text-primary-700">{category}</span>
+      <span>{dateDisplay}</span>
+      <span aria-hidden="true">·</span>
+      <span>{toPersianDigits(readingTime)} دقیقه مطالعه</span>
+    </div>
+    <h3 class="mt-2 font-bold leading-7 group-hover:text-primary-700">{title}</h3>
+    <p class="mt-1 line-clamp-2 text-sm text-ink-muted">{description}</p>
+  </div>
+</a>

@@ -1,0 +1,22 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  items: { label: string; href?: string }[];
+}
+const { items } = Astro.props;
+---
+<nav aria-label="مسیر صفحه" class="text-sm text-ink-muted">
+  <ol class="flex flex-wrap items-center gap-1.5">
+    {items.map((item, i) => (
+      <li class="flex items-center gap-1.5">
+        {i > 0 && <Icon name="arrow" size={14} class="rotate-180" aria-hidden="true" />}
+        {item.href ? (
+          <a href={item.href} class="hover:text-primary-700">{item.label}</a>
+        ) : (
+          <span aria-current="page" class="font-medium text-ink">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

@@ -33,7 +33,7 @@ A Persian-language (RTL), static marketing and information website for کلین�
 | 4 | Maintainer | Owner/developer edits Markdown + pushes; AI-assisted editing expected |
 | 5 | Sections | Home, Services, Therapists, Workshops, Articles, About+Gallery, FAQ, Contact, 404 |
 | 6 | Visual mood | «Calm & natural» — sage/teal, warm cream, generous whitespace |
-| 7 | Tech | Astro 5 + Tailwind CSS 4, static output, Zod-validated content collections |
+| 7 | Tech | Astro 7 + Tailwind CSS 4 (@tailwindcss/vite), static output, Zod-validated content collections |
 | 8 | Font | Vazirmatn Variable, self-hosted, subsetted |
 | 9 | Contact channels | Phone, WhatsApp, Instagram, Telegram, Eitaa, Bale |
 | 10 | Crisis lines | Yes — national crisis-support numbers in footer |
@@ -218,7 +218,7 @@ Edit Markdown → commit → push → GitHub Actions rebuilds + deploys (~1 min)
 
 ### 7.1 Stack
 
-- **Astro 5** — static output, zero client framework.
+- **Astro 7** — static output, zero client framework (requires Node ≥ 22.12.0; verified astro@7.3.8, 2026-10-14).
 - **Tailwind CSS 4** (@tailwindcss/vite) — design tokens as CSS variables + utility classes with logical properties for RTL.
 - **@fontsource-variable/vazirmatn** — self-hosted font.
 - **@astrojs/sitemap** — sitemap.xml.
@@ -350,7 +350,7 @@ Rules: images via `astro:assets` (AVIF/WebP, lazy below fold, width/height set);
 ### 13.1 GitHub setup (one-time)
 
 1. Create **public** repo `pendarqom.ir` under the owner's GitHub account.
-2. Push this repo; GitHub Actions workflow (`.github/workflows/deploy.yml`) uses `withastro/action` + `actions/deploy-pages` to build and publish on every push to `main`.
+2. Push this repo; GitHub Actions workflow (`.github/workflows/deploy.yml`) uses `actions/checkout@v7` + `withastro/action@v6` + `actions/deploy-pages@v5` to build and publish on every push to `main` (versions verified against Astro docs, 2026-10-14).
 3. Repo → Settings → Pages: **Source = GitHub Actions**; Custom domain = `pendarqom.ir`; enable **Enforce HTTPS** (GitHub auto-provisions a Let's Encrypt certificate — works for `.ir`).
 4. `public/CNAME` contains `pendarqom.ir` (prevents domain reset on deploys).
 
@@ -366,7 +366,7 @@ Rules: images via `astro:assets` (AVIF/WebP, lazy below fold, width/height set);
 | AAAA | `@` | `2606:50c0:8001::153` |
 | AAAA | `@` | `2606:50c0:8002::153` |
 | AAAA | `@` | `2606:50c0:8003::153` |
-| CNAME | `www` | `<github-username>.github.io` |
+| CNAME | `www` | `raya-mansouri.github.io` |
 
 - Canonical host: `https://pendarqom.ir` (apex). `www` redirects to apex via GitHub Pages.
 - If the registrar panel is nameserver-only: delegate DNS to a free DNS provider (e.g., Cloudflare Free) and create the records there.
@@ -403,4 +403,4 @@ Online booking integration (Iranian platforms), request forms (Formspree/Google 
 11. Confirmation of crisis-line numbers.
 12. Registrar/eNAMAD compliance confirmation.
 
-At implementation start we also need: **GitHub username** (for the `www` CNAME and repo URL).
+GitHub account confirmed: **`raya-mansouri`** — repo `github.com/raya-mansouri/pendarqom.ir` created and reachable (verified 2026-10-14).

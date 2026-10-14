@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import WorkshopCard from "../../components/cards/WorkshopCard.astro";
+
+const rank = { open: 0, full: 1, past: 2 } as const;
+const workshops = (await getCollection("workshops")).sort((a, b) => {
+  if (rank[a.data.status] !== rank[b.data.status]) return rank[a.data.status] - rank[b.data.status];
+  const [x, y] = [a.data.startDate.valueOf(), b.data.startDate.valueOf()];
+  return a.data.status === "past" ? y - x : x - y;
+});
+const upcoming = workshops.filter((w) => w.data.status !== "past");
+const past = workshops.filter((w) => w.data.status === "past");
+---
+<BaseLayout
+  title="کارگاه‌ها | پندار نیم رخ"
+  description="کارگاه‌های آموزشی روانشناسی در قم — فرزندپروری، مهارت‌های ارتباطی و درمان."
+>
+  <div class="container-site pt-10">
+    <h1 class="text-3xl sm:text-4xl">کارگاه‌های کلینیک</h1>
+  </div>
+  <section class="container-site section">
+    <h2 class="mb-6 text-xl font-bold">در حال ثبت‌نام</h2>
+    {upcoming.length === 0 ? (
+      <p class="text-ink-muted">در حال حاضر کارگاهی برای ثبت‌نام نیست؛ به‌زودی کارگاه‌های جدید اعلام می‌شود.</p>
+    ) : (
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {upcoming.map((w) => (
+          <WorkshopCard href={`/workshops/${w.id}/`} title={w.data.title} instructor={w.data.instructor} dateDisplay={w.data.dateDisplay} status={w.data.status} />
+        ))}
+      </div>
+    )}
+    {past.length > 0 && (
+      <div class="mt-14">
+        <h2 class="mb-6 text-xl font-bold text-ink-muted">برگزارشده</h2>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {past.map((w) => (
+            <WorkshopCard href={`/workshops/${w.id}/`} title={w.data.title} instructor={w.data.instructor} dateDisplay={w.data.dateDisplay} status={w.data.status} />
+          ))}
+        </div>
+      </div>
+    )}
+  </section>
+</BaseLayout>

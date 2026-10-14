@@ -2,7 +2,7 @@
 title: "کارگاه مهارت‌های فرزندپروری"
 instructor: "دکتر سارا محمدی"
 startDate: 2026-11-05
-dateDisplay: "پنجشنبه ۱۵ آبان ۱۴۰۵"
+dateDisplay: "پنجشنبه ۱۴ آبان ۱۴۰۵"
 time: "۱۶:۰۰ تا ۱۹:۰۰"
 location: "سالن کلینیک پندار نیم رخ"
 capacity: 15

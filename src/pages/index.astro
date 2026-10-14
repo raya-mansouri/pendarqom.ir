@@ -1,9 +1,185 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import ServiceCard from "../components/cards/ServiceCard.astro";
+import TherapistCard from "../components/cards/TherapistCard.astro";
+import WorkshopCard from "../components/cards/WorkshopCard.astro";
+import ArticleCard from "../components/cards/ArticleCard.astro";
+import TestimonialCard from "../components/cards/TestimonialCard.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+import { site } from "../data/site";
+import { testimonials } from "../data/testimonials";
+import { toPersianDigits } from "../utils/persian";
+import { readingTimeMinutes } from "../utils/readingtime";
+
+const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
+const therapists = (await getCollection("therapists"))
+  .filter((t) => t.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 4);
+const workshops = (await getCollection("workshops"))
+  .filter((w) => w.data.status !== "past")
+  .sort((a, b) => a.data.startDate.valueOf() - b.data.startDate.valueOf())
+  .slice(0, 3);
+const articles = (await getCollection("articles"))
+  .filter((a) => !a.data.draft)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
+const shownTestimonials = testimonials.filter((t) => t.consent).slice(0, 4);
+const primaryPhone = site.phones[0];
+
+const whyUs = [
+  { title: "درمانگران دارای پروانه", text: "همه درمانگران ما دارای پروانه فعالیت معتبر از سازمان نظام روانشناسی و مشاوره هستند." },
+  { title: "رویکردهای مبتنی بر شواهد", text: "از درمان‌های علمی و اثبات‌شده مانند CBT استفاده می‌کنیم؛ نه ادعا، بلکه روش." },
+  { title: "رازداری کامل", text: "همه گفت‌وگوها و اطلاعات شما محرمانه می‌ماند؛ امنیت روان شما اولویت ماست." },
+  { title: "فضایی آرام و امن", text: "فضای کلینیک برای آرامش از همان لحظه ورود طراحی شده است." },
+];
 ---
-<BaseLayout title="کلینیک علمی روانشناسی پندار نیم رخ" description="سلامت روان، با روش علمی و در فضایی آرام">
-  <div class="container-site section">
-    <h1>کلینیک علمی روانشناسی پندار نیم رخ</h1>
-    <p>سایت در حال ساخت است</p>
-  </div>
+<BaseLayout
+  title="کلینیک علمی روانشناسی پندار نیم رخ | درمان تخصصی در قم"
+  description={site.tagline}
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "Psychologist",
+      name: site.name,
+      url: site.url,
+      telephone: site.phones[0].number,
+      address: { "@type": "PostalAddress", addressLocality: "قم", addressCountry: "IR", streetAddress: site.address },
+      openingHours: "Sa-We 16:00-21:00 Th 09:00-13:00",
+      image: new URL("/og-default.png", site.url).href,
+    },
+  ]}
+>
+  <!-- ۱. Hero -->
+  <section class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-bl from-primary-50 via-bg to-primary-100" aria-hidden="true"></div>
+    <div class="container-site relative grid gap-12 py-20 sm:py-28 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div>
+        <p class="eyebrow">کلینیک علمی روانشناسی</p>
+        <h1 class="mt-3 text-4xl leading-[1.25] sm:text-5xl">
+          سلامت روان شما، <span class="text-primary-600">با روش علمی</span> و در فضایی آرام
+        </h1>
+        <p class="mt-5 max-w-xl text-lg text-ink-muted">{site.tagline}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={`tel:${primaryPhone.number.replace(/[^+\d]/g, "")}`} class="btn btn-primary px-7 py-3 text-base">رزرو نوبت</a>
+          <a href="/services/" class="btn btn-secondary px-7 py-3 text-base">خدمات کلینیک</a>
+        </div>
+        <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-muted">
+          <li class="flex items-center gap-1.5">پروانه {site.licenses[0].number}</li>
+          <li class="flex items-center gap-1.5">از سال {toPersianDigits(site.foundedYear)}</li>
+        </ul>
+      </div>
+      <div class="relative hidden lg:block" aria-hidden="true">
+        <div class="absolute -inset-6 rounded-[3rem] bg-primary-100"></div>
+        <div class="relative grid size-full min-h-80 place-items-center rounded-[2.5rem] bg-gradient-to-bl from-primary-200 to-primary-50 shadow-soft">
+          <span class="text-8xl">🌿</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ۲. خدمات -->
+  <section class="section bg-surface" aria-labelledby="services-title">
+    <div class="container-site">
+      <SectionHeading eyebrow="خدمات ما" title="خدمات تخصصی کلینیک" lead="از درمان فردی تا ارزیابی کودک — با روش‌های علمی و مبتنی بر شواهد" />
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => (
+          <ServiceCard
+            title={s.data.title}
+            summary={s.data.summary}
+            category={s.data.category}
+            icon={s.data.icon}
+            href={`/services/${s.id}/`}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ۳. چرا ما -->
+  <section class="section" aria-labelledby="why-title">
+    <div class="container-site">
+      <SectionHeading eyebrow="چرا پندار نیم رخ" title="اعتماد شما، مسئولیت ما" />
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {whyUs.map((item) => (
+          <div class="card reveal p-6">
+            <h3 class="font-bold text-primary-700">{item.title}</h3>
+            <p class="mt-2 text-sm leading-7 text-ink-muted">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ۴. درمانگران -->
+  <section class="section bg-surface" aria-labelledby="team-title">
+    <div class="container-site">
+      <SectionHeading eyebrow="تیم ما" title="درمانگران کلینیک" lead="با متخصصان ما آشنا شوید" />
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {therapists.map((t) => (
+          <TherapistCard id={t.id} name={t.data.name} title={t.data.title} specialties={t.data.specialties} />
+        ))}
+      </div>
+      <p class="mt-8 text-center">
+        <a href="/therapists/" class="btn btn-secondary">مشاهده همه درمانگران</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ۵. کارگاه‌ها -->
+  <section class="section" aria-labelledby="workshops-title">
+    <div class="container-site">
+      <SectionHeading eyebrow="آموزش" title="کارگاه‌های پیشِ رو" lead="مهارت‌های روانی را در محیطی گروهی و کاربردی تمرین کنید" />
+      <div class="grid gap-6 md:grid-cols-3">
+        {workshops.map((w) => (
+          <WorkshopCard
+            href={`/workshops/${w.id}/`}
+            title={w.data.title}
+            instructor={w.data.instructor}
+            dateDisplay={w.data.dateDisplay}
+            status={w.data.status}
+          />
+        ))}
+      </div>
+      <p class="mt-8 text-center">
+        <a href="/workshops/" class="btn btn-secondary">همه کارگاه‌ها</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ۶. نظرات مراجعین -->
+  <section class="section bg-surface" aria-labelledby="testimonials-title">
+    <div class="container-site">
+      <SectionHeading eyebrow="تجربه مراجعین" title="آنچه مراجعان ما می‌گویند" />
+      <div class="grid gap-6 md:grid-cols-3">
+        {shownTestimonials.map((t) => (
+          <TestimonialCard quote={t.quote} attribution={t.attribution} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ۷. مقالات -->
+  <section class="section" aria-labelledby="articles-title">
+    <div class="container-site">
+      <SectionHeading eyebrow="خواندنی‌ها" title="آخرین مقالات" />
+      <div class="grid gap-6 md:grid-cols-3">
+        {articles.map((a) => (
+          <ArticleCard
+            id={a.id}
+            title={a.data.title}
+            description={a.data.description}
+            dateDisplay={a.data.dateDisplay}
+            category={a.data.category}
+            readingTime={readingTimeMinutes(a.body ?? "")}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ۸. نوار تماس -->
+  <CtaStrip />
 </BaseLayout>

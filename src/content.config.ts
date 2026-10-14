@@ -20,6 +20,7 @@ const services = defineCollection({
     icon: z.enum(["individual", "couples", "child", "group", "assessment", "workshop"]),
     order: z.number(),
     placeholder: z.boolean(),
+    relatedTherapists: z.array(z.string()).default([]),
   }),
 });
 

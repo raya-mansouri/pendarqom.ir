@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import ServiceCard from "../../components/cards/ServiceCard.astro";
+
+const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout
+  title="خدمات کلینیک | پندار نیم رخ"
+  description="خدمات تخصصی روانشناسی در قم: درمان فردی، زوج‌درمانی، خانواده‌درمانی، کودک و نوجوان، گروه‌درمانی و ارزیابی."
+>
+  <div class="container-site pt-10">
+    <h1 class="text-3xl sm:text-4xl">خدمات کلینیک</h1>
+    <p class="mt-3 max-w-2xl text-ink-muted">
+      هر خدمت صفحه اختصاصی دارد؛ برای آشنایی بیشتر روی هر کارت بزنید یا مستقیم برای نوبت تماس بگیرید.
+    </p>
+  </div>
+  <section class="container-site section">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s) => (
+        <ServiceCard
+          title={s.data.title}
+          summary={s.data.summary}
+          category={s.data.category}
+          icon={s.data.icon}
+          href={`/services/${s.id}/`}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

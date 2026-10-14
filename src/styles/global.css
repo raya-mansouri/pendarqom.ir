@@ -1,1 +1,132 @@
 @import "tailwindcss";
+@import "@fontsource-variable/vazirmatn";
+
+@theme {
+  --font-sans: "Vazirmatn Variable", "Segoe UI", Tahoma, system-ui, sans-serif;
+
+  --color-bg: #faf8f4;
+  --color-surface: #ffffff;
+  --color-ink: #22302b;
+  --color-ink-muted: #5c6b64;
+
+  --color-primary-50: #f0f6f3;
+  --color-primary-100: #dceae4;
+  --color-primary-200: #bbd6cc;
+  --color-primary-300: #93bcae;
+  --color-primary-400: #6b9e8d;
+  --color-primary-500: #4e8474;
+  --color-primary-600: #3c6b5e;
+  --color-primary-700: #2f564c;
+  --color-primary-800: #264741;
+  --color-primary-900: #1f3a35;
+
+  --color-clay: #8c5a3c;
+  --color-status-open: #2e7d4f;
+  --color-status-open-bg: #e6f4ec;
+  --color-status-full: #9a6b1f;
+  --color-status-full-bg: #fbf3e0;
+  --color-status-past: #5c6b64;
+  --color-status-past-bg: #eef1ef;
+
+  --shadow-soft: 0 10px 30px rgb(34 48 43 / 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-bg font-sans text-ink antialiased;
+  font-size: 1.0625rem;
+  line-height: 1.9;
+}
+
+h1, h2, h3, h4 {
+  @apply font-bold;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary-600);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+  .section {
+    @apply py-16 sm:py-24;
+  }
+  .eyebrow {
+    @apply text-sm font-semibold text-primary-600;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-colors;
+  }
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700;
+  }
+  .btn-secondary {
+    @apply border border-primary-200 bg-surface text-primary-700 hover:bg-primary-50;
+  }
+  .btn-ghost {
+    @apply text-primary-700 hover:bg-primary-50;
+  }
+  .btn-whatsapp {
+    @apply bg-[#1fa855] text-white hover:bg-[#178a44];
+  }
+  .btn-call {
+    @apply bg-ink text-white hover:bg-primary-900;
+  }
+  .card {
+    @apply rounded-2xl bg-surface shadow-soft;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+  .prose-fa {
+    @apply max-w-[70ch];
+  }
+  .prose-fa h2 {
+    @apply mt-10 mb-4 text-2xl;
+  }
+  .prose-fa h3 {
+    @apply mt-8 mb-3 text-xl;
+  }
+  .prose-fa p {
+    @apply mb-4;
+  }
+  .prose-fa ul {
+    @apply mb-4 list-disc space-y-2 ps-6;
+  }
+  .prose-fa a {
+    @apply text-primary-600 underline underline-offset-4 hover:text-primary-700;
+  }
+  .prose-fa blockquote {
+    @apply my-6 border-s-4 border-primary-300 bg-primary-50 px-5 py-3 text-ink-muted;
+  }
+}
+
+/* Scroll-reveal (JS adds .is-visible; disabled for reduced-motion users via media query above) */
+.reveal {
+  opacity: 0;
+  translate: 0 16px;
+  transition: opacity 0.45s ease-out, translate 0.45s ease-out;
+}
+.reveal.is-visible {
+  opacity: 1;
+  translate: 0 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; translate: none; }
+}

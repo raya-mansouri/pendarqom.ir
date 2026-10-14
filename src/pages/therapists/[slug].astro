@@ -1,0 +1,103 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import ContactChannels from "../../components/ContactChannels.astro";
+import { site } from "../../data/site";
+import { therapistPhotos } from "../../utils/assets";
+
+export async function getStaticPaths() {
+  const therapists = await getCollection("therapists");
+  return therapists.map((therapist) => ({
+    params: { slug: therapist.id },
+    props: { therapist },
+  }));
+}
+const { therapist } = Astro.props;
+const { Content } = await render(therapist);
+const photo = therapistPhotos[therapist.id];
+const whatsappMsg = encodeURIComponent(`سلام، برای نوبت با ${therapist.data.name} تماس می‌گیرم.`);
+---
+<BaseLayout
+  title={`${therapist.data.name} | پندار نیم رخ`}
+  description={`${therapist.data.name} — ${therapist.data.title} در کلینیک علمی روانشناسی پندار نیم رخ`}
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: therapist.data.name,
+      jobTitle: therapist.data.title,
+      worksFor: { "@type": "Psychologist", name: site.name, url: site.url },
+      image: photo ? new URL(photo.src, site.url).href : undefined,
+      knowsAbout: therapist.data.specialties,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "خانه", item: site.url },
+        { "@type": "ListItem", position: 2, name: "درمانگران", item: `${site.url}/therapists/` },
+        { "@type": "ListItem", position: 3, name: therapist.data.name },
+      ],
+    },
+  ]}
+>
+  <div class="container-site pt-10">
+    <Breadcrumbs items={[{ label: "خانه", href: "/" }, { label: "درمانگران", href: "/therapists/" }, { label: therapist.data.name }]} />
+  </div>
+  <section class="container-site section grid gap-10 lg:grid-cols-[320px_1fr]">
+    <div>
+      <img
+        src={photo?.src}
+        alt={`تصویر ${therapist.data.name}`}
+        width="600"
+        height="600"
+        class="card aspect-square w-full object-cover"
+      />
+    </div>
+    <div>
+      <h1 class="text-3xl sm:text-4xl">{therapist.data.name}</h1>
+      <p class="mt-2 text-lg text-ink-muted">{therapist.data.title}</p>
+      <p class="mt-1 text-sm text-ink-muted">{therapist.data.licenseNumber}</p>
+
+      <dl class="mt-6 grid gap-4 sm:grid-cols-2">
+        <div class="card p-4">
+          <dt class="text-sm font-bold text-primary-700">حوزه‌های تخصصی</dt>
+          <dd class="mt-2 flex flex-wrap gap-1.5">
+            {therapist.data.specialties.map((s) => <span class="badge bg-primary-50 text-primary-700">{s}</span>)}
+          </dd>
+        </div>
+        <div class="card p-4">
+          <dt class="text-sm font-bold text-primary-700">رویکردهای درمانی</dt>
+          <dd class="mt-2 flex flex-wrap gap-1.5">
+            {therapist.data.approaches.map((a) => <span class="badge bg-primary-50 text-primary-700">{a}</span>)}
+          </dd>
+        </div>
+        <div class="card p-4">
+          <dt class="text-sm font-bold text-primary-700">تحصیلات و گواهی‌ها</dt>
+          <dd class="mt-2">
+            <ul class="list-disc space-y-1 ps-5 text-sm text-ink-muted">
+              {therapist.data.education.map((e) => <li>{e}</li>)}
+            </ul>
+          </dd>
+        </div>
+        <div class="card p-4">
+          <dt class="text-sm font-bold text-primary-700">زبان‌ها</dt>
+          <dd class="mt-2 text-sm text-ink-muted">{therapist.data.languages.join("، ")}</dd>
+        </div>
+      </dl>
+
+      <div class="card mt-6 p-6">
+        <h2 class="text-lg font-bold">رزرو نوبت با {therapist.data.name}</h2>
+        <div class="mt-4">
+          <ContactChannels compact />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="container-site pb-20">
+    <article class="prose-fa mx-auto">
+      <Content />
+    </article>
+  </section>
+</BaseLayout>

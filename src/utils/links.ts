@@ -1,9 +1,16 @@
+const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
+
+/** Maps Persian digits ۰-۹ to Latin 0-9; leaves everything else untouched. */
+function latinDigits(input: string): string {
+  return input.replace(/[۰-۹]/g, (d) => String(FA_DIGITS.indexOf(d)));
+}
+
 export function telHref(raw: string): string {
-  return `tel:${raw.replace(/[\s-]/g, "")}`;
+  return `tel:${latinDigits(raw).replace(/[\s-]/g, "")}`;
 }
 
 export function whatsappLink(number: string, message?: string): string {
-  const digits = number.replace(/\D/g, "");
+  const digits = latinDigits(number).replace(/\D/g, "");
   const base = `https://wa.me/${digits}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }

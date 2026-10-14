@@ -1,0 +1,25 @@
+---
+const modules = import.meta.glob<{ default: { src: string } }>("../assets/gallery/*.svg", { eager: true });
+const photos = Object.entries(modules).map(([path, mod]) => ({
+  src: mod.default.src,
+  name: path.split("/").pop()!.replace(".svg", ""),
+}));
+---
+<div class="grid grid-cols-2 gap-4 md:grid-cols-3">
+  {photos.map((photo, i) => (
+    <button
+      type="button"
+      class="group overflow-hidden rounded-2xl shadow-soft"
+      data-lightbox-trigger={photo.src}
+      data-lightbox-index={i}
+    >
+      <img src={photo.src} alt={`تصویر فضای کلینیک — ${photo.name}`} width="800" height="600" loading="lazy" class="aspect-[4/3] w-full object-cover transition-transform group-hover:scale-105" />
+    </button>
+  ))}
+</div>
+<dialog id="lightbox" class="mx-auto my-auto max-w-4xl bg-transparent p-0 backdrop:bg-ink/80" aria-label="نمایش تصویر">
+  <div class="relative">
+    <img id="lightbox-img" src="" alt="" width="1200" height="900" class="rounded-2xl" />
+    <button id="lightbox-close" type="button" class="btn btn-call absolute end-3 top-3 px-3 py-1.5">بستن</button>
+  </div>
+</dialog>

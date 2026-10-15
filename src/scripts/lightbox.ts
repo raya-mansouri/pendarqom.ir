@@ -1,6 +1,6 @@
 const dialog = document.getElementById("lightbox") as HTMLDialogElement | null;
 const img = document.getElementById("lightbox-img") as HTMLImageElement | null;
-const closeBtn = document.getElementById("lightbox-close");
+const lightboxCloseBtn = document.getElementById("lightbox-close");
 const triggers = document.querySelectorAll<HTMLElement>("[data-lightbox-trigger]");
 let lastIndex = 0;
 
@@ -12,11 +12,11 @@ function openAt(index: number) {
   img.alt = trigger.querySelector("img")?.alt ?? "";
   lastIndex = index;
   dialog.showModal();
-  closeBtn?.focus();
+  lightboxCloseBtn?.focus();
 }
 
 triggers.forEach((t, i) => t.addEventListener("click", () => openAt(i)));
-closeBtn?.addEventListener("click", () => dialog?.close());
+lightboxCloseBtn?.addEventListener("click", () => dialog?.close());
 dialog?.addEventListener("click", (e) => {
   if (e.target === dialog) dialog.close();
 });

@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { faqs } from "../data/faq";
+
+const ordered = [...faqs].sort((a, b) => a.order - b.order);
+---
+<BaseLayout
+  title="سؤالات متداول | پندار نیم رخ"
+  description="پاسخ پرسش‌های رایج درباره نوبتدهی، هزینه، رازداری و جلسات کلینیک پندار نیم رخ."
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: ordered.map((f) => ({
+        "@type": "Question",
+        name: f.question,
+        acceptedAnswer: { "@type": "Answer", text: f.answer },
+      })),
+    },
+  ]}
+>
+  <div class="container-site pt-10">
+    <Breadcrumbs items={[{ label: "خانه", href: "/" }, { label: "سؤالات متداول" }]} />
+    <h1 class="mt-6 text-3xl sm:text-4xl">سؤالات متداول</h1>
+  </div>
+  <section class="container-site section max-w-3xl">
+    {ordered.map((f) => (
+      <details class="card group mb-3 p-5">
+        <summary class="cursor-pointer list-none font-bold marker:hidden">
+          <span class="flex items-center justify-between gap-4">
+            {f.question}
+            <span aria-hidden="true" class="text-primary-600 transition-transform group-open:rotate-45">+</span>
+          </span>
+        </summary>
+        <p class="mt-3 text-sm leading-7 text-ink-muted">{f.answer}</p>
+      </details>
+    ))}
+  </section>
+</BaseLayout>

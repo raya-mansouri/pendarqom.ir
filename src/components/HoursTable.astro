@@ -1,0 +1,25 @@
+---
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  variant?: "default" | "on-dark";
+}
+const { title = "ساعت کاری", variant = "default" } = Astro.props;
+---
+<div>
+  {title && (
+    <p class:list={["mb-3 font-bold", variant === "on-dark" && "text-white"]}>{title}</p>
+  )}
+  <table class="w-full text-sm">
+    <caption class="sr-only">{title}</caption>
+    <tbody>
+      {site.hours.map((h) => (
+        <tr class:list={["border-b last:border-0", variant === "on-dark" ? "border-white/15" : "border-primary-100"]}>
+          <th scope="row" class:list={["py-2 text-start font-medium", variant === "on-dark" ? "text-primary-100" : "text-ink-muted"]}>{h.days}</th>
+          <td class:list={["py-2 text-end", variant === "on-dark" ? "text-white" : "text-ink"]}>{h.time}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

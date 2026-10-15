@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import ContactChannels from "../components/ContactChannels.astro";
+import HoursTable from "../components/HoursTable.astro";
+import CrisisStrip from "../components/CrisisStrip.astro";
+import Icon from "../components/Icon.astro";
+import { site } from "../data/site";
+---
+<BaseLayout
+  title="تماس و نوبتدهی | پندار نیم رخ"
+  description="تماس با کلینیک علمی روانشناسی پندار نیم رخ: تلفن، واتساپ، نشانی و ساعت کاری."
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "Psychologist",
+      name: site.name,
+      url: site.url,
+      telephone: site.phones[0].number,
+      address: { "@type": "PostalAddress", addressLocality: "قم", addressCountry: "IR", streetAddress: site.address },
+      openingHours: ["Sa-Su 10:00-22:00", "Mo-Th 10:00-22:00"],
+    },
+  ]}
+>
+  <div class="container-site pt-10">
+    <Breadcrumbs items={[{ label: "خانه", href: "/" }, { label: "تماس و نوبتدهی" }]} />
+    <div class="mt-6 max-w-2xl">
+      <h1 class="text-3xl sm:text-4xl">تماس و نوبتدهی</h1>
+      <p class="mt-3 text-ink-muted">
+        برای رزرو نوبت، پرسش درباره خدمات یا ثبت‌نام کارگاه‌ها از هر راهی که برای شما راحت‌تر است تماس بگیرید.
+      </p>
+      <p class="mt-4 rounded-xl bg-primary-50 px-4 py-3 text-sm leading-6 text-primary-800">
+        همه تماس‌ها و پیام‌ها کاملاً محرمانه بررسی می‌شوند. اطلاعات شما در اختیار هیچ شخص ثالثی قرار نمی‌گیرد.
+      </p>
+    </div>
+  </div>
+
+  <section class="container-site section grid gap-10 lg:grid-cols-2">
+    <div class="card p-6">
+      <h2 class="text-lg font-bold">راه‌های ارتباطی</h2>
+      <div class="mt-4">
+        <ContactChannels />
+      </div>
+      <div class="mt-6 space-y-3 text-sm">
+        {site.phones.map((p) => (
+          <p class="flex items-center gap-2 text-ink-muted">
+            <span class="text-primary-600"><Icon name="phone" size={16} /></span>
+            <span>{p.label}:</span>
+            <bdi class="font-semibold text-ink">{p.number}</bdi>
+          </p>
+        ))}
+        <p class="flex items-start gap-2 text-ink-muted">
+          <span class="mt-0.5 text-primary-600"><Icon name="map" size={16} /></span>
+          <span>{site.address}</span>
+        </p>
+      </div>
+      <div class="mt-6 flex flex-wrap gap-2">
+        <a class="btn btn-secondary px-3.5 py-2 text-xs" href={site.maps.neshan} target="_blank" rel="noopener">نمایش در نشان</a>
+        <a class="btn btn-secondary px-3.5 py-2 text-xs" href={site.maps.balad} target="_blank" rel="noopener">نمایش در بلد</a>
+      </div>
+    </div>
+
+    <div class="card p-6">
+      <h2 class="text-lg font-bold">ساعت کاری</h2>
+      <div class="mt-4">
+        <HoursTable title="برنامه پاسخگویی" />
+      </div>
+    </div>
+  </section>
+
+  <CrisisStrip />
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import Gallery from "../components/Gallery.astro";
+import { site } from "../data/site";
+---
+<BaseLayout
+  title="درباره ما | پندار نیم رخ"
+  description="داستان، مأموریت و مجوزهای کلینیک علمی روانشناسی پندار نیم رخ در قم."
+>
+  <div class="container-site pt-10">
+    <Breadcrumbs items={[{ label: "خانه", href: "/" }, { label: "درباره ما" }]} />
+    <div class="mt-6 max-w-3xl">
+      <h1 class="text-3xl sm:text-4xl">درباره کلینیک</h1>
+      <p class="mt-4 text-lg leading-8 text-ink-muted">
+        کلینیک علمی روانشناسی پندار نیم رخ با هدف ارائه خدمات روانشناختی مبتنی بر شواهد علمی در فضایی امن و محترمانه فعالیت می‌کند. تیم ما از درمانگران دارای پروانه است و سلامت روان مراجعین، اولویت اول ماست.
+      </p>
+      <p class="mt-3 text-ink-muted">
+        کلینیک پندار نیم رخ نمایندگی گروه سازمان‌های علمی اجتماعی درمانی پندار در قم است و خدمات تخصصی روانشناسی را به صورت حضوری، تلفنی و آنلاین ارائه می‌کند.
+      </p>
+    </div>
+  </div>
+
+  <section class="container-site section">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="card p-6">
+        <h2 class="font-bold text-primary-700">مأموریت ما</h2>
+        <p class="mt-2 text-sm leading-7 text-ink-muted">فراهم کردن مراقبت روانی باکیفیت و قابل اعتماد برای هر کسی که قدم اول را برمی‌دارد.</p>
+      </div>
+      <div class="card p-6">
+        <h2 class="font-bold text-primary-700">مجوزها</h2>
+        <ul class="mt-2 space-y-1 text-sm text-ink-muted">
+          {site.licenses.map((l) => <li>{l.org} — {l.number}</li>)}
+        </ul>
+      </div>
+      <div class="card p-6">
+        <h2 class="font-bold text-primary-700">ساعت کاری</h2>
+        <ul class="mt-2 space-y-1 text-sm text-ink-muted">
+          {site.hours.map((h) => <li>{h.days}: {h.time}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-site pb-24" aria-labelledby="gallery-title">
+    <SectionHeading eyebrow="گالری" title="فضای کلینیک" lead="محیطی آرام برای مسیر درمان شما" id="gallery-title" />
+    <Gallery />
+  </section>
+</BaseLayout>

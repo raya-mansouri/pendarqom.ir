@@ -1,0 +1,13 @@
+---
+interface Props {
+  status: "open" | "full" | "past";
+}
+const { status } = Astro.props;
+const labels = {
+  open: { text: "ثبت‌نام باز", cls: "bg-status-open-bg text-status-open" },
+  full: { text: "تکمیل ظرفیت", cls: "bg-status-full-bg text-status-full" },
+  past: { text: "برگزار شد", cls: "bg-status-past-bg text-status-past" },
+};
+const label = labels[status];
+---
+<span class:list={["badge", label.cls]}>{label.text}</span>

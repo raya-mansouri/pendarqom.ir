@@ -1,0 +1,112 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import ArticleCard from "../../components/cards/ArticleCard.astro";
+import { site } from "../../data/site";
+import { articleCovers } from "../../utils/assets";
+import { toPersianDigits } from "../../utils/persian";
+import { readingTimeMinutes } from "../../utils/readingtime";
+
+export async function getStaticPaths() {
+  const articles = (await getCollection("articles")).filter((a) => !a.data.draft);
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+const { article } = Astro.props;
+const { Content } = await render(article);
+const cover = articleCovers[article.id];
+const minutes = readingTimeMinutes(article.body ?? "");
+const all = (await getCollection("articles")).filter((a) => !a.data.draft && a.id !== article.id);
+const related = all
+  .filter((a) => a.data.category === article.data.category)
+  .concat(all.filter((a) => a.data.category !== article.data.category))
+  .slice(0, 3);
+const shareText = encodeURIComponent(article.data.title);
+const shareUrl = encodeURIComponent(new URL(`/articles/${article.id}/`, site.url).href);
+const description = article.data.description;
+---
+<BaseLayout
+  title={`${article.data.title} | مقالات پندار نیم رخ`}
+  description={description}
+  ogImage={cover?.src}
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: article.data.title,
+      description,
+      datePublished: article.data.publishDate.toISOString(),
+      dateModified: (article.data.updatedDate ?? article.data.publishDate).toISOString(),
+      author: { "@type": "Organization", name: site.name },
+      publisher: { "@type": "Organization", name: site.name },
+      keywords: article.data.tags.join("، "),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "خانه", item: site.url },
+        { "@type": "ListItem", position: 2, name: "مقالات", item: `${site.url}/articles/` },
+        { "@type": "ListItem", position: 3, name: article.data.title },
+      ],
+    },
+  ]}
+>
+  <div class="container-site pt-10">
+    <Breadcrumbs items={[{ label: "خانه", href: "/" }, { label: "مقالات", href: "/articles/" }, { label: article.data.title }]} />
+  </div>
+  <article class="container-site py-10">
+    <header class="mx-auto max-w-3xl">
+      <div class="flex flex-wrap items-center gap-2 text-sm text-ink-muted">
+        <span class="badge bg-primary-50 text-primary-700">{article.data.category}</span>
+        <span>{article.data.dateDisplay}</span>
+        <span aria-hidden="true">·</span>
+        <span>{toPersianDigits(minutes)} دقیقه مطالعه</span>
+        <span aria-hidden="true">·</span>
+        <span>{article.data.author}</span>
+      </div>
+      <h1 class="mt-4 text-3xl leading-snug sm:text-4xl">{article.data.title}</h1>
+      {cover && (
+        <img src={cover.src} alt="" width="1200" height="630" loading="eager" class="card mt-8 aspect-[1200/630] w-full object-cover" />
+      )}
+    </header>
+
+    <div class="prose-fa mx-auto mt-10">
+      <Content />
+    </div>
+
+    <footer class="mx-auto mt-12 max-w-3xl border-t border-primary-100 pt-6">
+      <p class="text-xs leading-6 text-ink-muted">
+        این محتوا جنبه اطلاع‌رسانی دارد و جایگزین مشاوره تخصصی نیست. برای بررسی وضعیت خود با کلینیک تماس بگیرید.
+      </p>
+      <div class="mt-4 flex flex-wrap items-center gap-3">
+        <span class="text-sm font-bold">اشتراک‌گذاری:</span>
+        <a class="btn btn-secondary px-3.5 py-2 text-xs" href={`https://t.me/share/url?url=${shareUrl}&text=${shareText}`} target="_blank" rel="noopener">تلگرام</a>
+        <a class="btn btn-whatsapp px-3.5 py-2 text-xs" href={`https://wa.me/?text=${shareText}%20${shareUrl}`} target="_blank" rel="noopener">واتساپ</a>
+      </div>
+    </footer>
+  </article>
+
+  {related.length > 0 && (
+    <section class="section bg-surface" aria-labelledby="related-title">
+      <div class="container-site">
+        <h2 id="related-title" class="mb-6 text-2xl font-bold">مطالب مرتبط</h2>
+        <div class="grid gap-6 md:grid-cols-3">
+          {related.map((a) => (
+            <ArticleCard
+              id={a.id}
+              title={a.data.title}
+              description={a.data.description}
+              dateDisplay={a.data.dateDisplay}
+              category={a.data.category}
+              readingTime={readingTimeMinutes(a.body ?? "")}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>

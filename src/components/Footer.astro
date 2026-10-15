@@ -3,13 +3,15 @@ import { site } from "../data/site";
 import { telHref, whatsappLink } from "../utils/links";
 import { toPersianDigits } from "../utils/persian";
 import CrisisStrip from "./CrisisStrip.astro";
+import logo from "../assets/logo.png";
 
 const year = toPersianDigits(site.foundedYear);
 ---
 <footer class="mt-auto border-t border-primary-100 bg-surface">
   <div class="container-site grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
     <section aria-label="درباره کلینیک">
-      <p class="text-lg font-extrabold text-primary-700">{site.shortName}</p>
+      <img src={logo.src} alt="" width="56" height="56" class="size-14" />
+      <p class="mt-3 text-lg font-extrabold text-primary-700">{site.shortName}</p>
       <p class="mt-2 text-sm text-ink-muted">{site.tagline}</p>
       <p class="mt-4 text-xs text-ink-muted">
         {site.licenses.map((l) => `${l.org} — پروانه ${l.number}`).join(" · ")}

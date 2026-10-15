@@ -47,7 +47,7 @@ const whyUs = [
       url: site.url,
       telephone: site.phones[0].number,
       address: { "@type": "PostalAddress", addressLocality: "قم", addressCountry: "IR", streetAddress: site.address },
-      openingHours: "Sa-We 16:00-21:00 Th 09:00-13:00",
+      openingHours: ["Sa-Su 10:00-22:00", "Mo-Th 10:00-22:00"],
       image: new URL("/og-default.png", site.url).href,
     },
   ]}

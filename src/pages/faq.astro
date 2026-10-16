@@ -26,7 +26,7 @@ const ordered = [...faqs].sort((a, b) => a.order - b.order);
   </div>
   <section class="container-site section max-w-3xl">
     {ordered.map((f) => (
-      <details class="card group mb-3 p-5">
+      <details name="faq" class="card group mb-3 p-5">
         <summary class="cursor-pointer list-none font-bold marker:hidden">
           <span class="flex items-center justify-between gap-4">
             {f.question}

@@ -9,8 +9,8 @@ export const site = {
   ],
   whatsapp: "989915291300",
   instagram: "https://instagram.com/pendarqom",
-  // تلگرام و ایتا: شناسه‌ها تأیید نشده — placeholder
-  telegram: "https://t.me/[آیدی تلگرام — به‌زودی]",
+  telegram: "https://t.me/pendarqom",
+  // ایتا: شناسه تأیید نشده — placeholder
   eitea: "https://eitaa.com/[آیدی ایتا — به‌زودی]",
   bale: "https://ble.ir/pendarqom",
   address: "قم، بلوار امین، کوچه ۱۲، پلاک ۱۶",

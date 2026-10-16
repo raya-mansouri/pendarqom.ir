@@ -3,5 +3,5 @@
     <stop offset="0" stop-color="#fbf3e0"/><stop offset="1" stop-color="#e7d8b8"/>
   </linearGradient></defs>
   <rect width="800" height="600" fill="url(#g)"/>
-  <text x="400" y="310" font-family="Tahoma, sans-serif" font-size="36" fill="#22302b" text-anchor="middle">اتاق درمان ۴ (نمونه)</text>
+  <text x="400" y="310" font-family="Tahoma, sans-serif" font-size="36" fill="#201c42" text-anchor="middle">اتاق درمان ۴ (نمونه)</text>
 </svg>

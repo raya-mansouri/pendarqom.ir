@@ -27,6 +27,7 @@ const articles = (await getCollection("articles"))
           dateDisplay={a.data.dateDisplay}
           category={a.data.category}
           readingTime={readingTimeMinutes(a.body ?? "")}
+          headingLevel="h2"
         />
       ))}
     </div>

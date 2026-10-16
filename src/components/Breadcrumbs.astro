@@ -10,7 +10,7 @@ const { items } = Astro.props;
   <ol class="flex flex-wrap items-center gap-1.5">
     {items.map((item, i) => (
       <li class="flex items-center gap-1.5">
-        {i > 0 && <Icon name="arrow" size={14} class="rotate-180" aria-hidden="true" />}
+        {i > 0 && <Icon name="arrow" size={14} aria-hidden="true" />}
         {item.href ? (
           <a href={item.href} class="hover:text-primary-700">{item.label}</a>
         ) : (

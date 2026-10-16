@@ -25,6 +25,7 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
           category={s.data.category}
           icon={s.data.icon}
           href={`/services/${s.id}/`}
+          headingLevel="h2"
         />
       ))}
     </div>

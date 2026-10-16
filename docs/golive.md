@@ -30,9 +30,19 @@
 
 ## ۲ب. تنظیمات Cloudflare (چون DNS پروکسی است — وضعیت فعلی)
 
-- **SSL/TLS → Overview:** Encrypt mode = **Full (strict)** (گواهی GitHub Pages در مبدأ اعتبارنامه دارد).
+- **SSL/TLS → Overview:** Encrypt mode = **Full (strict)** — اما **فقط پس از آنکه گواهی GitHub Pages صادر شده باشد** (در Settings → Pages باید پیام «Your site is ready to be served over HTTPS» را ببینید). تا پیش از صدور گواهی، حالت strict باعث خطای **526** می‌شود: Cloudflare نمی‌تواند با مبدأ TLS معتبر صحبت کند. در این فاصله حالت **Full** سایت را بالا نگه می‌دارد.
 - **SSL/TLS → Edge Certificates → Always Use HTTPS = On.** این کار `http://` را با ۳۰۱ به `https://` منتقل می‌کند. تا زمانی که این خاموش است، `http://pendarqom.ir` بدون ریدرکت کد ۲۰۰ برمی‌گرداند.
-- **Network:** (اختیاری) Canonical / SSL برای www نیز بررسی شود؛ ریدیرکت `www → apex` در لایهٔ Pages سالم کار می‌کند.
+- **ترتیب ایمن:** (۱) حالت = Full → (۲) صبر کنید تا گواهی Pages صادر شود → (۳) `curl -sI https://pendarqom.ir` = ۲۰۰ → (۴) حالت = Full (strict) → (۵) دوباره ۲۰۰ را بگیرید → (۶) Always Use HTTPS را روشن کنید. (اگر اول ریدرکت روشن شود و گواهی مبدأ مشکل داشته باشد، امکان حلقهٔ ریدرکت هست.)
+- **Network:** Minimum TLS 1.2. ریدیرکت `www → apex` در لایهٔ Pages سالم کار می‌کند.
+- **HSTS:** فقط پس از آنکه هر چهار حالت بالا (http→https، apex، www، strict) تأیید شدند؛ HSTS با ریدرکت خراب، مرورگرها را برای `max-age` قفل می‌کند.
+
+### عیب‌یابی سریع
+
+| نشانه | معنا | اقدام |
+|-------|------|-------|
+| `https://pendarqom.ir` → ۵۲۶ ولی `http://pendarqom.ir` → ۲۰۰ | مبدأ در دسترس است، فقط اعتبارسنجی گواهی مبدأ در حالت strict شکست می‌خورد | موقتاً SSL/TLS را روی **Full** بگذارید؛ در GitHub Pages وضعیت صدور گواهی را بررسی و پس از صدور دوباره **Full (strict)** |
+| `http://` بدون ریدرکت ۲۰۰ برمی‌گرداند | Always Use HTTPS خاموش است | مرحلهٔ ۲ب |
+| خطای ۵۲۱/۵۲۵ | رکوردهای DNS به مبدأ درست وصل نمی‌شوند | رکوردها و پروکسی را در Cloudflare بررسی کنید |
 
 ## ۳. تأیید نهایی (پس از resolve شدن DNS)
 
@@ -50,6 +60,7 @@ curl -sIL https://www.pendarqom.ir | grep -iE "HTTP|^location"
 
 curl -sI https://pendarqom.ir | head -5
 # انتظار: HTTP/2 200
+# اگر 526 برگشت: گواهی GitHub Pages هنوز معتبر نیست و حالت روی strict است → جدول «عیب‌یابی سریع» مرحلهٔ ۲ب.
 ```
 
 ## ۴. چک‌لیست پس از استقرار (spec §11)

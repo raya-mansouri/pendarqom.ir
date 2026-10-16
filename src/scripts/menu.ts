@@ -12,6 +12,7 @@ function focusables(): HTMLElement[] {
 
 function openMenu() {
   if (!menu || !toggle || !backdrop) return;
+  menu.inert = false;
   menu.classList.remove("translate-x-full");
   backdrop.classList.remove("hidden");
   toggle.setAttribute("aria-expanded", "true");
@@ -21,11 +22,12 @@ function openMenu() {
 
 function closeMenu() {
   if (!menu || !toggle || !backdrop) return;
+  toggle.focus();
   menu.classList.add("translate-x-full");
   backdrop.classList.add("hidden");
   toggle.setAttribute("aria-expanded", "false");
   document.documentElement.style.overflow = "";
-  toggle.focus();
+  menu.inert = true;
 }
 
 toggle?.addEventListener("click", openMenu);

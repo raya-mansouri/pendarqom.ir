@@ -1,5 +1,6 @@
 ---
 import { site } from "../data/site";
+import vazirmatnArabic from "@fontsource-variable/vazirmatn/files/vazirmatn-arabic-wght-normal.woff2";
 
 interface Props {
   title: string;
@@ -12,6 +13,7 @@ const ogImageAbs = new URL(ogImage, Astro.site);
 ---
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preload" href={vazirmatnArabic} as="font" type="font/woff2" crossorigin />
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta name="generator" content={Astro.generator} />

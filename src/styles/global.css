@@ -6,19 +6,20 @@
 
   --color-bg: #faf8f4;
   --color-surface: #ffffff;
-  --color-ink: #22302b;
-  --color-ink-muted: #5c6b64;
+  --color-ink: #201c42;
+  --color-ink-muted: #55516e;
 
-  --color-primary-50: #f0f6f3;
-  --color-primary-100: #dceae4;
-  --color-primary-200: #bbd6cc;
-  --color-primary-300: #93bcae;
-  --color-primary-400: #6b9e8d;
-  --color-primary-500: #4e8474;
-  --color-primary-600: #3c6b5e;
-  --color-primary-700: #2f564c;
-  --color-primary-800: #264741;
-  --color-primary-900: #1f3a35;
+  /* Royal-navy ramp sampled from logo medallion #2e2175; AA-verified: white on 600 >=4.5:1, 700 on cream >=4.5:1 */
+  --color-primary-50: #eef0fb;
+  --color-primary-100: #e0e3f7;
+  --color-primary-200: #c6c9ee;
+  --color-primary-300: #a6a7e1;
+  --color-primary-400: #8584d0;
+  --color-primary-500: #6866ba;
+  --color-primary-600: #504ca1;
+  --color-primary-700: #403c84;
+  --color-primary-800: #332f6a;
+  --color-primary-900: #282554;
 
   /* Muted logo-gold accent (royal blue + gold nastaliq logo) — AA ≥4.5:1 on cream #faf8f4 and white */
   --color-clay: #8a6d1f;
@@ -30,7 +31,7 @@
   --color-status-past: #55516e;
   --color-status-past-bg: #eef1ef;
 
-  --shadow-soft: 0 10px 30px rgb(34 48 43 / 0.08);
+  --shadow-soft: 0 10px 30px rgb(32 28 66 / 0.08);
 }
 
 html {

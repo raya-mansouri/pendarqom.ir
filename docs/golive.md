@@ -20,22 +20,32 @@
 
 اگر پنل registrar فقط تغییر NameServer می‌دهد (رایج برای دامنه‌های .ir): DNS را به یک سرویس رایگان مثل Cloudflare منتقل کنید و رکوردها را آنجا بسازید.
 
+> **وضعیت فعلی (راه‌اندازی‌شده):** DNS دامنه نزد **Cloudflare** است و رکوردها **پروکسی (ابر نارنجی)** شده‌اند؛ یعنی `dig` IPهای Cloudflare (مثل `104.21.x` / `172.67.x`) را برمی‌گرداند نه IP مستقیم GitHub. این درست است و HTTPS در لبهٔ Cloudflare خدمت می‌شود. در این حالت، **در اجبار HTTPS به تنظیمات GitHub متکی نباشید — تیک‌ها را در Cloudflare بزنید** (مرحلهٔ ۲ب).
+
 ## ۲. تنظیمات GitHub Pages
 
 - Settings → Pages → Build and deployment → Source: **GitHub Actions**
 - Settings → Pages → Custom domain: `pendarqom.ir` → Save (فایل `public/CNAME` همین مقدار را دارد)
-- پس از صدور گواهی (چند دقیقه تا یکی دو ساعت بعد از DNS): تیک **Enforce HTTPS** را بزنید
+- اگر DNS **مستقیم** (بدون پروکسی) به GitHub اشاره می‌کند: پس از صدور گواهی، تیک **Enforce HTTPS** را در همین صفحه بزنید.
+
+## ۲ب. تنظیمات Cloudflare (چون DNS پروکسی است — وضعیت فعلی)
+
+- **SSL/TLS → Overview:** Encrypt mode = **Full (strict)** (گواهی GitHub Pages در مبدأ اعتبارنامه دارد).
+- **SSL/TLS → Edge Certificates → Always Use HTTPS = On.** این کار `http://` را با ۳۰۱ به `https://` منتقل می‌کند. تا زمانی که این خاموش است، `http://pendarqom.ir` بدون ریدرکت کد ۲۰۰ برمی‌گرداند.
+- **Network:** (اختیاری) Canonical / SSL برای www نیز بررسی شود؛ ریدیرکت `www → apex` در لایهٔ Pages سالم کار می‌کند.
 
 ## ۳. تأیید نهایی (پس از resolve شدن DNS)
 
 ```bash
 dig +short pendarqom.ir A | sort
-# انتظار: چهار IP گروه 185.199.x.153
+# پروکسی Cloudflare: IPهای 104.21.x / 172.67.x (منتظر 185.199.x نباشید)
+# DNS مستقیم GitHub: چهار IP گروه 185.199.x.153
 
-curl -sIL http://pendarqom.ir | grep -E "HTTP|location"
-# انتظار: http -> https redirect
+curl -sIL http://pendarqom.ir | grep -iE "HTTP|^location"
+# انتظار پس از روشن‌کردن Always Use HTTPS: HTTP/1.1 301 + Location: https://...
+# اگر فقط HTTP 200 برگشت: Always Use HTTPS هنوز خاموش است (مرحلهٔ ۲ب).
 
-curl -sIL https://www.pendarqom.ir | grep -E "HTTP|location"
+curl -sIL https://www.pendarqom.ir | grep -iE "HTTP|^location"
 # انتظار: www -> apex، سپس 200
 
 curl -sI https://pendarqom.ir | head -5

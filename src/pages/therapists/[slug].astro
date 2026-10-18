@@ -67,20 +67,24 @@ const whatsappMsg = encodeURIComponent(`سلام، برای نوبت با ${ther
             {therapist.data.specialties.map((s) => <span class="badge bg-primary-50 text-primary-700">{s}</span>)}
           </dd>
         </div>
-        <div class="card p-4">
-          <dt class="text-sm font-bold text-primary-700">رویکردهای درمانی</dt>
-          <dd class="mt-2 flex flex-wrap gap-1.5">
-            {therapist.data.approaches.map((a) => <span class="badge bg-primary-50 text-primary-700">{a}</span>)}
-          </dd>
-        </div>
-        <div class="card p-4">
-          <dt class="text-sm font-bold text-primary-700">تحصیلات و گواهی‌ها</dt>
-          <dd class="mt-2">
-            <ul class="list-disc space-y-1 ps-5 text-sm text-ink-muted">
-              {therapist.data.education.map((e) => <li>{e}</li>)}
-            </ul>
-          </dd>
-        </div>
+        {therapist.data.approaches.length > 0 && (
+          <div class="card p-4">
+            <dt class="text-sm font-bold text-primary-700">رویکردهای درمانی</dt>
+            <dd class="mt-2 flex flex-wrap gap-1.5">
+              {therapist.data.approaches.map((a) => <span class="badge bg-primary-50 text-primary-700">{a}</span>)}
+            </dd>
+          </div>
+        )}
+        {therapist.data.education.length > 0 && (
+          <div class="card p-4">
+            <dt class="text-sm font-bold text-primary-700">تحصیلات و گواهی‌ها</dt>
+            <dd class="mt-2">
+              <ul class="list-disc space-y-1 ps-5 text-sm text-ink-muted">
+                {therapist.data.education.map((e) => <li>{e}</li>)}
+              </ul>
+            </dd>
+          </div>
+        )}
         <div class="card p-4">
           <dt class="text-sm font-bold text-primary-700">زبان‌ها</dt>
           <dd class="mt-2 text-sm text-ink-muted">{therapist.data.languages.join("، ")}</dd>

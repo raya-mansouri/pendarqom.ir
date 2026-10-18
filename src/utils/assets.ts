@@ -3,12 +3,12 @@ export interface AssetEntry {
 }
 
 const therapistModules = import.meta.glob<{ default: { src: string } }>(
-  "../assets/therapists/*.svg",
+  "../assets/therapists/*.webp",
   { eager: true },
 );
 export const therapistPhotos: Record<string, AssetEntry> = Object.fromEntries(
   Object.entries(therapistModules).map(([path, mod]) => [
-    path.split("/").pop()!.replace(".svg", ""),
+    path.split("/").pop()!.replace(".webp", ""),
     { src: mod.default.src },
   ]),
 );

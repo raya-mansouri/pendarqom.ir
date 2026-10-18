@@ -6,6 +6,9 @@ import HoursTable from "../components/HoursTable.astro";
 import CrisisStrip from "../components/CrisisStrip.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
+
+const primaryPhone = site.phones[0];
+const telephone = "+98" + primaryPhone.number.replace(/\D/g, "").replace(/^0/, "");
 ---
 <BaseLayout
   title="تماس و نوبتدهی | پندار نیم رخ"
@@ -16,7 +19,7 @@ import { site } from "../data/site";
       "@type": "Psychologist",
       name: site.name,
       url: site.url,
-      telephone: site.phones[0].number,
+      telephone,
       address: { "@type": "PostalAddress", addressLocality: "قم", addressCountry: "IR", streetAddress: site.address },
       openingHours: ["Sa-Su 10:00-22:00", "Mo-Th 10:00-22:00"],
     },

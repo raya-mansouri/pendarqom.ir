@@ -8,6 +8,7 @@ const roots = [
   "src/content/articles",
 ];
 const dataFiles = ["src/data/testimonials.ts", "src/data/faq.ts", "src/data/site.ts"];
+const assetRoots = ["src/assets/gallery", "src/assets/articles"];
 
 const patterns = [
   /^placeholder:\s*true/m,
@@ -33,12 +34,19 @@ for (const root of roots) {
 for (const path of dataFiles) {
   scanFile(path, readFileSync(path, "utf8"), patterns.slice(2));
 }
+for (const root of assetRoots) {
+  for (const file of readdirSync(root)) {
+    if (!file.endsWith(".svg")) continue;
+    const path = join(root, file);
+    scanFile(path, readFileSync(path, "utf8"), [/نمونه/]);
+  }
+}
 
 if (offenders.length > 0) {
   console.error("✖_LAUNCH BLOCKED — placeholder/draft content remains in:\n");
   for (const o of offenders) console.error("  - " + o);
   console.error(
-    "\nReplace or remove placeholder:true / draft:true frontmatter, then re-run: npm run build:launch",
+    "\nReplace placeholder/draft content (frontmatter, data, or assets) with real values, then re-run: npm run build:launch",
   );
   process.exit(1);
 }

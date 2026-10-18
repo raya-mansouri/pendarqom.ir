@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import SectionHeading from "../../components/SectionHeading.astro";
 import TherapistCard from "../../components/cards/TherapistCard.astro";
 
 const therapists = (await getCollection("therapists")).sort(
@@ -19,7 +18,7 @@ const therapists = (await getCollection("therapists")).sort(
   <section class="container-site section">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {therapists.map((t) => (
-        <TherapistCard id={t.id} name={t.data.name} title={t.data.title} specialties={t.data.specialties} />
+        <TherapistCard id={t.id} name={t.data.name} title={t.data.title} specialties={t.data.specialties} headingLevel="h2" />
       ))}
     </div>
   </section>

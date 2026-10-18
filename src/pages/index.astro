@@ -28,6 +28,7 @@ const articles = (await getCollection("articles"))
   .slice(0, 3);
 const shownTestimonials = testimonials.filter((t) => t.consent).slice(0, 4);
 const primaryPhone = site.phones[0];
+const telephone = "+98" + primaryPhone.number.replace(/\D/g, "").replace(/^0/, "");
 
 const whyUs = [
   { title: "درمانگران دارای پروانه", text: "همه درمانگران ما دارای پروانه فعالیت معتبر از سازمان نظام روانشناسی و مشاوره هستند." },
@@ -45,7 +46,7 @@ const whyUs = [
       "@type": "Psychologist",
       name: site.name,
       url: site.url,
-      telephone: site.phones[0].number,
+      telephone,
       address: { "@type": "PostalAddress", addressLocality: "قم", addressCountry: "IR", streetAddress: site.address },
       openingHours: ["Sa-Su 10:00-22:00", "Mo-Th 10:00-22:00"],
       image: new URL("/og-default.png", site.url).href,

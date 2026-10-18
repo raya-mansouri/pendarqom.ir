@@ -18,6 +18,8 @@ export async function getStaticPaths() {
 const { article } = Astro.props;
 const { Content } = await render(article);
 const cover = articleCovers[article.id];
+const rasterCover = cover && !cover.src.endsWith(".svg") ? cover.src : undefined;
+const shareImage = new URL(rasterCover ?? "/og-default.png", site.url).href;
 const minutes = readingTimeMinutes(article.body ?? "");
 const all = (await getCollection("articles")).filter((a) => !a.data.draft && a.id !== article.id);
 const related = all
@@ -31,17 +33,23 @@ const description = article.data.description;
 <BaseLayout
   title={`${article.data.title} | مقالات پندار نیم رخ`}
   description={description}
-  ogImage={cover?.src}
+  ogImage={rasterCover}
+  ogType="article"
   jsonLd={[
     {
       "@context": "https://schema.org",
       "@type": "Article",
       headline: article.data.title,
       description,
+      image: shareImage,
       datePublished: article.data.publishDate.toISOString(),
       dateModified: (article.data.updatedDate ?? article.data.publishDate).toISOString(),
-      author: { "@type": "Organization", name: site.name },
-      publisher: { "@type": "Organization", name: site.name },
+      author: { "@type": "Person", name: article.data.author },
+      publisher: {
+        "@type": "Organization",
+        name: site.name,
+        logo: { "@type": "ImageObject", url: new URL("/apple-touch-icon.png", site.url).href },
+      },
       keywords: article.data.tags.join("، "),
     },
     {

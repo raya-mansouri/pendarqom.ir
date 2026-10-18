@@ -6,6 +6,8 @@ import HoursTable from "../components/HoursTable.astro";
 import CrisisStrip from "../components/CrisisStrip.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
+import { telHref } from "../utils/links";
+import { toPersianDigits } from "../utils/persian";
 
 const primaryPhone = site.phones[0];
 const telephone = "+98" + primaryPhone.number.replace(/\D/g, "").replace(/^0/, "");
@@ -49,7 +51,7 @@ const telephone = "+98" + primaryPhone.number.replace(/\D/g, "").replace(/^0/, "
           <p class="flex items-center gap-2 text-ink-muted">
             <span class="text-primary-600"><Icon name="phone" size={16} /></span>
             <span>{p.label}:</span>
-            <bdi class="font-semibold text-ink">{p.number}</bdi>
+            <a class="font-semibold text-ink hover:text-primary-700" href={telHref(p.number)}><bdi>{toPersianDigits(p.number)}</bdi></a>
           </p>
         ))}
         <p class="flex items-start gap-2 text-ink-muted">

@@ -20,8 +20,8 @@ lightboxCloseBtn?.addEventListener("click", () => dialog?.close());
 dialog?.addEventListener("click", (e) => {
   if (e.target === dialog) dialog.close();
 });
-dialog?.addEventListener("keydown", (e) => {
-  if (!dialog || !img) return;
+document.addEventListener("keydown", (e) => {
+  if (!dialog?.open || !img) return;
   if (e.key === "ArrowLeft") openAt((lastIndex + 1) % triggers.length);
   if (e.key === "ArrowRight") openAt((lastIndex - 1 + triggers.length) % triggers.length);
 });

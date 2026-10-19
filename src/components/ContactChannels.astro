@@ -9,6 +9,7 @@ interface Props {
 const { compact = false } = Astro.props;
 
 const primaryPhone = site.phones[0];
+const isHttpUrl = (url?: string): url is string => !!url && /^https?:\/\/[^\s[\]]+$/.test(url);
 const channels = [
   site.whatsapp && {
     label: "واتساپ",
@@ -17,10 +18,10 @@ const channels = [
     cls: "btn-whatsapp",
   },
   { label: primaryPhone.label, href: telHref(primaryPhone.number), icon: "phone", cls: "btn-call" },
-  site.telegram && { label: "تلگرام", href: site.telegram, icon: "telegram", cls: "btn-secondary" },
-  site.instagram && { label: "اینستاگرام", href: site.instagram, icon: "instagram", cls: "btn-secondary" },
-  site.eitea && { label: "ایتا", href: site.eitea, icon: "chat", cls: "btn-secondary" },
-  site.bale && { label: "بله", href: site.bale, icon: "chat", cls: "btn-secondary" },
+  isHttpUrl(site.telegram) && { label: "تلگرام", href: site.telegram, icon: "telegram", cls: "btn-secondary" },
+  isHttpUrl(site.instagram) && { label: "اینستاگرام", href: site.instagram, icon: "instagram", cls: "btn-secondary" },
+  isHttpUrl(site.eitea) && { label: "ایتا", href: site.eitea, icon: "chat", cls: "btn-secondary" },
+  isHttpUrl(site.bale) && { label: "بله", href: site.bale, icon: "chat", cls: "btn-secondary" },
 ].filter(Boolean) as { label: string; href: string; icon: string; cls: string }[];
 ---
 <div class:list={["flex flex-wrap gap-3", compact && "gap-2"]}>

@@ -20,7 +20,7 @@ const past = workshops.filter((w) => w.data.status === "past");
     <h1 class="text-3xl sm:text-4xl">کارگاه‌های کلینیک</h1>
   </div>
   <section class="container-site section">
-    <h2 class="mb-6 text-xl font-bold">در حال ثبت‌نام</h2>
+    <h2 class="mb-6 text-xl font-bold">کارگاه‌های پیشِ رو</h2>
     {upcoming.length === 0 ? (
       <p class="text-ink-muted">در حال حاضر کارگاهی برای ثبت‌نام نیست؛ به‌زودی کارگاه‌های جدید اعلام می‌شود.</p>
     ) : (
@@ -32,7 +32,7 @@ const past = workshops.filter((w) => w.data.status === "past");
     )}
     {past.length > 0 && (
       <div class="mt-14">
-        <h2 class="mb-6 text-xl font-bold text-ink-muted">برگزارشده</h2>
+        <h2 class="mb-6 text-xl font-bold text-ink-muted">برگزار‌شده</h2>
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {past.map((w) => (
             <WorkshopCard href={`/workshops/${w.id}/`} title={w.data.title} instructor={w.data.instructor} dateDisplay={w.data.dateDisplay} status={w.data.status} />

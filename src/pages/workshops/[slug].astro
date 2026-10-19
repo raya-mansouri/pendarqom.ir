@@ -39,7 +39,7 @@ const signupHref =
       "@context": "https://schema.org",
       "@type": "Event",
       name: workshop.data.title,
-      startDate: workshop.data.startDate.toISOString(),
+      startDate: workshop.data.startDate.toISOString().slice(0, 10),
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       eventStatus: workshop.data.status === "past" ? undefined : "https://schema.org/EventScheduled",
       location: { "@type": "Place", name: workshop.data.location, address: site.address },

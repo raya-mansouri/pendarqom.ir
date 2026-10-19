@@ -6,8 +6,9 @@ interface Props {
   name: string;
   title: string;
   specialties: string[];
+  headingLevel?: "h2" | "h3";
 }
-const { id, name, title, specialties } = Astro.props;
+const { id, name, title, specialties, headingLevel: H = "h3" } = Astro.props;
 const photo = therapistPhotos[id];
 ---
 <a href={`/therapists/${id}/`} class="card reveal group overflow-hidden transition-transform hover:-translate-y-1">
@@ -20,7 +21,7 @@ const photo = therapistPhotos[id];
     class="aspect-square w-full object-cover"
   />
   <div class="p-5">
-    <h3 class="font-bold group-hover:text-primary-700">{name}</h3>
+    <H class="font-bold group-hover:text-primary-700">{name}</H>
     <p class="mt-0.5 text-sm text-ink-muted">{title}</p>
     <div class="mt-3 flex flex-wrap gap-1.5">
       {specialties.slice(0, 3).map((s) => (

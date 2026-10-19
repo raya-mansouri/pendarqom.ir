@@ -10,14 +10,14 @@ import TestimonialCard from "../components/cards/TestimonialCard.astro";
 import CtaStrip from "../components/CtaStrip.astro";
 import { site } from "../data/site";
 import { testimonials } from "../data/testimonials";
+import { telHref } from "../utils/links";
 import { toPersianDigits } from "../utils/persian";
 import { readingTimeMinutes } from "../utils/readingtime";
 
 const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
-const therapists = (await getCollection("therapists"))
-  .filter((t) => t.data.featured)
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 4);
+const allTherapists = (await getCollection("therapists")).sort((a, b) => a.data.order - b.data.order);
+const featuredTherapists = allTherapists.filter((t) => t.data.featured);
+const therapists = (featuredTherapists.length > 0 ? featuredTherapists : allTherapists).slice(0, 4);
 const workshops = (await getCollection("workshops"))
   .filter((w) => w.data.status !== "past")
   .sort((a, b) => a.data.startDate.valueOf() - b.data.startDate.valueOf())
@@ -26,8 +26,9 @@ const articles = (await getCollection("articles"))
   .filter((a) => !a.data.draft)
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
   .slice(0, 3);
-const shownTestimonials = testimonials.filter((t) => t.consent).slice(0, 4);
+const shownTestimonials = testimonials.filter((t) => t.consent && !t.placeholder).slice(0, 4);
 const primaryPhone = site.phones[0];
+const telephone = "+98" + primaryPhone.number.replace(/\D/g, "").replace(/^0/, "");
 
 const whyUs = [
   { title: "درمانگران دارای پروانه", text: "همه درمانگران ما دارای پروانه فعالیت معتبر از سازمان نظام روانشناسی و مشاوره هستند." },
@@ -45,7 +46,7 @@ const whyUs = [
       "@type": "Psychologist",
       name: site.name,
       url: site.url,
-      telephone: site.phones[0].number,
+      telephone,
       address: { "@type": "PostalAddress", addressLocality: "قم", addressCountry: "IR", streetAddress: site.address },
       openingHours: ["Sa-Su 10:00-22:00", "Mo-Th 10:00-22:00"],
       image: new URL("/og-default.png", site.url).href,
@@ -63,7 +64,7 @@ const whyUs = [
         </h1>
         <p class="mt-5 max-w-xl text-lg text-ink-muted">{site.tagline}</p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href={`tel:${primaryPhone.number.replace(/[^+\d]/g, "")}`} class="btn btn-primary px-7 py-3 text-base">رزرو نوبت</a>
+          <a href={telHref(primaryPhone.number)} class="btn btn-primary px-7 py-3 text-base">رزرو نوبت</a>
           <a href="/services/" class="btn btn-secondary px-7 py-3 text-base">خدمات کلینیک</a>
         </div>
         <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-muted">
@@ -150,16 +151,18 @@ const whyUs = [
   </section>
 
   <!-- ۶. نظرات مراجعین -->
-  <section class="section bg-surface" aria-labelledby="testimonials-title">
-    <div class="container-site">
-      <SectionHeading id="testimonials-title" eyebrow="تجربه مراجعین" title="آنچه مراجعان ما می‌گویند" />
-      <div class="grid gap-6 md:grid-cols-3">
-        {shownTestimonials.map((t) => (
-          <TestimonialCard quote={t.quote} attribution={t.attribution} />
-        ))}
+  {shownTestimonials.length > 0 && (
+    <section class="section bg-surface" aria-labelledby="testimonials-title">
+      <div class="container-site">
+        <SectionHeading id="testimonials-title" eyebrow="تجربه مراجعین" title="آنچه مراجعان ما می‌گویند" />
+        <div class="grid gap-6 md:grid-cols-3">
+          {shownTestimonials.map((t) => (
+            <TestimonialCard quote={t.quote} attribution={t.attribution} />
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- ۷. مقالات -->
   <section class="section" aria-labelledby="articles-title">

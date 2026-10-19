@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="تصویر نمونه درمانگر">
-  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#504ca1"/><stop offset="1" stop-color="#a6a7e1"/>
-  </linearGradient></defs>
-  <rect width="600" height="600" fill="url(#g)"/>
-  <circle cx="300" cy="230" r="90" fill="#faf8f4" opacity="0.9"/>
-  <path d="M120 600c0-120 80-180 180-180s180 60 180 180z" fill="#faf8f4" opacity="0.9"/>
-  <text x="300" y="60" font-family="Tahoma, sans-serif" font-size="30" fill="#faf8f4" text-anchor="middle">تصویر نمونه — دکتر مریم احمدی</text>
-</svg>

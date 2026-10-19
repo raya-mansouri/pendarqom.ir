@@ -9,14 +9,22 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  ogType?: "website" | "article";
+  noindex?: boolean;
   jsonLd?: Record<string, unknown>[];
 }
-const { title, description, ogImage, jsonLd = [] } = Astro.props;
+const { title, description, ogImage, ogType, noindex, jsonLd = [] } = Astro.props;
 ---
 <!doctype html>
 <html lang="fa" dir="rtl">
   <head>
-    <BaseHead title={title} description={description} ogImage={ogImage} />
+    <BaseHead
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      ogType={ogType}
+      noindex={noindex}
+    />
     <script is:inline>document.documentElement.classList.add('js');</script>
     {jsonLd.map((data) => <JsonLd data={data} />)}
   </head>

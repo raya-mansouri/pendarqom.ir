@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import SectionHeading from "../../components/SectionHeading.astro";
 import ServiceCard from "../../components/cards/ServiceCard.astro";
 
 const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);

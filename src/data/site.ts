@@ -1,8 +1,8 @@
 export const site = {
   name: "کلینیک علمی روانشناسی پندار نیم رخ",
-  shortName: "پندار نیم رخ",
+  shortName: "کلینیک علمی روانشناسی پندار نیم رخ",
   tagline:
-    "نماینده گروه سازمان‌های علمی اجتماعی درمانی پندار در قم — خدمات روانشناسی به صورت حضوری، تلفنی و آنلاین",
+    "نماینده گروه سازمان‌های علمی اجتماعی درمانی پندار در قم — خدمات تخصصی روانشناسی به صورت حضوری، تلفنی و آنلاین",
   url: "https://pendarqom.ir",
   phones: [
     { label: "شماره تماس کلینیک", number: "0991 529 1300" },
@@ -10,8 +10,7 @@ export const site = {
   whatsapp: "989915291300",
   instagram: "https://instagram.com/pendarqom",
   telegram: "https://t.me/pendarqom",
-  // ایتا: شناسه تأیید نشده — placeholder
-  eitea: "https://eitaa.com/[آیدی ایتا — به‌زودی]",
+  eitea: "https://eitaa.com/pendarqom",
   bale: "https://ble.ir/pendarqom",
   address: "قم، بلوار امین، کوچه ۱۲، پلاک ۱۶",
   maps: {

@@ -13,6 +13,17 @@ export const therapistPhotos: Record<string, AssetEntry> = Object.fromEntries(
   ]),
 );
 
+const workshopModules = import.meta.glob<{ default: { src: string } }>(
+  "../assets/workshops/*.webp",
+  { eager: true },
+);
+export const workshopPosters: Record<string, AssetEntry> = Object.fromEntries(
+  Object.entries(workshopModules).map(([path, mod]) => [
+    path.split("/").pop()!.replace(".webp", ""),
+    { src: mod.default.src },
+  ]),
+);
+
 const articleModules = import.meta.glob<{ default: { src: string } }>(
   "../assets/articles/*.svg",
   { eager: true },

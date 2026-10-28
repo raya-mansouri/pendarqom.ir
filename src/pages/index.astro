@@ -18,9 +18,11 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
 const allTherapists = (await getCollection("therapists")).sort((a, b) => a.data.order - b.data.order);
 const featuredTherapists = allTherapists.filter((t) => t.data.featured);
 const therapists = (featuredTherapists.length > 0 ? featuredTherapists : allTherapists).slice(0, 4);
+// کارگاه‌های بدون تاریخ شروع (تا اعلام تاریخ) در انتهای فهرست می‌مانند
+const startOf = (w: { data: { startDate?: Date } }) => w.data.startDate?.valueOf() ?? Number.MAX_SAFE_INTEGER;
 const workshops = (await getCollection("workshops"))
   .filter((w) => w.data.status !== "past")
-  .sort((a, b) => a.data.startDate.valueOf() - b.data.startDate.valueOf())
+  .sort((a, b) => startOf(a) - startOf(b))
   .slice(0, 3);
 const articles = (await getCollection("articles"))
   .filter((a) => !a.data.draft)
@@ -136,10 +138,12 @@ const whyUs = [
       <div class="grid gap-6 md:grid-cols-3">
         {workshops.map((w) => (
           <WorkshopCard
+            id={w.id}
             href={`/workshops/${w.id}/`}
             title={w.data.title}
             instructor={w.data.instructor}
             dateDisplay={w.data.dateDisplay}
+            sessions={w.data.sessions}
             status={w.data.status}
           />
         ))}

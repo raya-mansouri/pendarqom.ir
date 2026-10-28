@@ -18,3 +18,9 @@ export function whatsappLink(number: string, message?: string): string {
 export function workshopSignupMessage(title: string): string {
   return `سلام، برای ثبت‌نام کارگاه «${title}» راهنمایی می‌خواستم.`;
 }
+
+/** Builds an Instagram DM link (opens chat) from a profile URL. */
+export function instagramDmLink(profileUrl: string): string {
+  const handle = profileUrl.split("/").filter(Boolean).pop() ?? "";
+  return `https://ig.me/m/${handle}`;
+}

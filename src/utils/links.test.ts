@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { telHref, whatsappLink, workshopSignupMessage } from "./links";
+import { instagramDmLink, telHref, whatsappLink, workshopSignupMessage } from "./links";
 
 describe("telHref", () => {
   it("strips spaces and dashes, keeps +", () => {
@@ -29,5 +29,14 @@ describe("workshopSignupMessage", () => {
   it("includes the workshop title", () => {
     expect(workshopSignupMessage("مهارت‌های فرزندپروری")).toContain("مهارت‌های فرزندپروری");
     expect(workshopSignupMessage("x")).toMatch(/^سلام/);
+  });
+});
+
+describe("instagramDmLink", () => {
+  it("builds ig.me dm url from profile url", () => {
+    expect(instagramDmLink("https://instagram.com/pendarqom")).toBe("https://ig.me/m/pendarqom");
+  });
+  it("strips trailing slash", () => {
+    expect(instagramDmLink("https://instagram.com/pendarqom/")).toBe("https://ig.me/m/pendarqom");
   });
 });

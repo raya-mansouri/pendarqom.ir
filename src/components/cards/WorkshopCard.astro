@@ -1,24 +1,43 @@
 ---
+import { workshopPosters } from "../../utils/assets";
+import { toPersianDigits } from "../../utils/persian";
 import Icon from "../Icon.astro";
 import StatusBadge from "../StatusBadge.astro";
 
 interface Props {
+  id: string;
   href: string;
   title: string;
   instructor: string;
-  dateDisplay: string;
+  dateDisplay?: string;
+  sessions?: number;
   status: "open" | "full" | "past";
 }
-const { href, title, instructor, dateDisplay, status } = Astro.props;
+const { id, href, title, instructor, dateDisplay, sessions, status } = Astro.props;
+const poster = workshopPosters[id];
 ---
-<a href={href} class:list={["card reveal block p-6 transition-transform hover:-translate-y-1", status === "past" && "opacity-75"]}>
-  <div class="flex items-center justify-between gap-3">
-    <StatusBadge status={status} />
-    <span class="inline-flex items-center gap-1.5 text-xs text-ink-muted">
-      <Icon name="calendar" size={16} />
-      {dateDisplay}
-    </span>
+<a href={href} class:list={["card reveal group block overflow-hidden transition-transform hover:-translate-y-1", status === "past" && "opacity-75"]}>
+  {poster && (
+    <img
+      src={poster.src}
+      alt={`پوستر کارگاه ${title}`}
+      width={1024}
+      height={1536}
+      loading="lazy"
+      class="aspect-[3/4] w-full object-cover"
+    />
+  )}
+  <div class="p-5">
+    <div class="flex items-center justify-between gap-3">
+      <StatusBadge status={status} />
+      {(dateDisplay || sessions) && (
+        <span class="inline-flex items-center gap-1.5 text-xs text-ink-muted">
+          <Icon name="calendar" size={14} />
+          {dateDisplay ?? `${toPersianDigits(sessions ?? 0)} جلسه`}
+        </span>
+      )}
+    </div>
+    <h3 class="mt-3 text-lg font-bold group-hover:text-primary-700">{title}</h3>
+    <p class="mt-1 text-sm text-ink-muted">مدرس: {instructor}</p>
   </div>
-  <h3 class="mt-3 text-lg font-bold">{title}</h3>
-  <p class="mt-1 text-sm text-ink-muted">مدرس: {instructor}</p>
 </a>

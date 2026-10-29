@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import { Picture } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import ContactChannels from "../../components/ContactChannels.astro";
@@ -18,8 +19,8 @@ const { Content } = await render(therapist);
 const photo = therapistPhotos[therapist.id];
 ---
 <BaseLayout
-  title={`${therapist.data.name} | پندار نیم رخ`}
-  description={`${therapist.data.name} — ${therapist.data.title} در کلینیک علمی روانشناسی پندار نیم رخ`}
+  title={therapist.data.seoTitle ?? `${therapist.data.name} | پندار نیم رخ`}
+  description={therapist.data.seoDescription ?? `${therapist.data.name} — ${therapist.data.title} در کلینیک علمی روانشناسی پندار نیم رخ`}
   jsonLd={[
     {
       "@context": "https://schema.org",
@@ -46,17 +47,25 @@ const photo = therapistPhotos[therapist.id];
   </div>
   <section class="container-site section grid gap-10 lg:grid-cols-[320px_1fr]">
     <div>
-      <img
-        src={photo?.src}
-        alt={`تصویر ${therapist.data.name}`}
-        width="600"
-        height="600"
-        class="card aspect-square w-full object-cover"
-      />
+      {photo && (
+        <Picture
+          src={photo}
+          alt={`تصویر ${therapist.data.name}`}
+          formats={["avif", "webp"]}
+          fallbackFormat="webp"
+          widths={[200, 320, 480, 640, 820, 1000, 1200].filter((w) => w < photo.width).concat(photo.width)}
+          sizes="(min-width: 64rem) 320px, (min-width: 40rem) calc(100vw - 3rem), calc(100vw - 2rem)"
+          quality={82}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="card aspect-square w-full object-cover"
+        />
+      )}
     </div>
     <div>
       <h1 class="text-3xl sm:text-4xl">{therapist.data.name}</h1>
-      <p class="mt-2 text-lg text-ink-muted">{therapist.data.title}</p>
+      <p class="mt-2 text-lg text-ink-muted">{therapist.data.title} در قم</p>
       <p class="mt-1 text-sm text-ink-muted">{therapist.data.licenseNumber}</p>
 
       <dl class="mt-6 grid gap-4 sm:grid-cols-2">

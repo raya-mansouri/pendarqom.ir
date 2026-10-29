@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import { Picture } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import StatusBadge from "../../components/StatusBadge.astro";
@@ -78,13 +79,17 @@ const dateParts = [workshop.data.dateDisplay, workshop.data.time].filter(Boolean
     </article>
     <aside class="card h-fit p-6">
       {poster && (
-        <img
-          src={poster.src}
+        <Picture
+          src={poster}
           alt={`پوستر کارگاه ${workshop.data.title}`}
-          width={1024}
-          height={1536}
+          formats={["avif", "webp"]}
+          fallbackFormat="webp"
+          widths={[340, 480, 680, 820, 960, 1024].filter((w) => w < poster.width).concat(poster.width)}
+          sizes="(min-width: 64rem) calc(340px - 3rem), (min-width: 40rem) calc(100vw - 6rem), calc(100vw - 5rem)"
+          quality={82}
           loading="lazy"
-          class="mb-6 w-full rounded-xl object-cover"
+          decoding="async"
+          class="mb-6 w-full rounded-xl bg-surface object-contain"
         />
       )}
       <h2 class="text-lg font-bold">مشخصات کارگاه</h2>

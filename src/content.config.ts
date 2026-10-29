@@ -16,6 +16,7 @@ const services = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
+    seoDescription: z.string().optional(),
     category: z.enum(serviceCategories),
     icon: z.enum(["individual", "couples", "child", "group", "assessment", "workshop"]),
     order: z.number(),
@@ -29,6 +30,8 @@ const therapists = defineCollection({
   schema: z.object({
     name: z.string(),
     title: z.string(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
     licenseNumber: z.string(),
     specialties: z.array(z.string()),
     approaches: z.array(z.string()),

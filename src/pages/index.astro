@@ -40,8 +40,8 @@ const whyUs = [
 ];
 ---
 <BaseLayout
-  title="کلینیک علمی روانشناسی پندار نیم رخ | درمان تخصصی در قم"
-  description={site.tagline}
+  title="کلینیک روانشناسی پندار نیم رخ قم"
+  description="کلینیک روانشناسی پندار نیم رخ در قم؛ روان‌درمانی فردی، زوج‌درمانی، مشاوره کودک و نوجوان، گروه‌درمانی و تست روانشناسی. حضوری، تلفنی و آنلاین."
   jsonLd={[
     {
       "@context": "https://schema.org",
@@ -60,11 +60,15 @@ const whyUs = [
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-bl from-primary-50 via-bg to-primary-100" aria-hidden="true"></div>
     <div class="container-site relative grid gap-12 py-20 sm:py-28 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
       <div>
-        <p class="eyebrow">کلینیک علمی روانشناسی</p>
         <h1 class="mt-3 text-3xl leading-[1.35] sm:text-5xl sm:leading-[1.25]">
-          سلامت روان شما، <span class="text-primary-600">با روش علمی</span> و در فضایی آرام
+          کلینیک روانشناسی پندار نیم رخ قم
         </h1>
-        <p class="mt-5 max-w-xl text-lg text-ink-muted">{site.tagline}</p>
+        <p class="mt-4 text-xl font-semibold text-ink sm:text-2xl">
+          سلامت روان شما، <span class="text-primary-600">با روش علمی</span> و در فضایی آرام
+        </p>
+        <p class="mt-4 max-w-xl text-lg text-ink-muted">
+          روان‌درمانی فردی، زوج‌درمانی، مشاوره کودک و نوجوان و ارزیابی روانشناختی؛ با درمانگران دارای پروانه، حضوری، تلفنی و آنلاین.
+        </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href={telHref(primaryPhone.number)} class="btn btn-primary px-7 py-3 text-base">رزرو نوبت</a>
           <a href="/services/" class="btn btn-secondary px-7 py-3 text-base">خدمات کلینیک</a>
@@ -86,7 +90,7 @@ const whyUs = [
   <!-- ۲. خدمات -->
   <section class="section bg-surface" aria-labelledby="services-title">
     <div class="container-site">
-      <SectionHeading id="services-title" eyebrow="خدمات ما" title="خدمات تخصصی کلینیک" lead="از درمان فردی تا ارزیابی کودک — با روش‌های علمی و مبتنی بر شواهد" />
+      <SectionHeading id="services-title" eyebrow="خدمات ما" title="خدمات تخصصی روانشناسی در قم" lead="از درمان فردی تا ارزیابی کودک — با روش‌های علمی و مبتنی بر شواهد" />
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((s) => (
           <ServiceCard
@@ -119,10 +123,16 @@ const whyUs = [
   <!-- ۴. درمانگران -->
   <section class="section bg-surface" aria-labelledby="team-title">
     <div class="container-site">
-      <SectionHeading id="team-title" eyebrow="تیم ما" title="درمانگران کلینیک" lead="با متخصصان ما آشنا شوید" />
+      <SectionHeading id="team-title" eyebrow="تیم ما" title="روانشناسان کلینیک پندار نیم رخ قم" lead="با متخصصان پندار آشنا شوید" />
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {therapists.map((t) => (
-          <TherapistCard id={t.id} name={t.data.name} title={t.data.title} specialties={t.data.specialties} />
+          <TherapistCard
+            id={t.id}
+            name={t.data.name}
+            title={t.data.title}
+            specialties={t.data.specialties}
+            sizes="(min-width: 72rem) 16.125rem, (min-width: 64rem) calc((100vw - 7.5rem) / 4), (min-width: 40rem) calc((100vw - 4.5rem) / 2), calc(100vw - 2rem)"
+          />
         ))}
       </div>
       <p class="mt-8 text-center">
@@ -145,6 +155,7 @@ const whyUs = [
             dateDisplay={w.data.dateDisplay}
             sessions={w.data.sessions}
             status={w.data.status}
+            sizes="(min-width: 72rem) 22rem, (min-width: 48rem) calc((100vw - 6rem) / 3), (min-width: 40rem) calc(100vw - 3rem), calc(100vw - 2rem)"
           />
         ))}
       </div>

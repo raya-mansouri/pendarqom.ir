@@ -8,17 +8,24 @@ const therapists = (await getCollection("therapists")).sort(
 );
 ---
 <BaseLayout
-  title="درمانگران | پندار نیم رخ"
-  description="تیم درمانگران کلینیک علمی روانشناسی پندار نیم رخ — متخصصان دارای پروانه در حوزه‌های فردی، زوج، خانواده و کودک."
+  title="روانشناسان کلینیک پندار نیم رخ قم"
+  description="روانشناسان و درمانگران کلینیک پندار نیم رخ قم؛ متخصصان دارای پروانه در حوزه‌های روان‌درمانی فردی، زوج‌درمانی، خانواده و کودک و نوجوان."
 >
   <div class="container-site pt-10">
-    <h1 class="text-3xl sm:text-4xl">درمانگران کلینیک</h1>
+    <h1 class="text-3xl sm:text-4xl">روانشناسان کلینیک پندار نیم رخ قم</h1>
     <p class="mt-3 max-w-2xl text-ink-muted">همه درمانگران ما دارای پروانه فعالیت معتبر هستند.</p>
   </div>
   <section class="container-site section">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {therapists.map((t) => (
-        <TherapistCard id={t.id} name={t.data.name} title={t.data.title} specialties={t.data.specialties} headingLevel="h2" />
+      {therapists.map((t, i) => (
+        <TherapistCard
+          id={t.id}
+          name={t.data.name}
+          title={t.data.title}
+          specialties={t.data.specialties}
+          headingLevel="h2"
+          priority={i < 3}
+        />
       ))}
     </div>
   </section>

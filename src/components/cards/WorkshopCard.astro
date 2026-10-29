@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 import { workshopPosters } from "../../utils/assets";
 import { toPersianDigits } from "../../utils/persian";
 import Icon from "../Icon.astro";
@@ -12,19 +13,33 @@ interface Props {
   dateDisplay?: string;
   sessions?: number;
   status: "open" | "full" | "past";
+  sizes?: string;
 }
-const { id, href, title, instructor, dateDisplay, sessions, status } = Astro.props;
+const {
+  id,
+  href,
+  title,
+  instructor,
+  dateDisplay,
+  sessions,
+  status,
+  sizes = "(min-width: 72rem) 22rem, (min-width: 64rem) calc((100vw - 6rem) / 3), (min-width: 48rem) calc((100vw - 4.5rem) / 2), (min-width: 40rem) calc(100vw - 3rem), calc(100vw - 2rem)",
+} = Astro.props;
 const poster = workshopPosters[id];
 ---
 <a href={href} class:list={["card reveal group block overflow-hidden transition-transform hover:-translate-y-1", status === "past" && "opacity-75"]}>
   {poster && (
-    <img
-      src={poster.src}
+    <Picture
+      src={poster}
       alt={`پوستر کارگاه ${title}`}
-      width={1024}
-      height={1536}
+      formats={["avif", "webp"]}
+      fallbackFormat="webp"
+      widths={[240, 360, 480, 680, 820, 960, 1024].filter((w) => w < poster.width).concat(poster.width)}
+      sizes={sizes}
+      quality={82}
       loading="lazy"
-      class="aspect-[3/4] w-full object-cover"
+      decoding="async"
+      class="aspect-[3/4] w-full bg-surface object-contain"
     />
   )}
   <div class="p-5">

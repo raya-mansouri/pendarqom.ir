@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 import { therapistPhotos } from "../../utils/assets";
 
 interface Props {
@@ -7,19 +8,36 @@ interface Props {
   title: string;
   specialties: string[];
   headingLevel?: "h2" | "h3";
+  sizes?: string;
+  priority?: boolean;
 }
-const { id, name, title, specialties, headingLevel: H = "h3" } = Astro.props;
+const {
+  id,
+  name,
+  title,
+  specialties,
+  headingLevel: H = "h3",
+  sizes = "(min-width: 72rem) 22rem, (min-width: 64rem) calc((100vw - 6rem) / 3), (min-width: 40rem) calc((100vw - 4.5rem) / 2), calc(100vw - 2rem)",
+  priority = false,
+} = Astro.props;
 const photo = therapistPhotos[id];
 ---
 <a href={`/therapists/${id}/`} class="card reveal group overflow-hidden transition-transform hover:-translate-y-1">
-  <img
-    src={photo?.src}
-    alt={`تصویر ${name}`}
-    width="600"
-    height="600"
-    loading="lazy"
-    class="aspect-square w-full object-cover"
-  />
+  {photo && (
+    <Picture
+      src={photo}
+      alt={`تصویر ${name}`}
+      formats={["avif", "webp"]}
+      fallbackFormat="webp"
+      widths={[160, 240, 320, 400, 600, 800, 1000].filter((w) => w < photo.width).concat(photo.width)}
+      sizes={sizes}
+      quality={82}
+      loading={priority ? "eager" : "lazy"}
+      fetchpriority={priority ? "high" : undefined}
+      decoding="async"
+      class="aspect-square w-full object-cover"
+    />
+  )}
   <div class="p-5">
     <H class="font-bold group-hover:text-primary-700">{name}</H>
     <p class="mt-0.5 text-sm text-ink-muted">{title}</p>

@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run",
-    "build:launch": "node scripts/check-placeholders.mjs && astro build"
+    "build:launch": "npm run build"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

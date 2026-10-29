@@ -38,6 +38,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Keep content clear of the fixed mobile bottom nav (4rem bar + iOS safe area). */
+@media (width < 64rem) {
+  body {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+  }
+}
+
 body {
   @apply bg-bg font-sans text-ink antialiased;
   font-size: 1.0625rem;

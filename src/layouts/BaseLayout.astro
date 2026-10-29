@@ -4,6 +4,7 @@ import BaseHead from "../components/BaseHead.astro";
 import JsonLd from "../components/JsonLd.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import BottomNav from "../components/BottomNav.astro";
 
 interface Props {
   title: string;
@@ -40,6 +41,7 @@ const { title, description, ogImage, ogType, noindex, jsonLd = [] } = Astro.prop
       <slot />
     </main>
     <Footer />
+    <BottomNav />
     <script>
       import "../scripts/menu";
       import "../scripts/reveal";

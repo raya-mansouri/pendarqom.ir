@@ -4,9 +4,9 @@ Before public announcement, replace ALL of the following and make `npm run build
 
 - [x] `src/data/site.ts` — phones, whatsapp, address, maps links, hours, instagram, bale — DONE (real)
 - [x] `src/data/site.ts` — telegram handle — DONE (`t.me/pendarqom`)
-- [ ] `src/data/site.ts` — still placeholder: eitaa handle (`[آیدی ایتا — به‌زودی]`), license number (`شماره ۰۰۰۰۰۰ (نمونه)`)
+- [ ] `src/data/site.ts` — still placeholder: eitaa handle (`[آیدی ایتا — به‌زودی]`)
 - [ ] `src/data/testimonials.ts` — real quotes with written consent (consent field) or delete entries
-- [ ] All `src/content/services/*.md` — real descriptions (`placeholder: true` → `false`)
+- [x] All `src/content/services/*.md` — real descriptions
 - [x] All `src/content/therapists/*.md` — 8 real profiles with names, license numbers, specialties, bios and photos — DONE (2026-10-18)
 - [ ] All `src/content/workshops/*.md` — real first workshops or delete (`placeholder: false`)
 - [ ] `src/content/articles/*.md` — real articles or remove files (`draft: true` files — child-anxiety is draft: publish or delete)

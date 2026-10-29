@@ -1,4 +1,6 @@
 export const iconPaths: Record<string, string> = {
+  home: "M3 10.5 12 3l9 7.5M5.5 9v12h13V9M9.5 21v-6h5v6",
+  grid: "M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z",
   individual: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8a7 7 0 0 1 14 0",
   couples: "M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3 20a5 5 0 0 1 10 0m-2-9a5 5 0 0 1 10 9",
   child: "M12 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm-5 13a5 5 0 0 1 10 0M9 12h6l-1 4h-4z",

@@ -27,12 +27,12 @@ export const workshopPosters: Record<string, ImageMetadata> = Object.fromEntries
 );
 
 const articleModules = import.meta.glob<{ default: { src: string } }>(
-  "../assets/articles/*.svg",
+  "../assets/articles/*.webp",
   { eager: true },
 );
 export const articleCovers: Record<string, AssetEntry> = Object.fromEntries(
   Object.entries(articleModules).map(([path, mod]) => [
-    path.split("/").pop()!.replace(".svg", ""),
+    path.split("/").pop()!.replace(".webp", ""),
     { src: mod.default.src },
   ]),
 );

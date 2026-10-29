@@ -6,7 +6,7 @@ dateDisplay: "۲۴ شهریور ۱۴۰۵"
 author: "دکتر مریم باقری پناه"
 category: "نوجوان"
 tags: ["اضطراب کودک", "فرزندپروری"]
-draft: true
+draft: false
 placeholder: false
 ---
 

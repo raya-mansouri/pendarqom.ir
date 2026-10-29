@@ -1,8 +1,8 @@
-# کلینیک پندار نیم رخ — Website Implementation Plan
+# کلینیک پندار نیم‌رخ — Website Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build the Persian (RTL) static website for کلینیک علمی روانشناسی پندار نیم رخ and deploy it to GitHub Pages at https://pendarqom.ir.
+**Goal:** Build the Persian (RTL) static website for کلینیک علمی روانشناسی پندار نیم‌رخ and deploy it to GitHub Pages at https://pendarqom.ir.
 
 **Architecture:** Astro 7 static output (zero client framework, vanilla JS islands ≤15KB), Tailwind CSS 4 via `@tailwindcss/vite`, Zod-validated content collections (Markdown per therapist/service/workshop/article), a `site.ts` single source of truth for contact data, GitHub Actions deploy on push to `main`.
 
@@ -140,7 +140,7 @@ import "../styles/global.css";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>کلینیک علمی روانشناسی پندار نیم رخ</title>
+    <title>کلینیک علمی روانشناسی پندار نیم‌رخ</title>
   </head>
   <body>
     <p>سایت در حال ساخت است</p>
@@ -497,8 +497,8 @@ git commit -m "feat: persian digits, contact link builders, reading time (TDD)"
 
 ```ts
 export const site = {
-  name: "کلینیک علمی روانشناسی پندار نیم رخ",
-  shortName: "پندار نیم رخ",
+  name: "کلینیک علمی روانشناسی پندار نیم‌رخ",
+  shortName: "پندار نیم‌رخ",
   tagline: "سلامت روان، با روش علمی و در فضایی آرام",
   url: "https://pendarqom.ir",
   phones: [
@@ -845,7 +845,7 @@ instructor: "دکتر سارا محمدی"
 startDate: 2026-11-05
 dateDisplay: "پنجشنبه ۱۵ آبان ۱۴۰۵"
 time: "۱۶:۰۰ تا ۱۹:۰۰"
-location: "سالن کلینیک پندار نیم رخ"
+location: "سالن کلینیک پندار نیم‌رخ"
 capacity: 15
 fee: "۱٬۵۰۰٬۰۰۰ تومان"
 status: "open"
@@ -866,7 +866,7 @@ title: "۱۰ نشانه استرس که نباید نادیده بگیرید"
 description: "نشانه‌های جسمی و روانی استرس و زمان مراجعه به روانشناس."
 publishDate: 2026-10-01
 dateDisplay: "۱ مهر ۱۴۰۵"
-author: "تیم تحریریه پندار نیم رخ"
+author: "تیم تحریریه پندار نیم‌رخ"
 category: "سلامت روان"
 tags: ["استرس", "سلامت روان"]
 draft: false
@@ -1024,9 +1024,9 @@ export {};
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
-<BaseLayout title="کلینیک علمی روانشناسی پندار نیم رخ" description="سلامت روان، با روش علمی و در فضایی آرام">
+<BaseLayout title="کلینیک علمی روانشناسی پندار نیم‌رخ" description="سلامت روان، با روش علمی و در فضایی آرام">
   <div class="container-site section">
-    <h1>کلینیک علمی روانشناسی پندار نیم رخ</h1>
+    <h1>کلینیک علمی روانشناسی پندار نیم‌رخ</h1>
     <p>سایت در حال ساخت است</p>
   </div>
 </BaseLayout>
@@ -1308,7 +1308,7 @@ const year = toPersianDigits(site.foundedYear);
 
   <div class="border-t border-primary-100 py-4">
     <p class="container-site text-center text-xs text-ink-muted">
-      © {year} کلینیک علمی روانشناسی پندار نیم رخ — کلیه حقوق محفوظ است.
+      © {year} کلینیک علمی روانشناسی پندار نیم‌رخ — کلیه حقوق محفوظ است.
     </p>
   </div>
 </footer>
@@ -1777,7 +1777,7 @@ const whyUs = [
 ];
 ---
 <BaseLayout
-  title="کلینیک علمی روانشناسی پندار نیم رخ | درمان تخصصی در قم"
+  title="کلینیک علمی روانشناسی پندار نیم‌رخ | درمان تخصصی در قم"
   description={site.tagline}
   jsonLd={[
     {
@@ -1802,7 +1802,7 @@ const whyUs = [
           سلامت روان شما، <span class="text-primary-600">با روش علمی</span> و در فضایی آرام
         </h1>
         <p class="mt-5 max-w-xl text-lg text-ink-muted">
-          کلینیک پندار نیم رخ با تیمی از درمانگران دارای پروانه، مسیر درمانی امن و محرمانه را برای شما و عزیزانتان فراهم می‌کند.
+          کلینیک پندار نیم‌رخ با تیمی از درمانگران دارای پروانه، مسیر درمانی امن و محرمانه را برای شما و عزیزانتان فراهم می‌کند.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href={`tel:${primaryPhone.number.replace(/[^+\d]/g, "")}`} class="btn btn-primary px-7 py-3 text-base">رزرو نوبت</a>
@@ -1843,7 +1843,7 @@ const whyUs = [
   <!-- ۳. چرا ما -->
   <section class="section" aria-labelledby="why-title">
     <div class="container-site">
-      <SectionHeading eyebrow="چرا پندار نیم رخ" title="اعتماد شما، مسئولیت ما" />
+      <SectionHeading eyebrow="چرا پندار نیم‌رخ" title="اعتماد شما، مسئولیت ما" />
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {whyUs.map((item) => (
           <div class="card reveal p-6">
@@ -1963,7 +1963,7 @@ import ServiceCard from "../../components/cards/ServiceCard.astro";
 const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
 ---
 <BaseLayout
-  title="خدمات کلینیک | پندار نیم رخ"
+  title="خدمات کلینیک | پندار نیم‌رخ"
   description="خدمات تخصصی روانشناسی در قم: درمان فردی، زوج‌درمانی، خانواده‌درمانی، کودک و نوجوان، گروه‌درمانی و ارزیابی."
 >
   <div class="container-site pt-10">
@@ -2009,7 +2009,7 @@ const { service } = Astro.props;
 const { Content } = await render(service);
 ---
 <BaseLayout
-  title={`${service.data.title} | پندار نیم رخ`}
+  title={`${service.data.title} | پندار نیم‌رخ`}
   description={service.data.summary}
   jsonLd={[
     {
@@ -2107,8 +2107,8 @@ const therapists = (await getCollection("therapists")).sort(
 );
 ---
 <BaseLayout
-  title="درمانگران | پندار نیم رخ"
-  description="تیم درمانگران کلینیک علمی روانشناسی پندار نیم رخ — متخصصان دارای پروانه در حوزه‌های فردی، زوج، خانواده و کودک."
+  title="درمانگران | پندار نیم‌رخ"
+  description="تیم درمانگران کلینیک علمی روانشناسی پندار نیم‌رخ — متخصصان دارای پروانه در حوزه‌های فردی، زوج، خانواده و کودک."
 >
   <div class="container-site pt-10">
     <h1 class="text-3xl sm:text-4xl">درمانگران کلینیک</h1>
@@ -2148,8 +2148,8 @@ const photo = therapistPhotos[therapist.id];
 const whatsappMsg = encodeURIComponent(`سلام، برای نوبت با ${therapist.data.name} تماس می‌گیرم.`);
 ---
 <BaseLayout
-  title={`${therapist.data.name} | پندار نیم رخ`}
-  description={`${therapist.data.name} — ${therapist.data.title} در کلینیک علمی روانشناسی پندار نیم رخ`}
+  title={`${therapist.data.name} | پندار نیم‌رخ`}
+  description={`${therapist.data.name} — ${therapist.data.title} در کلینیک علمی روانشناسی پندار نیم‌رخ`}
   jsonLd={[
     {
       "@context": "https://schema.org",
@@ -2273,7 +2273,7 @@ const upcoming = workshops.filter((w) => w.data.status !== "past");
 const past = workshops.filter((w) => w.data.status === "past");
 ---
 <BaseLayout
-  title="کارگاه‌ها | پندار نیم رخ"
+  title="کارگاه‌ها | پندار نیم‌رخ"
   description="کارگاه‌های آموزشی روانشناسی در قم — فرزندپروری، مهارت‌های ارتباطی و درمان."
 >
   <div class="container-site pt-10">
@@ -2331,7 +2331,7 @@ const signupHref =
     : undefined;
 ---
 <BaseLayout
-  title={`${workshop.data.title} | کارگاه‌های پندار نیم رخ`}
+  title={`${workshop.data.title} | کارگاه‌های پندار نیم‌رخ`}
   description={`کارگاه «${workshop.data.title}» با مدرسی ${workshop.data.instructor} — ${workshop.data.dateDisplay}، ${workshop.data.location}`}
   jsonLd={[
     {
@@ -2445,8 +2445,8 @@ const articles = (await getCollection("articles"))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 <BaseLayout
-  title="مقالات | پندار نیم رخ"
-  description="مقالات علمی و کاربردی درباره سلامت روان، روابط و فرزندپروری از کلینیک پندار نیم رخ."
+  title="مقالات | پندار نیم‌رخ"
+  description="مقالات علمی و کاربردی درباره سلامت روان، روابط و فرزندپروری از کلینیک پندار نیم‌رخ."
 >
   <div class="container-site pt-10">
     <h1 class="text-3xl sm:text-4xl">مقالات</h1>
@@ -2505,7 +2505,7 @@ const shareUrl = encodeURIComponent(new URL(`/articles/${article.id}/`, site.url
 const description = article.data.description;
 ---
 <BaseLayout
-  title={`${article.data.title} | مقالات پندار نیم رخ`}
+  title={`${article.data.title} | مقالات پندار نیم‌رخ`}
   description={description}
   ogImage={cover?.src}
   jsonLd={[
@@ -2689,15 +2689,15 @@ import Gallery from "../components/Gallery.astro";
 import { site } from "../data/site";
 ---
 <BaseLayout
-  title="درباره ما | پندار نیم رخ"
-  description="داستان، مأموریت و مجوزهای کلینیک علمی روانشناسی پندار نیم رخ در قم."
+  title="درباره ما | پندار نیم‌رخ"
+  description="داستان، مأموریت و مجوزهای کلینیک علمی روانشناسی پندار نیم‌رخ در قم."
 >
   <div class="container-site pt-10">
     <Breadcrumbs items={[{ label: "خانه", href: "/" }, { label: "درباره ما" }]} />
     <div class="mt-6 max-w-3xl">
       <h1 class="text-3xl sm:text-4xl">درباره کلینیک</h1>
       <p class="mt-4 text-lg leading-8 text-ink-muted">
-        کلینیک علمی روانشناسی پندار نیم رخ با هدف ارائه خدمات روانشناختی مبتنی بر شواهد علمی در فضایی امن و محترمانه فعالیت می‌کند. تیم ما از درمانگران دارای پروانه است و سلامت روان مراجعین، اولویت اول ماست.
+        کلینیک علمی روانشناسی پندار نیم‌رخ با هدف ارائه خدمات روانشناختی مبتنی بر شواهد علمی در فضایی امن و محترمانه فعالیت می‌کند. تیم ما از درمانگران دارای پروانه است و سلامت روان مراجعین، اولویت اول ماست.
       </p>
     </div>
   </div>
@@ -2741,8 +2741,8 @@ import { faqs } from "../data/faq";
 const ordered = [...faqs].sort((a, b) => a.order - b.order);
 ---
 <BaseLayout
-  title="سؤالات متداول | پندار نیم رخ"
-  description="پاسخ پرسش‌های رایج درباره نوبتدهی، هزینه، رازداری و جلسات کلینیک پندار نیم رخ."
+  title="سؤالات متداول | پندار نیم‌رخ"
+  description="پاسخ پرسش‌های رایج درباره نوبتدهی، هزینه، رازداری و جلسات کلینیک پندار نیم‌رخ."
   jsonLd={[
     {
       "@context": "https://schema.org",
@@ -2788,8 +2788,8 @@ import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
 ---
 <BaseLayout
-  title="تماس و نوبتدهی | پندار نیم رخ"
-  description="تماس با کلینیک علمی روانشناسی پندار نیم رخ: تلفن، واتساپ، نشانی و ساعت کاری."
+  title="تماس و نوبتدهی | پندار نیم‌رخ"
+  description="تماس با کلینیک علمی روانشناسی پندار نیم‌رخ: تلفن، واتساپ، نشانی و ساعت کاری."
   jsonLd={[
     {
       "@context": "https://schema.org",
@@ -2896,7 +2896,7 @@ git commit -m "feat: about with gallery lightbox, FAQ accordion with FAQPage sch
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
-<BaseLayout title="صفحه پیدا نشد | پندار نیم رخ" description="صفحه موردنظر یافت نشد.">
+<BaseLayout title="صفحه پیدا نشد | پندار نیم‌رخ" description="صفحه موردنظر یافت نشد.">
   <div class="container-site section text-center">
     <p class="eyebrow">۴۰۴</p>
     <h1 class="mt-2 text-3xl">صفحه‌ای که دنبالش بودید پیدا نشد</h1>

@@ -1,4 +1,4 @@
-# کلینیک علمی روانشناسی پندار نیم رخ — Website Design Spec
+# کلینیک علمی روانشناسی پندار نیم‌رخ — Website Design Spec
 
 - **Date:** 2026-10-14
 - **Status:** Approved (design rounds 1–3 confirmed by owner)
@@ -9,7 +9,7 @@
 
 ## 1. Overview & Goals
 
-A Persian-language (RTL), static marketing and information website for کلینیک علمی روانشناسی پندار نیم رخ.
+A Persian-language (RTL), static marketing and information website for کلینیک علمی روانشناسی پندار نیم‌رخ.
 
 **Goals, in priority order:**
 

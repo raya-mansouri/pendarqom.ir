@@ -1,7 +1,7 @@
 ---
 title: "سنگ صبور — روایت سکوت تا سخن"
 instructor: "سحرناز امینی"
-location: "کلینیک علمی روانشناسی پندار نیم رخ"
+location: "کلینیک علمی روانشناسی پندار نیم‌رخ"
 fee: "۴۰۰ تومان"
 status: "past"
 placeholder: false

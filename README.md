@@ -1,6 +1,6 @@
 # pendarqom.ir
 
-Persian (RTL) static website for «کلینیک علمی روانشناسی پندار نیم رخ» — the Qom branch of «گروه سازمان‌های علمی اجتماعی درمانی پندار», a scientific psychology clinic offering in-person, phone, and online services. Live at https://pendarqom.ir.
+Persian (RTL) static website for «کلینیک علمی روانشناسی پندار نیم‌رخ» — the Qom branch of «گروه سازمان‌های علمی اجتماعی درمانی پندار», a scientific psychology clinic offering in-person, phone, and online services. Live at https://pendarqom.ir.
 
 ## Stack
 

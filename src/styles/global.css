@@ -4,34 +4,37 @@
 @theme {
   --font-sans: "Vazirmatn Variable", "Segoe UI", Tahoma, system-ui, sans-serif;
 
-  --color-bg: #faf8f4;
-  --color-surface: #ffffff;
-  --color-ink: #201c42;
-  --color-ink-muted: #55516e;
+  /* Warm clinic-interior palette sampled from the Pendar clinic space itself:
+     cream plaster walls, espresso wood furniture, terracotta accents,
+     nastaliq-calligraphy gold, and sage from the plants. */
+  --color-bg: #f8f2e7;
+  --color-surface: #fffdf8;
+  --color-ink: #33261b;
+  --color-ink-muted: #5d4d3e;
 
-  /* Royal-navy ramp sampled from logo medallion #2e2175; AA-verified: white on 600 >=4.5:1, 700 on cream >=4.5:1 */
-  --color-primary-50: #eef0fb;
-  --color-primary-100: #e0e3f7;
-  --color-primary-200: #c6c9ee;
-  --color-primary-300: #a6a7e1;
-  --color-primary-400: #8584d0;
-  --color-primary-500: #6866ba;
-  --color-primary-600: #504ca1;
-  --color-primary-700: #403c84;
-  --color-primary-800: #332f6a;
-  --color-primary-900: #282554;
+  /* Terracotta ramp; AA-verified: white on 600 = 5.7:1, 700 on cream = 6.7:1 */
+  --color-primary-50: #f8ece3;
+  --color-primary-100: #f0dccd;
+  --color-primary-200: #e2bfa8;
+  --color-primary-300: #d19c7f;
+  --color-primary-400: #bd774f;
+  --color-primary-500: #ad6240;
+  --color-primary-600: #a34e2e;
+  --color-primary-700: #8a3e24;
+  --color-primary-800: #6f3119;
+  --color-primary-900: #4f2211;
 
-  /* Muted logo-gold accent (royal blue + gold nastaliq logo) — AA ≥4.5:1 on cream #faf8f4 and white */
-  --color-clay: #8a6d1f;
-  /* status fg tokens darkened to ≥4.9:1 on their bg tints (AA for 12px badge text) */
-  --color-status-open: #297547;
-  --color-status-open-bg: #e6f4ec;
-  --color-status-full: #8d601c;
-  --color-status-full-bg: #fbf3e0;
-  --color-status-past: #55516e;
-  --color-status-past-bg: #eef1ef;
+  /* Calligraphy-gold accent — AA ≥4.5:1 on cream #f8f2e7 and surface #fffdf8 */
+  --color-clay: #8a651c;
+  /* status fg tokens ≥4.5:1 on their bg tints (AA for 12px badge text) */
+  --color-status-open: #2f6b45;
+  --color-status-open-bg: #e9f2e6;
+  --color-status-full: #8a5c17;
+  --color-status-full-bg: #faf1dc;
+  --color-status-past: #5d4d3e;
+  --color-status-past-bg: #efe9dd;
 
-  --shadow-soft: 0 10px 30px rgb(32 28 66 / 0.08);
+  --shadow-soft: 0 10px 30px rgb(51 38 27 / 0.09);
 }
 
 html {
@@ -79,7 +82,7 @@ h1, h2, h3, h4 {
     @apply py-16 sm:py-24;
   }
   .eyebrow {
-    @apply text-sm font-semibold text-primary-600;
+    @apply text-sm font-semibold text-clay;
   }
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-colors;

@@ -4,19 +4,28 @@ import ContactChannels from "./ContactChannels.astro";
 import HoursTable from "./HoursTable.astro";
 ---
 <section class="section bg-primary-600 text-white" aria-label="رزرو نوبت">
-  <div class="container-site grid items-center gap-10 lg:grid-cols-2">
-    <div>
+  <div class="container-site grid items-stretch gap-6 sm:gap-8 lg:grid-cols-[1.2fr_0.85fr_1fr]">
+    <div class="lg:self-center">
       <h2 class="text-3xl">قدم اول را بردارید</h2>
       <p class="mt-3 text-primary-100">
-        برای رزرو نوبت یا هر پرسشی، از راه راحت‌تر برای شما تماس بگیرید. پاسخگویی اولیه کاملاً محرمانه است.
+        جهت رزرو نوبت یا هر پرسش دیگری، از هر مسیر ارتباطی که برای تان راحت‌تر است تماس بگیرید. پاسخگویی و گفتگو کاملاً محرمانه است.
       </p>
       <div class="mt-6">
         <ContactChannels />
       </div>
     </div>
-    <div class="rounded-2xl bg-white/10 p-6">
+    <div class="flex flex-col justify-center rounded-2xl bg-white/10 p-5">
       <HoursTable title="ساعت کاری کلینیک" variant="on-dark" />
-      <p class="mt-4 text-sm text-primary-100">{site.address}</p>
+      <p class="mt-4 text-sm leading-6 text-primary-100">{site.address}</p>
+    </div>
+    <div class="min-h-64 overflow-hidden rounded-2xl bg-white/10">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=50.8494%2C34.6215%2C50.8524%2C34.6232&layer=mapnik&marker=34.62235%2C50.85092"
+        title="نقشه موقعیت کلینیک پندار نیم‌رخ"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="h-full min-h-64 w-full border-0"
+      ></iframe>
     </div>
   </div>
 </section>

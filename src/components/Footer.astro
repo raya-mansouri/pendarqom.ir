@@ -42,7 +42,7 @@ const socials = [
       <h2 class="mb-3 text-sm font-bold text-ink">تماس با ما</h2>
       <ul class="space-y-1.5 text-sm leading-7 text-ink-muted">
         {site.phones.map((p) => (
-          <li><a class="hover:text-primary-700" href={telHref(p.number)}><bdi>{toPersianDigits(p.number)}</bdi></a></li>
+          <li><a class="inline-block py-0.5 hover:text-primary-700" href={telHref(p.number)}><bdi>{toPersianDigits(p.number)}</bdi></a></li>
         ))}
       </ul>
 

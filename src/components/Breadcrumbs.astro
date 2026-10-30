@@ -12,7 +12,7 @@ const { items } = Astro.props;
       <li class="flex items-center gap-1.5">
         {i > 0 && <Icon name="arrow" size={14} aria-hidden="true" />}
         {item.href ? (
-          <a href={item.href} class="hover:text-primary-700">{item.label}</a>
+          <a href={item.href} class="inline-block py-0.5 hover:text-primary-700">{item.label}</a>
         ) : (
           <span aria-current="page" class="font-medium text-ink">{item.label}</span>
         )}

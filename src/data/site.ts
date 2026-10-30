@@ -6,6 +6,7 @@ export const site = {
   url: "https://pendarqom.ir",
   phones: [
     { label: "شماره تماس کلینیک", number: "0991 529 1300" },
+    { label: "تلفن ثابت", number: "025 3293 7949" },
   ],
   whatsapp: "989915291300",
   instagram: "https://instagram.com/pendarqom",

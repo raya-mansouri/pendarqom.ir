@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import ArticleCard from "../../components/cards/ArticleCard.astro";
+import Icon from "../../components/Icon.astro";
 import { site } from "../../data/site";
 import { articleCovers } from "../../utils/assets";
 import { toPersianDigits } from "../../utils/persian";
@@ -91,8 +92,26 @@ const description = article.data.description;
       </p>
       <div class="mt-4 flex flex-wrap items-center gap-3">
         <span class="text-sm font-bold">اشتراک‌گذاری:</span>
-        <a class="btn btn-secondary px-3.5 py-2 text-xs" href={`https://t.me/share/url?url=${shareUrl}&text=${shareText}`} target="_blank" rel="noopener">تلگرام</a>
-        <a class="btn btn-whatsapp px-3.5 py-2 text-xs" href={`https://wa.me/?text=${shareText}%20${shareUrl}`} target="_blank" rel="noopener">واتساپ</a>
+        <a
+          class="flex size-10 items-center justify-center rounded-full border border-primary-100 bg-surface transition-colors hover:border-primary-300 hover:bg-primary-50"
+          href={`https://t.me/share/url?url=${shareUrl}&text=${shareText}`}
+          target="_blank"
+          rel="noopener"
+          aria-label="اشتراک‌گذاری در تلگرام"
+          title="اشتراک‌گذاری در تلگرام"
+        >
+          <Icon name="telegram" size={20} />
+        </a>
+        <a
+          class="flex size-10 items-center justify-center rounded-full border border-primary-100 bg-surface transition-colors hover:border-primary-300 hover:bg-primary-50"
+          href={`https://wa.me/?text=${shareText}%20${shareUrl}`}
+          target="_blank"
+          rel="noopener"
+          aria-label="اشتراک‌گذاری در واتساپ"
+          title="اشتراک‌گذاری در واتساپ"
+        >
+          <Icon name="whatsapp" size={20} />
+        </a>
       </div>
     </footer>
   </article>

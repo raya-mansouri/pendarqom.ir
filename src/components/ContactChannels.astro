@@ -10,25 +10,38 @@ const { compact = false } = Astro.props;
 
 const primaryPhone = site.phones[0];
 const isHttpUrl = (url?: string): url is string => !!url && /^https?:\/\/[^\s[\]]+$/.test(url);
-const channels = [
-  site.whatsapp && {
-    label: "واتساپ",
-    href: whatsappLink(site.whatsapp),
-    icon: "whatsapp",
-    cls: "btn-secondary",
-  },
-  { label: primaryPhone.label, href: telHref(primaryPhone.number), icon: "phone", cls: "btn-call" },
-  isHttpUrl(site.telegram) && { label: "تلگرام", href: site.telegram, icon: "telegram", cls: "btn-secondary" },
-  isHttpUrl(site.instagram) && { label: "اینستاگرام", href: site.instagram, icon: "instagram", cls: "btn-secondary" },
-  isHttpUrl(site.eitea) && { label: "ایتا", href: site.eitea, icon: "eitaa", cls: "btn-secondary" },
-  isHttpUrl(site.bale) && { label: "بله", href: site.bale, icon: "bale", cls: "btn-secondary" },
-].filter(Boolean) as { label: string; href: string; icon: string; cls: string }[];
+const socials = [
+  site.whatsapp && { label: "واتساپ", href: whatsappLink(site.whatsapp), icon: "whatsapp" },
+  isHttpUrl(site.telegram) && { label: "تلگرام", href: site.telegram, icon: "telegram" },
+  isHttpUrl(site.instagram) && { label: "اینستاگرام", href: site.instagram, icon: "instagram" },
+  isHttpUrl(site.eitea) && { label: "ایتا", href: site.eitea, icon: "eitaa" },
+  isHttpUrl(site.bale) && { label: "بله", href: site.bale, icon: "bale" },
+].filter(Boolean) as { label: string; href: string; icon: string }[];
 ---
-<div class:list={["flex flex-wrap gap-3", compact && "gap-2"]}>
-  {channels.map((c) => (
-    <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener" class:list={["btn", c.cls, compact && "px-3.5 py-2 text-xs"]}>
-      <Icon name={c.icon} size={compact ? 16 : 18} />
-      {c.label}
-    </a>
-  ))}
+<div class="flex flex-wrap items-center gap-3">
+  <a href={telHref(primaryPhone.number)} class:list={["btn btn-call", compact && "px-3.5 py-2 text-xs"]}>
+    <Icon name="phone" size={compact ? 16 : 18} />
+    {primaryPhone.label}
+  </a>
+  {socials.length > 0 && (
+    <ul class="flex flex-wrap items-center gap-2">
+      {socials.map((s) => (
+        <li>
+          <a
+            href={s.href}
+            target="_blank"
+            rel="noopener"
+            aria-label={s.label}
+            title={s.label}
+            class:list={[
+              "flex items-center justify-center rounded-full border border-primary-100 bg-surface transition-colors hover:border-primary-300 hover:bg-primary-50",
+              compact ? "size-9" : "size-10",
+            ]}
+          >
+            <Icon name={s.icon} size={compact ? 18 : 20} />
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
 </div>

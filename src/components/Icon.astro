@@ -8,6 +8,7 @@ interface Props {
 const { name, size = 20, class: className } = Astro.props;
 const brand = brandIcons[name];
 const gradientId = brand?.gradient ? `${name}-gradient-${Math.random().toString(36).slice(2, 7)}` : undefined;
+const clipId = brand?.clip ? `${name}-clip-${Math.random().toString(36).slice(2, 7)}` : undefined;
 const paths = brand?.paths.map((p) => ({
   ...p,
   fill: p.fill.startsWith("url(#") ? `url(#${gradientId})` : p.fill,
@@ -15,16 +16,25 @@ const paths = brand?.paths.map((p) => ({
 ---
 {brand ? (
   <svg aria-hidden="true" width={size} height={size} viewBox={brand.viewBox} fill="none" class={className}>
-    {brand.gradient && (
+    {(brand.gradient || brand.clip) && (
       <defs>
-        <linearGradient id={gradientId} x1="0%" y1="100%" x2="100%" y2="0%">
-          {brand.gradient.stops.map(([offset, color]) => (
-            <stop offset={offset} stop-color={color} />
-          ))}
-        </linearGradient>
+        {brand.gradient && (
+          <linearGradient id={gradientId} x1="0%" y1="100%" x2="100%" y2="0%">
+            {brand.gradient.stops.map(([offset, color]) => (
+              <stop offset={offset} stop-color={color} />
+            ))}
+          </linearGradient>
+        )}
+        {brand.clip && (
+          <clipPath id={clipId}>
+            <path d={brand.clip} />
+          </clipPath>
+        )}
       </defs>
     )}
-    {paths.map((p) => <path d={p.d} fill={p.fill} fill-rule={p.fillRule} />)}
+    <g clip-path={clipId ? `url(#${clipId})` : undefined}>
+      {paths.map((p) => <path d={p.d} fill={p.fill} fill-rule={p.fillRule} />)}
+    </g>
   </svg>
 ) : (
   <svg

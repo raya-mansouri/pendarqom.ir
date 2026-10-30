@@ -45,30 +45,31 @@ const photo = therapistPhotos[therapist.id];
   <div class="container-site pt-10">
     <Breadcrumbs items={[{ label: "خانه", href: "/" }, { label: "درمانگران", href: "/therapists/" }, { label: therapist.data.name }]} />
   </div>
-  <section class="container-site section grid gap-10 lg:grid-cols-[320px_1fr]">
-    <div>
+  <section class="container-site section grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-4 gap-y-6 lg:grid-cols-[320px_1fr] lg:gap-x-10">
+    <div class="lg:col-start-1 lg:row-span-2">
       {photo && (
         <Picture
           src={photo}
           alt={`تصویر ${therapist.data.name}`}
           formats={["avif", "webp"]}
           fallbackFormat="webp"
-          widths={[200, 320, 480, 640, 820, 1000, 1200].filter((w) => w < photo.width).concat(photo.width)}
-          sizes="(min-width: 64rem) 320px, (min-width: 40rem) calc(100vw - 3rem), calc(100vw - 2rem)"
+          widths={[96, 112, 160, 200, 320, 480, 640, 820, 1000, 1200].filter((w) => w < photo.width).concat(photo.width)}
+          sizes="(min-width: 64rem) 320px, 112px"
           quality={82}
           loading="eager"
           fetchpriority="high"
           decoding="async"
-          class="card aspect-square w-full object-cover"
+          class="card aspect-square size-24 shrink-0 object-cover sm:size-28 lg:size-auto lg:w-full"
         />
       )}
     </div>
-    <div>
-      <h1 class="text-3xl sm:text-4xl">{therapist.data.name}</h1>
-      <p class="mt-2 text-lg text-ink-muted">{therapist.data.title} در قم</p>
-      <p class="mt-1 text-sm text-ink-muted">{therapist.data.licenseNumber}</p>
-
-      <dl class="mt-6 grid gap-4 sm:grid-cols-2">
+    <header class="min-w-0 lg:col-start-2 lg:row-start-1">
+      <h1 class="text-2xl sm:text-4xl">{therapist.data.name}</h1>
+      <p class="mt-2 text-base text-ink-muted sm:text-lg">{therapist.data.title} در قم</p>
+      <p class="mt-1 text-xs text-ink-muted sm:text-sm">{therapist.data.licenseNumber}</p>
+    </header>
+    <div class="col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-2">
+      <dl class="grid gap-4 sm:grid-cols-2">
         <div class="card p-4">
           <dt class="text-sm font-bold text-primary-700">حوزه‌های تخصصی</dt>
           <dd class="mt-2 flex flex-wrap gap-1.5">

@@ -4,7 +4,7 @@ description: "نشانه‌های جسمی و روانی استرس و زمان 
 publishDate: 2026-10-01
 dateDisplay: "پنجشنبه ۹ مهر ۱۴۰۵"
 author: "تیم تحریریه پندار نیم‌رخ"
-category: "سلامت روان"
+category: "فردی"
 tags: ["استرس", "سلامت روان"]
 draft: false
 placeholder: false

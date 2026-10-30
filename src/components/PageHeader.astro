@@ -14,7 +14,7 @@ const hasMeta = Astro.slots.has("meta");
 ---
 <div class="container-site pt-10">
   <Breadcrumbs items={breadcrumbs} />
-  <div class="mt-6 flex max-w-3xl flex-col gap-5 sm:flex-row sm:items-start">
+  <div class="mt-6 flex max-w-3xl items-start gap-3 sm:gap-5">
     <Picture
       src={logo}
       formats={["avif", "webp"]}
@@ -22,13 +22,13 @@ const hasMeta = Astro.slots.has("meta");
       alt=""
       width={96}
       height={96}
-      class="size-24"
+      class="size-14 shrink-0 sm:size-24"
       pictureAttributes={{ class: "shrink-0 self-start" }}
     />
     <div class="min-w-0">
       <slot name="meta" />
-      <h1 class:list={["text-3xl sm:text-4xl", hasMeta && "mt-3"]}>{title}</h1>
-      {intro && <p class="mt-3 text-lg leading-8 text-ink-muted">{intro}</p>}
+      <h1 class:list={["text-2xl sm:text-4xl", hasMeta && "mt-3"]}>{title}</h1>
+      {intro && <p class="mt-3 text-base leading-7 text-ink-muted sm:text-lg sm:leading-8">{intro}</p>}
       <slot />
     </div>
   </div>

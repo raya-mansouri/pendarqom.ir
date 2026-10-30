@@ -4,7 +4,7 @@ description: "مهارت‌های ارتباطی ساده‌ای که تعارض
 publishDate: 2026-09-01
 dateDisplay: "۱۰ شهریور ۱۴۰۵"
 author: "دکتر محمد مصباحی"
-category: "زوج"
+category: "زوج‌درمانی"
 tags: ["ارتباط زوجین", "زوج‌درمانی"]
 draft: false
 placeholder: false

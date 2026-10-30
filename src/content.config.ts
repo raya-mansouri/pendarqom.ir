@@ -4,7 +4,8 @@ import { z } from "astro/zod";
 
 export const serviceCategories = [
   "فردی",
-  "زوج و خانواده",
+  "خانواده‌درمانی",
+  "زوج‌درمانی",
   "کودک و نوجوان",
   "گروه‌درمانی",
   "ارزیابی و تست",
@@ -18,7 +19,7 @@ const services = defineCollection({
     summary: z.string(),
     seoDescription: z.string().optional(),
     category: z.enum(serviceCategories),
-    icon: z.enum(["individual", "couples", "family", "child", "group", "assessment"]),
+    icon: z.enum(["individual", "couples", "family", "child", "group", "assessment", "workshop"]),
     order: z.number(),
     placeholder: z.boolean(),
     relatedTherapists: z.array(z.string()).default([]),

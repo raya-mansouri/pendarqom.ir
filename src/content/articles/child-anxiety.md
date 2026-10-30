@@ -4,7 +4,7 @@ description: "چگونه اضطراب کودک را بشناسیم و به‌ع�
 publishDate: 2026-09-15
 dateDisplay: "۲۴ شهریور ۱۴۰۵"
 author: "دکتر مریم باقری پناه"
-category: "نوجوان"
+category: "کودک و نوجوان"
 tags: ["اضطراب کودک", "فرزندپروری"]
 draft: false
 placeholder: false

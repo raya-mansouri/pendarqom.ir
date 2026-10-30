@@ -28,6 +28,26 @@ const signupHref =
 const instagramHref =
   workshop.data.status === "open" && site.instagram ? instagramDmLink(site.instagram) : undefined;
 const dateParts = [workshop.data.dateDisplay, workshop.data.time].filter(Boolean);
+
+const eventSchema = workshop.data.startDate
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      name: workshop.data.title,
+      startDate: workshop.data.startDate.toISOString(),
+      endDate: workshop.data.endDate?.toISOString(),
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: { "@type": "Place", name: workshop.data.location, address: site.address },
+      image: poster ? new URL(poster.src, site.url).href : undefined,
+      description: `کارگاه «${workshop.data.title}» با مدرسی ${workshop.data.instructor}`,
+      organizer: { "@type": "Organization", name: site.name, url: site.url },
+      performer: { "@type": "Person", name: workshop.data.instructor },
+      offers: signupHref
+        ? { "@type": "Offer", url: signupHref, availability: "https://schema.org/InStock" }
+        : undefined,
+    }
+  : undefined;
 ---
 <BaseLayout
   title={`${workshop.data.title} | کارگاه‌های پندار نیم‌رخ`}
@@ -43,19 +63,7 @@ const dateParts = [workshop.data.dateDisplay, workshop.data.time].filter(Boolean
         { "@type": "ListItem", position: 3, name: workshop.data.title },
       ],
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "Event",
-      name: workshop.data.title,
-      startDate: workshop.data.startDate?.toISOString().slice(0, 10),
-      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-      eventStatus: isPast ? undefined : "https://schema.org/EventScheduled",
-      location: { "@type": "Place", name: workshop.data.location, address: site.address },
-      image: poster ? new URL(poster.src, site.url).href : undefined,
-      description: `کارگاه «${workshop.data.title}» با مدرسی ${workshop.data.instructor}`,
-      organizer: { "@type": "Organization", name: site.name, url: site.url },
-      performer: { "@type": "Person", name: workshop.data.instructor },
-    },
+    ...(eventSchema ? [eventSchema] : []),
   ]}
 >
   <div class="container-site pt-10">

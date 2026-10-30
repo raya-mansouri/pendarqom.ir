@@ -49,6 +49,7 @@ const workshops = defineCollection({
     title: z.string(),
     instructor: z.string(),
     startDate: z.coerce.date().optional(),
+    endDate: z.coerce.date().optional(),
     dateDisplay: z.string().optional(),
     time: z.string().optional(),
     location: z.string().default("کلینیک علمی روانشناسی پندار نیم‌رخ"),

@@ -4,9 +4,19 @@ import { site } from "../data/site";
 import { telHref, whatsappLink } from "../utils/links";
 import { toPersianDigits } from "../utils/persian";
 import CrisisStrip from "./CrisisStrip.astro";
+import Icon from "./Icon.astro";
 import logo from "../assets/logo.png";
 
 const year = new Intl.DateTimeFormat("fa-IR", { year: "numeric" }).format(new Date());
+
+const isHttpUrl = (url?: string): url is string => !!url && /^https?:\/\/[^\s[\]]+$/.test(url);
+const socials = [
+  site.whatsapp ? { label: "واتساپ", href: whatsappLink(site.whatsapp), icon: "whatsapp" } : null,
+  isHttpUrl(site.telegram) ? { label: "تلگرام", href: site.telegram, icon: "telegram" } : null,
+  isHttpUrl(site.instagram) ? { label: "اینستاگرام", href: site.instagram, icon: "instagram" } : null,
+  isHttpUrl(site.eitea) ? { label: "ایتا", href: site.eitea, icon: "eitaa" } : null,
+  isHttpUrl(site.bale) ? { label: "بله", href: site.bale, icon: "bale" } : null,
+].filter((s): s is { label: string; href: string; icon: string } => s !== null);
 ---
 <footer class="mt-auto border-t border-primary-100 bg-surface">
   <div class="container-site grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
@@ -21,7 +31,32 @@ const year = new Intl.DateTimeFormat("fa-IR", { year: "numeric" }).format(new Da
         class="size-16"
       />
       <p class="mt-3 text-lg font-extrabold text-primary-700">{site.name}</p>
-      <p class="mt-2 text-sm text-ink-muted">{site.tagline}</p>
+      <p class="mt-2 text-sm leading-7 text-ink-muted">{site.tagline}</p>
+      <p class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink-muted">
+        <span>پروانه {site.licenses[0].number}</span>
+        <span>از سال {toPersianDigits(site.foundedYear)}</span>
+        <span>حضوری، تلفنی و آنلاین</span>
+      </p>
+      {socials.length > 0 && (
+        <div class="mt-5">
+          <p class="mb-2 text-xs font-semibold text-ink">همراه ما باشید</p>
+          <ul class="flex flex-wrap items-center gap-2">
+            {socials.map((s) => (
+              <li>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={s.label}
+                  class="flex size-10 items-center justify-center rounded-full border border-primary-100 bg-surface transition-colors hover:border-primary-300 hover:bg-primary-50"
+                >
+                  <Icon name={s.icon} size={20} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
 
     <nav aria-label="پیوندهای سریع">
@@ -61,8 +96,11 @@ const year = new Intl.DateTimeFormat("fa-IR", { year: "numeric" }).format(new Da
 
   <CrisisStrip />
 
-  <div class="border-t border-primary-100 py-4">
-    <p class="container-site text-center text-xs text-ink-muted">
+  <div class="border-t border-primary-100 py-6">
+    <p class="container-site text-center text-sm text-ink-muted">
+      اگر نمی‌دانید از کجا شروع کنید، همین حالا تماس بگیرید؛ در اولین گفت‌وگو با هم راه را پیدا می‌کنیم.
+    </p>
+    <p class="container-site mt-2 text-center text-xs text-ink-muted">
       © {year} کلینیک علمی روانشناسی پندار نیم‌رخ — کلیه حقوق محفوظ است.
     </p>
   </div>

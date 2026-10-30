@@ -1,22 +1,44 @@
 ---
-import { iconPaths } from "./icons";
+import { brandIcons, iconPaths } from "./icons";
 interface Props {
-  name: keyof typeof iconPaths;
+  name: keyof typeof iconPaths | keyof typeof brandIcons;
   size?: number;
   class?: string;
 }
 const { name, size = 20, class: className } = Astro.props;
+const brand = brandIcons[name];
+const gradientId = brand?.gradient ? `${name}-gradient-${Math.random().toString(36).slice(2, 7)}` : undefined;
+const paths = brand?.paths.map((p) => ({
+  ...p,
+  fill: p.fill.startsWith("url(#") ? `url(#${gradientId})` : p.fill,
+}));
 ---
-<svg
-  aria-hidden="true"
-  width={size}
-  height={size}
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="1.8"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  class={className}
-  set:html={`<path d="${iconPaths[name]}" />`}
-/>
+{brand ? (
+  <svg aria-hidden="true" width={size} height={size} viewBox={brand.viewBox} fill="none" class={className}>
+    {brand.gradient && (
+      <defs>
+        <linearGradient id={gradientId} x1="0%" y1="100%" x2="100%" y2="0%">
+          {brand.gradient.stops.map(([offset, color]) => (
+            <stop offset={offset} stop-color={color} />
+          ))}
+        </linearGradient>
+      </defs>
+    )}
+    {paths.map((p) => <path d={p.d} fill={p.fill} fill-rule={p.fillRule} />)}
+  </svg>
+) : (
+  <svg
+    aria-hidden="true"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class={className}
+  >
+    <path d={iconPaths[name]} />
+  </svg>
+)}

@@ -15,13 +15,13 @@ const channels = [
     label: "واتساپ",
     href: whatsappLink(site.whatsapp),
     icon: "whatsapp",
-    cls: "btn-whatsapp",
+    cls: "btn-secondary",
   },
   { label: primaryPhone.label, href: telHref(primaryPhone.number), icon: "phone", cls: "btn-call" },
   isHttpUrl(site.telegram) && { label: "تلگرام", href: site.telegram, icon: "telegram", cls: "btn-secondary" },
   isHttpUrl(site.instagram) && { label: "اینستاگرام", href: site.instagram, icon: "instagram", cls: "btn-secondary" },
-  isHttpUrl(site.eitea) && { label: "ایتا", href: site.eitea, icon: "chat", cls: "btn-secondary" },
-  isHttpUrl(site.bale) && { label: "بله", href: site.bale, icon: "chat", cls: "btn-secondary" },
+  isHttpUrl(site.eitea) && { label: "ایتا", href: site.eitea, icon: "eitaa", cls: "btn-secondary" },
+  isHttpUrl(site.bale) && { label: "بله", href: site.bale, icon: "bale", cls: "btn-secondary" },
 ].filter(Boolean) as { label: string; href: string; icon: string; cls: string }[];
 ---
 <div class:list={["flex flex-wrap gap-3", compact && "gap-2"]}>

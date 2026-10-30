@@ -61,29 +61,37 @@ const whyUs = [
   <!-- ۱. Hero -->
   <section class="relative overflow-hidden">
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-bl from-primary-50 via-bg to-primary-100" aria-hidden="true"></div>
-    <div class="container-site relative grid gap-12 py-20 sm:py-28 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+    <div class="container-site relative grid gap-12 py-16 sm:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
       <div>
-        <h1 class="mt-3 text-3xl leading-[1.35] sm:text-5xl sm:leading-[1.25]">
+        <p class="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-surface/70 px-4 py-1.5 text-sm font-semibold text-primary-700">
+          کلینیک روانشناسی در قم
+        </p>
+        <h1 class="mt-5 text-3xl leading-[1.35] sm:text-5xl sm:leading-[1.25]">
           کلینیک علمی روانشناسی پندار نیم‌رخ قم
         </h1>
-        <p class="mt-4 text-xl font-semibold text-ink sm:text-2xl">
-          سلامت روان شما، <span class="text-primary-600">با روش علمی</span> و در فضایی آرام
+        <p class="mt-5 text-xl font-semibold text-ink sm:text-2xl">
+          اینجا می‌توانید بدون قضاوت، از خودتان و رابطه‌تان حرف بزنید
         </p>
-        <p class="mt-4 max-w-xl text-lg text-ink-muted">
+        <p class="mt-4 max-w-xl text-lg leading-8 text-ink-muted">
           روان‌درمانی فردی، زوج‌درمانی، مشاوره کودک و نوجوان و ارزیابی روانشناختی؛ با درمانگران دارای پروانه، حضوری، تلفنی و آنلاین.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href={telHref(primaryPhone.number)} class="btn btn-primary px-7 py-3 text-base">رزرو نوبت</a>
           <a href="/services/" class="btn btn-secondary px-7 py-3 text-base">خدمات کلینیک</a>
         </div>
+        <p class="mt-3 text-sm text-ink-muted">
+          نمی‌دانید از کجا شروع کنید؟ کافی است تماس بگیرید؛ در اولین گفت‌وگو راهنمایی‌تان می‌کنیم.
+        </p>
         <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-muted">
           <li class="flex items-center gap-1.5">پروانه {site.licenses[0].number}</li>
           <li class="flex items-center gap-1.5">از سال {toPersianDigits(site.foundedYear)}</li>
+          <li class="flex items-center gap-1.5">حضوری، تلفنی و آنلاین</li>
         </ul>
       </div>
       <div class="relative hidden lg:block" aria-hidden="true">
         <div class="absolute -inset-6 rounded-t-[13rem] rounded-b-[3rem] bg-primary-100"></div>
-        <div class="relative grid size-full min-h-80 place-items-center rounded-t-[10rem] rounded-b-[2.5rem] bg-gradient-to-bl from-primary-200 to-primary-50 shadow-soft">
+        <div class="relative flex min-h-[24rem] flex-col items-center justify-center gap-8 rounded-t-[10rem] rounded-b-[2.5rem] bg-gradient-to-bl from-primary-200 via-primary-50 to-surface px-10 text-center shadow-soft">
+          <div class="absolute inset-4 rounded-t-[9rem] rounded-b-[2rem] border border-surface/70"></div>
           <Picture
             src={logo}
             formats={["avif", "webp"]}
@@ -92,8 +100,11 @@ const whyUs = [
             width={160}
             height={160}
             loading="eager"
-            class="w-40"
+            class="relative w-40 drop-shadow-sm"
           />
+          <p class="relative max-w-[15rem] text-base leading-8 text-primary-800">
+            فضایی آرام و محرمانه، برای گفت‌وگویی صادقانه دربارهٔ آنچه برایتان مهم است.
+          </p>
         </div>
       </div>
     </div>
@@ -120,7 +131,12 @@ const whyUs = [
   <!-- ۳. چرا ما -->
   <section class="section" aria-labelledby="why-title">
     <div class="container-site">
-      <SectionHeading id="why-title" eyebrow="چرا پندار نیم‌رخ" title="اعتماد شما، مسئولیت ما" />
+      <SectionHeading
+        id="why-title"
+        eyebrow="چرا پندار نیم‌رخ"
+        title="اعتماد شما، مسئولیت ما"
+        lead="پندار نیم‌رخ نماینده گروه سازمان‌های علمی، اجتماعی، درمانی پندار در قم است؛ از سال ۱۳۹۷ در کنار مراجعان قم، با همراهی درمانگران حرفه ای و تیمی متخصص ."
+      />
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {whyUs.map((item) => (
           <div class="card reveal p-6">

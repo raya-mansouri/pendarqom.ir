@@ -34,6 +34,7 @@ const therapists = defineCollection({
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
     licenseNumber: z.string(),
+    registryUrl: z.string().url().optional(),
     specialties: z.array(z.string()),
     approaches: z.array(z.string()),
     education: z.array(z.string()),

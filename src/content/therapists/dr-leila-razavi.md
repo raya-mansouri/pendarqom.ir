@@ -59,8 +59,10 @@ placeholder: false
 
 ## فعالیت‌های علمی و پژوهشی
 
-- **مقاله:** اثربخشی درمان مبتنی بر پذیرش و تعهد بر شدت خستگی و افسردگی با نقش تعدیل‌کننده ناگویی هیجانی در افراد مبتلا به MS
-- **مقاله:** مقایسه اثربخشی درمان ذهن‌آگاهی مبنی بر کاهش استرس و درمان مبتنی بر پذیرش و تعهد به شیوه گروهی بر شدت درد و کیفیت زندگی مرتبط با سلامت در افراد مبتلا به میگرن
-- **مقاله:** اثربخشی آموزش رویکرد درمان مبتنی بر پذیرش و تعهد بر تاب‌آوری والدین دارای فرزند مبتلا به اوتیسم
-- **مقاله:** اثربخشی درمان متمرکز بر شفقت‌ورزی بر تنظیم هیجانی مادران کودکان مبتلا به سرطان
-- **کتاب:** تشخیص، فرمول‌بندی و طرح درمان شناختی-رفتاری اختلال اضطراب فراگیر
+- **مقاله (۲۰۲۱):** Effectiveness of Group Therapy Based on Acceptance and Commitment on the Severity of Fatigue and Depression With the Moderating Role of Alexithymia in Patients With Multiple Sclerosis — International Clinical Neuroscience Journal
+- **مقاله (۲۰۱۹):** Comparison of the Effectiveness of Mindfulness-Based Stress Reduction Group Therapy With Acceptance and Commitment Therapy on Severity of Pain and Health-Related Quality of Life in Patients With Migraine — International Clinical Neuroscience Journal
+- **مقاله (۲۰۱۹):** اثربخشی درمان متمرکز بر شفقت‌ورزی بر تنظیم شناختی هیجان مادران کودکان مبتلا به سرطان — با همکاری مریم باقری پناه
+- **مقاله:** Investigating the Relationship Between Job Aspirations and Job Burnout Among Education Teachers in Tehran — Sociology of Education
+- **کتاب (۲۰۱۹):** تشخیص، فرمول‌بندی و طرح درمان شناختی–رفتاری اختلال اضطراب فراگیر — انتشارات نگاه ماندگار
+
+فهرست کامل و منابع هر اثر در [پروفایل Google Scholar](https://scholar.google.com/citations?user=M8clObQAAAAJ) و [صفحه آثار علمی](https://leilarazavi.github.io/publications/) در دسترس است.

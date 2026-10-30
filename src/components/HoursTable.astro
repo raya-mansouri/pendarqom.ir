@@ -4,8 +4,9 @@ import { site } from "../data/site";
 interface Props {
   title?: string;
   variant?: "default" | "on-dark";
+  dividers?: boolean;
 }
-const { title = "ساعت کاری", variant = "default" } = Astro.props;
+const { title = "ساعت کاری", variant = "default", dividers = true } = Astro.props;
 ---
 <div>
   {title && (
@@ -15,7 +16,7 @@ const { title = "ساعت کاری", variant = "default" } = Astro.props;
     <caption class="sr-only">{title}</caption>
     <tbody>
       {site.hours.map((h) => (
-        <tr class:list={["border-b last:border-0", variant === "on-dark" ? "border-white/15" : "border-primary-100"]}>
+        <tr class:list={[dividers && "border-b last:border-0", variant === "on-dark" ? "border-white/15" : "border-primary-100"]}>
           <th scope="row" class:list={["py-2 text-start font-medium", variant === "on-dark" ? "text-white" : "text-ink-muted"]}>{h.days}</th>
           <td class:list={["py-2 text-end", variant === "on-dark" ? "text-white" : "text-ink"]}>{h.time}</td>
         </tr>

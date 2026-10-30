@@ -3,7 +3,7 @@ title: "خانواده‌درمانی"
 summary: "بهبود روابط والدین و فرزندان و مدیریت چالش‌های خانوادگی در قالب جلسات خانوادگی."
 seoDescription: "خانواده‌درمانی در قم برای بهبود روابط والدین و فرزندان و مدیریت چالش‌های خانوادگی؛ جلسات خانوادگی با درمانگران دارای پروانه در کلینیک پندار نیم‌رخ."
 category: "زوج و خانواده"
-icon: "couples"
+icon: "family"
 order: 3
 placeholder: false
 relatedTherapists: ["dr-leila-razavi", "maryam-rahimi"]

@@ -49,6 +49,6 @@ const paths = brand?.paths.map((p) => ({
     stroke-linejoin="round"
     class={className}
   >
-    <path d={iconPaths[name]} />
+    {iconPaths[name].map((d) => <path d={d} />)}
   </svg>
 )}

@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import ContactChannels from "../../components/ContactChannels.astro";
+import Icon from "../../components/Icon.astro";
 import { site } from "../../data/site";
 
 export async function getStaticPaths() {
@@ -39,7 +40,12 @@ const relatedTherapists = service.data.relatedTherapists
     breadcrumbs={[{ label: "خانه", href: "/" }, { label: "خدمات", href: "/services/" }, { label: service.data.title }]}
     intro={service.data.summary}
   >
-    <span slot="meta" class="badge bg-primary-50 text-primary-700">{service.data.category}</span>
+    <div slot="meta" class="flex items-center gap-2.5">
+      <span class="grid size-10 place-items-center rounded-xl bg-primary-50 text-primary-600">
+        <Icon name={service.data.icon} size={20} />
+      </span>
+      <span class="badge bg-primary-50 text-primary-700">{service.data.category}</span>
+    </div>
   </PageHeader>
   <section class="container-site section grid gap-10 lg:grid-cols-[1fr_320px]">
     <article class="prose-fa">

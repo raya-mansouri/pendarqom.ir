@@ -9,6 +9,7 @@ import WorkshopCard from "../components/cards/WorkshopCard.astro";
 import ArticleCard from "../components/cards/ArticleCard.astro";
 import TestimonialCard from "../components/cards/TestimonialCard.astro";
 import CtaStrip from "../components/CtaStrip.astro";
+import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
 import { testimonials } from "../data/testimonials";
 import { telHref } from "../utils/links";
@@ -35,10 +36,10 @@ const primaryPhone = site.phones[0];
 const telephone = "+98" + primaryPhone.number.replace(/\D/g, "").replace(/^0/, "");
 
 const whyUs = [
-  { title: "درمانگران دارای پروانه", text: "همه درمانگران ما دارای پروانه فعالیت معتبر از سازمان نظام روانشناسی و مشاوره هستند." },
-  { title: "رویکردهای مبتنی بر شواهد", text: "از درمان‌های علمی و اثبات‌شده مانند CBT استفاده می‌کنیم؛ نه ادعا، بلکه روش." },
-  { title: "رازداری کامل", text: "همه گفت‌وگوها و اطلاعات شما محرمانه می‌ماند؛ امنیت روان شما اولویت ماست." },
-  { title: "فضایی آرام و امن", text: "فضای کلینیک برای آرامش از همان لحظه ورود طراحی شده است." },
+  { icon: "license", title: "درمانگران دارای پروانه", text: "همه درمانگران ما دارای پروانه فعالیت معتبر از سازمان نظام روانشناسی و مشاوره هستند." },
+  { icon: "evidence", title: "رویکردهای مبتنی بر شواهد", text: "از درمان‌های علمی و اثبات‌شده مانند CBT استفاده می‌کنیم؛ نه ادعا، بلکه روش." },
+  { icon: "privacy", title: "رازداری کامل", text: "همه گفت‌وگوها و اطلاعات شما محرمانه می‌ماند؛ امنیت روان شما اولویت ماست." },
+  { icon: "calm", title: "فضایی آرام و امن", text: "فضای کلینیک برای آرامش از همان لحظه ورود طراحی شده است." },
 ];
 ---
 <BaseLayout
@@ -160,7 +161,10 @@ const whyUs = [
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {whyUs.map((item) => (
           <div class="card reveal p-6">
-            <h3 class="font-bold text-primary-700">{item.title}</h3>
+            <span class="grid size-11 place-items-center rounded-xl bg-primary-50 text-primary-600">
+              <Icon name={item.icon} size={22} />
+            </span>
+            <h3 class="mt-4 font-bold text-primary-700">{item.title}</h3>
             <p class="mt-2 text-sm leading-7 text-ink-muted">{item.text}</p>
           </div>
         ))}

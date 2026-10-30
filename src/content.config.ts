@@ -18,7 +18,7 @@ const services = defineCollection({
     summary: z.string(),
     seoDescription: z.string().optional(),
     category: z.enum(serviceCategories),
-    icon: z.enum(["individual", "couples", "child", "group", "assessment", "workshop"]),
+    icon: z.enum(["individual", "couples", "family", "child", "group", "assessment"]),
     order: z.number(),
     placeholder: z.boolean(),
     relatedTherapists: z.array(z.string()).default([]),

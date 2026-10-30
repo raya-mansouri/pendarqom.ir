@@ -5,3 +5,4 @@ dist/
 *.log
 .mimosa
 .playwright-cli
+.taste-skill

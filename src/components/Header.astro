@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 import { site } from "../data/site";
 import { telHref } from "../utils/links";
 import logo from "../assets/logo.png";
@@ -19,8 +20,18 @@ const primaryPhone = site.phones[0];
 ---
 <header class="sticky top-0 z-40 border-b border-primary-100 bg-bg/90 backdrop-blur">
   <div class="container-site flex h-16 items-center justify-between gap-4">
-    <a href="/" aria-label={site.shortName} class="flex items-center gap-2.5 text-lg font-extrabold text-primary-700">
-      <img src={logo.src} alt="" width="44" height="44" class="size-11" />
+    <a href="/" aria-label={site.name} class="flex items-center gap-2.5 text-lg font-extrabold text-primary-700">
+      <Picture
+        src={logo}
+        formats={["avif", "webp"]}
+        densities={[1, 2, 3]}
+        alt=""
+        width={48}
+        height={48}
+        loading="eager"
+        class="size-12"
+      />
+      <span class="whitespace-nowrap">{site.brandName}</span>
     </a>
 
     <nav aria-label="ناوبری اصلی" class="hidden items-center gap-1 lg:flex">
@@ -60,9 +71,20 @@ const primaryPhone = site.phones[0];
   class="fixed inset-y-0 start-0 z-50 flex w-72 max-w-[85vw] translate-x-full flex-col overflow-y-auto bg-surface p-6 shadow-soft transition-transform duration-300 lg:hidden"
 >
   <div class="mb-6 flex items-center justify-between">
-    <span class="flex items-center gap-2 text-lg font-extrabold text-primary-700">
-      <img src={logo.src} alt="" width="36" height="36" class="size-9" />
-      {site.shortName}
+    <span class="flex items-center gap-2.5">
+      <Picture
+        src={logo}
+        formats={["avif", "webp"]}
+        densities={[1, 2, 3]}
+        alt=""
+        width={40}
+        height={40}
+        class="size-10"
+      />
+      <span class="flex flex-col text-lg font-extrabold leading-tight text-primary-700">
+        {site.brandName}
+        <span class="text-xs font-medium text-ink-muted">کلینیک علمی روانشناسی</span>
+      </span>
     </span>
     <button id="menu-close" type="button" class="btn btn-ghost px-2 py-1" >
       <span class="sr-only">بستن منو</span>

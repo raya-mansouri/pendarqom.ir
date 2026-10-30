@@ -1,6 +1,6 @@
 export const site = {
   name: "کلینیک علمی روانشناسی پندار نیم‌رخ",
-  shortName: "کلینیک علمی روانشناسی پندار نیم‌رخ",
+  brandName: "پندار نیم‌رخ",
   tagline:
     "نماینده گروه سازمان‌های علمی اجتماعی درمانی پندار در قم — خدمات تخصصی روانشناسی به صورت حضوری، تلفنی و آنلاین",
   url: "https://pendarqom.ir",
@@ -30,5 +30,3 @@ export const site = {
   ],
   foundedYear: 1397,
 } as const;
-
-export type SiteConfig = typeof site;

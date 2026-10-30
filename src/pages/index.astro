@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { Picture } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import ServiceCard from "../components/cards/ServiceCard.astro";
@@ -13,6 +14,7 @@ import { testimonials } from "../data/testimonials";
 import { telHref } from "../utils/links";
 import { toPersianDigits } from "../utils/persian";
 import { readingTimeMinutes } from "../utils/readingtime";
+import logo from "../assets/logo.png";
 
 const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
 const allTherapists = (await getCollection("therapists")).sort((a, b) => a.data.order - b.data.order);
@@ -51,6 +53,7 @@ const whyUs = [
       telephone,
       address: { "@type": "PostalAddress", addressLocality: "قم", addressCountry: "IR", streetAddress: site.address },
       openingHours: ["Sa-Su 10:00-22:00", "Mo-Th 10:00-22:00"],
+      logo: new URL("/logo.png", site.url).href,
       image: new URL("/og-default.png", site.url).href,
     },
   ]}
@@ -81,7 +84,16 @@ const whyUs = [
       <div class="relative hidden lg:block" aria-hidden="true">
         <div class="absolute -inset-6 rounded-t-[13rem] rounded-b-[3rem] bg-primary-100"></div>
         <div class="relative grid size-full min-h-80 place-items-center rounded-t-[10rem] rounded-b-[2.5rem] bg-gradient-to-bl from-primary-200 to-primary-50 shadow-soft">
-          <span class="text-8xl">🌿</span>
+          <Picture
+            src={logo}
+            formats={["avif", "webp"]}
+            densities={[1, 2]}
+            alt=""
+            width={160}
+            height={160}
+            loading="eager"
+            class="w-40"
+          />
         </div>
       </div>
     </div>

@@ -13,7 +13,6 @@ export const iconPaths: Record<string, string> = {
   telegram: "M21 4 3 11l5.5 2L10 19l3-3.5L18 19l3-15ZM8.5 13l9-7",
   chat: "M4 5h16v11H9l-5 4V5Z", // generic messenger (Eitaa/Bale until official brand SVGs are provided)
   map: "M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z",
-  clock: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0-13v5l3.5 2",
   calendar: "M5 5h14v16H5zM5 9h14M9 3v4m6-4v4",
   arrow: "M19 12H5m6-7-7 7 7 7", // points LEFT = forward direction in RTL
 };

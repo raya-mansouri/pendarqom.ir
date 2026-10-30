@@ -1,0 +1,163 @@
+---
+import { Image } from "astro:assets";
+import "leaflet/dist/leaflet.css";
+import Icon from "./Icon.astro";
+import { site } from "../data/site";
+import logo from "../assets/logo.png";
+
+interface Props {
+  class?: string;
+  lat?: number;
+  lng?: number;
+  zoom?: number;
+  onDark?: boolean;
+}
+
+const {
+  class: className = "",
+  lat = 34.62235,
+  lng = 50.85092,
+  zoom = 17,
+  onDark = false,
+} = Astro.props;
+---
+<div
+  class:list={[
+    "relative isolate min-h-64 overflow-hidden rounded-2xl border bg-primary-50 shadow-soft",
+    onDark ? "border-white/20" : "border-primary-100",
+    className,
+  ]}
+>
+  <div
+    data-map
+    data-lat={lat}
+    data-lng={lng}
+    data-zoom={zoom}
+    aria-label="نقشه موقعیت کلینیک پندار نیم‌رخ"
+    class="absolute inset-0 z-0"
+  >
+  </div>
+
+  <div class="pointer-events-none absolute inset-x-3 top-3 z-[900] flex items-start justify-between gap-2">
+    <span class="flex min-w-0 items-center gap-1.5 rounded-full bg-surface/95 py-1 pe-2.5 ps-1.5 shadow-soft backdrop-blur">
+      <Image src={logo} alt="" width={20} height={20} class="size-5" />
+      <span class="truncate text-xs font-bold text-primary-700">{site.brandName}</span>
+    </span>
+    <a
+      href={site.maps.neshan}
+      target="_blank"
+      rel="noopener"
+      class="pointer-events-auto flex shrink-0 items-center gap-1 rounded-full bg-primary-600 px-2.5 py-1 text-xs font-bold text-white shadow-soft transition-colors hover:bg-primary-700"
+    >
+      <span>مسیر</span>
+      <Icon name="arrow" size={13} />
+    </a>
+  </div>
+
+  <a
+    href="https://www.openstreetmap.org/copyright"
+    target="_blank"
+    rel="noopener"
+    dir="ltr"
+    class="absolute bottom-2 left-2 z-[900] rounded bg-surface/85 px-1.5 py-0.5 text-[10px] leading-4 text-ink-muted backdrop-blur"
+  >
+    © OpenStreetMap contributors
+  </a>
+</div>
+
+<script>
+  import L from "leaflet";
+
+  document.querySelectorAll<HTMLElement>("[data-map]").forEach((el) => {
+    if (el.dataset.ready) return;
+    el.dataset.ready = "true";
+
+    const lat = Number(el.dataset.lat);
+    const lng = Number(el.dataset.lng);
+    const zoom = Number(el.dataset.zoom ?? 17);
+
+    const map = L.map(el, {
+      center: [lat, lng],
+      zoom,
+      zoomControl: false,
+      attributionControl: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      keyboard: false,
+      dragging: !L.Browser.mobile,
+    });
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    L.marker([lat, lng], {
+      icon: L.divIcon({
+        className: "map-pin",
+        html: '<span class="map-pin-ring"></span><svg class="map-pin-mark" width="30" height="38" viewBox="0 0 30 38" fill="none" aria-hidden="true"><path d="M15 36.4S27.5 23.3 27.5 14.4C27.5 6.9 21.9 1.6 15 1.6S2.5 6.9 2.5 14.4C2.5 23.3 15 36.4 15 36.4Z" fill="#a34e2e" stroke="#fffdf8" stroke-width="3" stroke-linejoin="round"/><circle cx="15" cy="14.4" r="4.6" fill="#fffdf8"/></svg>',
+        iconSize: [30, 38],
+        iconAnchor: [15, 37],
+      }),
+      keyboard: false,
+      alt: "کلینیک پندار نیم‌رخ",
+    }).addTo(map);
+
+    requestAnimationFrame(() => map.invalidateSize());
+    window.addEventListener("load", () => map.invalidateSize(), { once: true });
+  });
+</script>
+
+<style is:global>
+  .leaflet-container {
+    background: #efe9dd;
+    font-family: inherit;
+  }
+
+  .leaflet-container .leaflet-tile-pane {
+    filter: saturate(0.82) sepia(0.06) contrast(0.97) brightness(1.02);
+  }
+
+  .map-pin {
+    border: 0;
+    background: none;
+  }
+
+  .map-pin-ring {
+    position: absolute;
+    top: 37px;
+    left: 50%;
+    width: 34px;
+    height: 34px;
+    margin: -17px 0 0 -17px;
+    border-radius: 9999px;
+    background: rgb(163 78 46 / 0.22);
+    animation: map-pin-ping 2.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .map-pin-mark {
+    position: relative;
+    display: block;
+    filter: drop-shadow(0 2px 4px rgb(51 38 27 / 0.35));
+  }
+
+  @keyframes map-pin-ping {
+    0% {
+      transform: scale(0.35);
+      opacity: 0.9;
+    }
+    70%,
+    100% {
+      transform: scale(1.35);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .map-pin-ring {
+      animation: none;
+      opacity: 0;
+    }
+  }
+</style>

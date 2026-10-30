@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import ContactChannels from "../components/ContactChannels.astro";
 import HoursTable from "../components/HoursTable.astro";
+import MapCard from "../components/MapCard.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
 import { telHref } from "../utils/links";
@@ -39,7 +40,7 @@ const telephone = "+98" + primaryPhone.number.replace(/\D/g, "").replace(/^0/, "
     </div>
   </div>
 
-  <section class="container-site section mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
+  <section class="container-site section mx-auto grid max-w-6xl gap-8 lg:grid-cols-3">
     <div class="card p-5">
       <h2 class="text-lg font-bold">راه‌های ارتباطی</h2>
       <div class="mt-4">
@@ -55,6 +56,8 @@ const telephone = "+98" + primaryPhone.number.replace(/\D/g, "").replace(/^0/, "
         ))}
       </div>
     </div>
+
+    <MapCard zoom={17} class="h-full min-h-64" />
 
     <div class="card p-5">
       <div class="mt-4">
@@ -76,16 +79,6 @@ const telephone = "+98" + primaryPhone.number.replace(/\D/g, "").replace(/^0/, "
           </a>
         </div>
       </div>
-    </div>
-
-    <div class="card overflow-hidden lg:col-span-2">
-      <iframe
-        src="https://www.openstreetmap.org/export/embed.html?bbox=50.8500%2C34.6218%2C50.8518%2C34.6229&layer=mapnik&marker=34.62235%2C50.85092"
-        title="نقشه موقعیت کلینیک پندار نیم‌رخ"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        class="block h-72 w-full border-0 sm:h-80"
-      ></iframe>
     </div>
   </section>
 

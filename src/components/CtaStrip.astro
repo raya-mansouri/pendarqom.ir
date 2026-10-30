@@ -2,6 +2,7 @@
 import { site } from "../data/site";
 import ContactChannels from "./ContactChannels.astro";
 import HoursTable from "./HoursTable.astro";
+import MapCard from "./MapCard.astro";
 ---
 <section class="section bg-primary-600 text-white" aria-label="رزرو نوبت">
   <div class="container-site grid items-stretch gap-6 sm:gap-8 lg:grid-cols-[1.2fr_0.85fr_1fr]">
@@ -18,14 +19,6 @@ import HoursTable from "./HoursTable.astro";
       <HoursTable title="ساعت کاری کلینیک" variant="on-dark" />
       <p class="mt-4 text-sm leading-6 text-primary-100">{site.address}</p>
     </div>
-    <div class="min-h-64 overflow-hidden rounded-2xl bg-white/10">
-      <iframe
-        src="https://www.openstreetmap.org/export/embed.html?bbox=50.8494%2C34.6215%2C50.8524%2C34.6232&layer=mapnik&marker=34.62235%2C50.85092"
-        title="نقشه موقعیت کلینیک پندار نیم‌رخ"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        class="h-full min-h-64 w-full border-0"
-      ></iframe>
-    </div>
+    <MapCard onDark class="h-full min-h-64" />
   </div>
 </section>

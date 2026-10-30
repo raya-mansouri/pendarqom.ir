@@ -128,28 +128,8 @@ const whyUs = [
     </div>
   </section>
 
-  <!-- ۳. چرا ما -->
-  <section class="section" aria-labelledby="why-title">
-    <div class="container-site">
-      <SectionHeading
-        id="why-title"
-        eyebrow="چرا پندار نیم‌رخ"
-        title="اعتماد شما، مسئولیت ما"
-        lead="پندار نیم‌رخ نماینده گروه سازمان‌های علمی، اجتماعی، درمانی پندار در قم است؛ از سال ۱۳۹۷ در کنار مراجعان قم، با همراهی درمانگران حرفه ای و تیمی متخصص ."
-      />
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {whyUs.map((item) => (
-          <div class="card reveal p-6">
-            <h3 class="font-bold text-primary-700">{item.title}</h3>
-            <p class="mt-2 text-sm leading-7 text-ink-muted">{item.text}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ۴. درمانگران -->
-  <section class="section bg-surface" aria-labelledby="team-title">
+  <!-- ۳. درمانگران -->
+  <section class="section" aria-labelledby="team-title">
     <div class="container-site">
       <SectionHeading id="team-title" eyebrow="تیم ما" title="روانشناسان کلینیک پندار نیم‌رخ قم" lead="با متخصصان پندار آشنا شوید" />
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -166,6 +146,26 @@ const whyUs = [
       <p class="mt-8 text-center">
         <a href="/therapists/" class="btn btn-secondary">مشاهده همه درمانگران</a>
       </p>
+    </div>
+  </section>
+
+  <!-- ۴. چرا ما -->
+  <section class="section bg-surface" aria-labelledby="why-title">
+    <div class="container-site">
+      <SectionHeading
+        id="why-title"
+        eyebrow="چرا پندار نیم‌رخ"
+        title="اعتماد شما، مسئولیت ما"
+        lead="پندار نیم‌رخ نماینده گروه سازمان‌های علمی، اجتماعی، درمانی پندار در قم است؛ از سال ۱۳۹۷ در کنار مراجعان قم، با همراهی درمانگران حرفه ای و تیمی متخصص ."
+      />
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {whyUs.map((item) => (
+          <div class="card reveal p-6">
+            <h3 class="font-bold text-primary-700">{item.title}</h3>
+            <p class="mt-2 text-sm leading-7 text-ink-muted">{item.text}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 

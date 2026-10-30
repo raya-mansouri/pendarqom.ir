@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Breadcrumbs from "../components/Breadcrumbs.astro";
+import PageHeader from "../components/PageHeader.astro";
 import { faqs } from "../data/faq";
 
 const ordered = [...faqs].sort((a, b) => a.order - b.order);
@@ -20,10 +20,10 @@ const ordered = [...faqs].sort((a, b) => a.order - b.order);
     },
   ]}
 >
-  <div class="container-site pt-10">
-    <Breadcrumbs items={[{ label: "خانه", href: "/" }, { label: "سؤالات متداول" }]} />
-    <h1 class="mt-6 text-3xl sm:text-4xl">سؤالات متداول</h1>
-  </div>
+  <PageHeader
+    title="سؤالات متداول"
+    breadcrumbs={[{ label: "خانه", href: "/" }, { label: "سؤالات متداول" }]}
+  />
   <section class="container-site section max-w-3xl">
     {ordered.map((f) => (
       <details name="faq" class="card group mb-3 p-5">

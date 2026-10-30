@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/PageHeader.astro";
 import WorkshopCard from "../../components/cards/WorkshopCard.astro";
 
 const rank = { open: 0, full: 1, past: 2 } as const;
@@ -18,9 +19,10 @@ const past = workshops.filter((w) => w.data.status === "past");
   title="کارگاه‌ها | پندار نیم‌رخ"
   description="کارگاه‌های آموزشی روانشناسی در قم — فرزندپروری، فلسفه برای کودکان، هنر، خودمراقبتی کودکان و مهارت‌های ارتباطی."
 >
-  <div class="container-site pt-10">
-    <h1 class="text-3xl sm:text-4xl">کارگاه‌های کلینیک</h1>
-  </div>
+  <PageHeader
+    title="کارگاه‌های کلینیک"
+    breadcrumbs={[{ label: "خانه", href: "/" }, { label: "کارگاه‌ها" }]}
+  />
   <section class="container-site section">
     <h2 class="mb-6 text-xl font-bold">کارگاه‌های پیشِ رو</h2>
     {upcoming.length === 0 ? (

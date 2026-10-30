@@ -1,0 +1,35 @@
+---
+import { Picture } from "astro:assets";
+import Breadcrumbs from "./Breadcrumbs.astro";
+import logo from "../assets/logo.png";
+
+interface Props {
+  title: string;
+  breadcrumbs: { label: string; href?: string }[];
+  intro?: string;
+}
+
+const { title, breadcrumbs, intro } = Astro.props;
+const hasMeta = Astro.slots.has("meta");
+---
+<div class="container-site pt-10">
+  <Breadcrumbs items={breadcrumbs} />
+  <div class="mt-6 flex max-w-3xl flex-col gap-5 sm:flex-row sm:items-start">
+    <Picture
+      src={logo}
+      formats={["avif", "webp"]}
+      densities={[1, 2, 3]}
+      alt=""
+      width={96}
+      height={96}
+      class="size-24"
+      pictureAttributes={{ class: "shrink-0 self-start" }}
+    />
+    <div class="min-w-0">
+      <slot name="meta" />
+      <h1 class:list={["text-3xl sm:text-4xl", hasMeta && "mt-3"]}>{title}</h1>
+      {intro && <p class="mt-3 text-lg leading-8 text-ink-muted">{intro}</p>}
+      <slot />
+    </div>
+  </div>
+</div>

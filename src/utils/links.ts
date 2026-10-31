@@ -19,6 +19,10 @@ export function workshopSignupMessage(title: string): string {
   return `سلام، برای ثبت‌نام کارگاه «${title}» راهنمایی می‌خواستم.`;
 }
 
+export function workshopWaitlistMessage(title: string): string {
+  return `سلام، ظرفیت کارگاه «${title}» تکمیل شده است؛ لطفاً نام من را در لیست انتظار این کارگاه ثبت کنید.`;
+}
+
 /** Builds an Instagram DM link (opens chat) from a profile URL. */
 export function instagramDmLink(profileUrl: string): string {
   const handle = profileUrl.split("/").filter(Boolean).pop() ?? "";

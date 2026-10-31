@@ -1,0 +1,184 @@
+---
+import { site } from "../data/site";
+import { whatsappLink, telHref } from "../utils/links";
+import { toPersianDigits } from "../utils/persian";
+
+interface ServiceOption {
+  title: string;
+}
+interface TherapistOption {
+  slug: string;
+  name: string;
+}
+interface Props {
+  services: ServiceOption[];
+  therapists: TherapistOption[];
+  id?: string;
+}
+const { services, therapists, id = "booking-form" } = Astro.props;
+const primaryPhone = site.phones[0];
+const times = ["اولین نوبت آزاد", "صبح (۱۰ تا ۱۳)", "بعدازظهر (۱۳ تا ۱۷)", "عصر (۱۷ تا ۲۲)"];
+---
+
+<form
+  id={id}
+  class="grid gap-4 sm:grid-cols-2"
+  data-whatsapp={site.whatsapp}
+  novalidate
+>
+  <div>
+    <label for={`${id}-name`} class="block text-sm font-semibold">نام</label>
+    <input
+      id={`${id}-name`}
+      name="name"
+      type="text"
+      autocomplete="name"
+      required
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+    />
+  </div>
+
+  <div>
+    <label for={`${id}-phone`} class="block text-sm font-semibold">شماره تماس</label>
+    <input
+      id={`${id}-phone`}
+      name="phone"
+      type="tel"
+      inputmode="tel"
+      autocomplete="tel"
+      placeholder="۰۹۱۲۳۴۵۶۷۸۹"
+      required
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+    />
+  </div>
+
+  <div>
+    <label for={`${id}-service`} class="block text-sm font-semibold">خدمت مورد نظر</label>
+    <select
+      id={`${id}-service`}
+      name="service"
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+    >
+      <option value="">هنوز مطمئن نیستم</option>
+      {services.map((s) => <option value={s.title}>{s.title}</option>)}
+    </select>
+  </div>
+
+  <div>
+    <label for={`${id}-therapist`} class="block text-sm font-semibold">درمانگر (اختیاری)</label>
+    <select
+      id={`${id}-therapist`}
+      name="therapist"
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+    >
+      <option value="">تفاوتی ندارد</option>
+      {therapists.map((t) => <option value={t.slug}>{t.name}</option>)}
+    </select>
+  </div>
+
+  <div>
+    <label for={`${id}-mode`} class="block text-sm font-semibold">نوع جلسه</label>
+    <select
+      id={`${id}-mode`}
+      name="mode"
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+    >
+      <option value="حضوری در کلینیک">حضوری در کلینیک</option>
+      <option value="آنلاین">آنلاین</option>
+      <option value="تفاوتی ندارد">تفاوتی ندارد</option>
+    </select>
+  </div>
+
+  <div>
+    <label for={`${id}-time`} class="block text-sm font-semibold">زمان دلخواه</label>
+    <select
+      id={`${id}-time`}
+      name="time"
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+    >
+      {times.map((t) => <option value={t}>{t}</option>)}
+    </select>
+  </div>
+
+  <div class="sm:col-span-2">
+    <label for={`${id}-note`} class="block text-sm font-semibold">توضیح کوتاه (اختیاری)</label>
+    <textarea
+      id={`${id}-note`}
+      name="note"
+      rows="3"
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+    ></textarea>
+    <p class="mt-1.5 text-xs leading-5 text-ink-muted">
+      جزئیات حساس را در این کادر ننویسید؛ در تماس اول با درمانگر صحبت می‌کنید.
+    </p>
+  </div>
+
+  <p id={`${id}-error`} class="hidden rounded-lg bg-surface px-3 py-2 text-sm font-medium text-primary-800 sm:col-span-2" role="alert"></p>
+
+  <div class="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center">
+    <button type="submit" class="btn btn-whatsapp justify-center">
+      ارسال درخواست در واتساپ
+    </button>
+    <a href={telHref(primaryPhone.number)} class="btn btn-call justify-center">
+      یا تماس تلفنی: <bdi>{toPersianDigits(primaryPhone.number)}</bdi>
+    </a>
+  </div>
+
+  <p class="text-xs leading-6 text-ink-muted sm:col-span-2">
+    این فرم اطلاعات را جایی ذخیره نمی‌کند. با زدن دکمه، پیام آماده در واتساپ باز می‌شود و تنها با ارسال شما به دست کلینیک می‌رسد.
+  </p>
+</form>
+
+<script>
+  const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
+  const toLatin = (value: string) => value.replace(/[۰-۹]/g, (d) => String(FA_DIGITS.indexOf(d)));
+
+  document.querySelectorAll<HTMLFormElement>("form[data-whatsapp]").forEach((form) => {
+    const error = form.querySelector<HTMLElement>("[role=alert]");
+    const whatsapp = form.dataset.whatsapp ?? "";
+
+    const params = new URLSearchParams(window.location.search);
+    const therapist = form.querySelector<HTMLSelectElement>("select[name=therapist]");
+    const preselected = params.get("therapist");
+    if (therapist && preselected && [...therapist.options].some((o) => o.value === preselected)) {
+      therapist.value = preselected;
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const value = (key: string) => String(data.get(key) ?? "").trim();
+
+      const name = value("name");
+      const phoneDigits = toLatin(value("phone")).replace(/\D/g, "").replace(/^98/, "0").replace(/^9/, "0");
+      const phone = /^09\d{9}$/.test(phoneDigits);
+      const fail = (message: string) => {
+        if (error) {
+          error.textContent = message;
+          error.classList.remove("hidden");
+        }
+      };
+
+      if (name.length < 2) return fail("نام را کامل وارد کنید.");
+      if (!phone) return fail("شماره تماس را به شکل یک موبایل معتبر وارد کنید؛ مثلاً ۰۹۱۲۳۴۵۶۷۸۹.");
+
+      error?.classList.add("hidden");
+
+      const lines = [
+        "درخواست نوبت از سایت پندار نیم‌رخ",
+        `نام: ${name}`,
+        `تماس: ${phoneDigits}`,
+      ];
+      const service = value("service");
+      const therapistName = therapist?.selectedOptions[0]?.text ?? "";
+      if (service) lines.push(`خدمت: ${service}`);
+      if (therapistName && therapist?.value) lines.push(`درمانگر: ${therapistName}`);
+      lines.push(`نوع جلسه: ${value("mode")}`, `زمان دلخواه: ${value("time")}`);
+      const note = value("note");
+      if (note) lines.push(`توضیح: ${note}`);
+
+      const href = `https://wa.me/${whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`;
+      window.open(href, "_blank", "noopener");
+    });
+  });
+</script>

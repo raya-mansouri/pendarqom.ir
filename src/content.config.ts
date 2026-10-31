@@ -39,6 +39,7 @@ const therapists = defineCollection({
     approaches: z.array(z.string()),
     education: z.array(z.string()),
     languages: z.array(z.string()).default(["فارسی"]),
+    online: z.boolean().default(false),
     order: z.number(),
     featured: z.boolean().default(false),
     placeholder: z.boolean(),

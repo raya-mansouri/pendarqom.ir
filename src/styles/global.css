@@ -26,6 +26,8 @@
 
   /* Calligraphy-gold accent — AA ≥4.5:1 on cream #f8f2e7 and surface #fffdf8 */
   --color-clay: #8a651c;
+  /* Logo navy — reserved for trust/privacy callouts; white on it = 12.3:1 */
+  --color-navy: #2a2585;
   /* status fg tokens ≥4.5:1 on their bg tints (AA for 12px badge text) */
   --color-status-open: #2f6b45;
   --color-status-open-bg: #e9f2e6;

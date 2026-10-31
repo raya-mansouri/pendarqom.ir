@@ -7,6 +7,8 @@ interface Props {
   name: string;
   title: string;
   specialties: string[];
+  issues?: string[];
+  online?: boolean;
   headingLevel?: "h2" | "h3";
   sizes?: string;
   priority?: boolean;
@@ -16,13 +18,20 @@ const {
   name,
   title,
   specialties,
+  issues = [],
+  online = false,
   headingLevel: H = "h3",
   sizes = "(min-width: 72rem) 22rem, (min-width: 64rem) calc((100vw - 6rem) / 3), (min-width: 40rem) calc((100vw - 4.5rem) / 2), calc(100vw - 2rem)",
   priority = false,
 } = Astro.props;
 const photo = therapistPhotos[id];
 ---
-<a href={`/therapists/${id}/`} class="card reveal group overflow-hidden transition-transform hover:-translate-y-1">
+<a
+  href={`/therapists/${id}/`}
+  data-therapist-card
+  data-issues={issues.join(" ")}
+  class="card reveal group overflow-hidden transition-transform hover:-translate-y-1"
+>
   {photo && (
     <Picture
       src={photo}
@@ -45,6 +54,7 @@ const photo = therapistPhotos[id];
       {specialties.slice(0, 3).map((s) => (
         <span class="badge bg-primary-50 text-primary-700">{s}</span>
       ))}
+      {online && <span class="badge bg-primary-100 text-primary-800">آنلاین</span>}
     </div>
   </div>
 </a>

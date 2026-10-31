@@ -9,6 +9,7 @@ specialties: ["اختلالات شخصیت", "سازمان شخصیت مرزی �
 approaches: ["روان‌درمانی تحلیلی معاصر (ریلیشنال)", "درمان متمرکز بر انتقال (TFP)", "زوج‌درمانی تحلیلی", "ارزیابی SWAP-200"]
 education: []
 languages: ["فارسی"]
+online: true
 order: 2
 featured: false
 placeholder: false

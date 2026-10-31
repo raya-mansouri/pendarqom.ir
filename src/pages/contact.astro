@@ -1,9 +1,11 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/PageHeader.astro";
 import ContactChannels from "../components/ContactChannels.astro";
 import HoursTable from "../components/HoursTable.astro";
 import MapCard from "../components/MapCard.astro";
+import BookingForm from "../components/BookingForm.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
 import { telHref } from "../utils/links";
@@ -11,6 +13,10 @@ import { toPersianDigits } from "../utils/persian";
 
 const primaryPhone = site.phones[0];
 const telephone = "+98" + primaryPhone.number.replace(/\D/g, "").replace(/^0/, "");
+const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
+const therapists = (await getCollection("therapists"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((t) => ({ slug: t.id, name: t.data.name }));
 ---
 <BaseLayout
   title="تماس و رزرو نوبت | پندار نیم‌رخ"
@@ -32,12 +38,22 @@ const telephone = "+98" + primaryPhone.number.replace(/\D/g, "").replace(/^0/, "
     breadcrumbs={[{ label: "خانه", href: "/" }, { label: "تماس و رزرو نوبت" }]}
   >
     <p class="mt-3 text-lg leading-8 text-ink-muted">
-      برای رزرو نوبت، پرسش درباره خدمات یا ثبت‌نام کارگاه‌ها از هر راهی که برای شما راحت‌تر است تماس بگیرید.
+      برای رزرو نوبت، پرسش درباره خدمات یا ثبت‌نام کارگاه‌ها از هر راهی که برای شما راحت‌تر است با ما در میان بگذارید.
     </p>
-    <p class="mt-4 rounded-xl bg-primary-50 px-4 py-3 text-sm leading-6 text-primary-800">
+    <p class="mt-4 rounded-xl bg-navy px-4 py-3 text-sm leading-6 text-white">
       همه تماس‌ها و پیام‌ها کاملاً محرمانه بررسی می‌شوند. اطلاعات شما در اختیار هیچ شخص ثالثی قرار نمی‌گیرد.
     </p>
   </PageHeader>
+
+  <section id="booking" class="container-site section mx-auto max-w-3xl scroll-mt-24">
+    <h2 class="text-2xl sm:text-3xl">درخواست نوبت</h2>
+    <p class="mt-2 text-ink-muted">
+      فرم را پر کنید؛ پیام آماده در واتساپ باز می‌شود و کلینیک در ساعت کاری پاسخ می‌دهد.
+    </p>
+    <div class="card mt-6 p-5 sm:p-6">
+      <BookingForm services={services.map((s) => ({ title: s.data.title }))} therapists={therapists} />
+    </div>
+  </section>
 
   <section class="container-site section mx-auto grid max-w-6xl gap-8 lg:grid-cols-3">
     <div class="card p-5">

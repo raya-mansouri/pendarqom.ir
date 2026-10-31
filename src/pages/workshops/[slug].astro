@@ -6,7 +6,7 @@ import PageHeader from "../../components/PageHeader.astro";
 import StatusBadge from "../../components/StatusBadge.astro";
 import Icon from "../../components/Icon.astro";
 import { site } from "../../data/site";
-import { whatsappLink, instagramDmLink, workshopSignupMessage, telHref } from "../../utils/links";
+import { whatsappLink, instagramDmLink, workshopSignupMessage, workshopWaitlistMessage, telHref } from "../../utils/links";
 import { workshopPosters } from "../../utils/assets";
 import { toPersianDigits } from "../../utils/persian";
 
@@ -27,6 +27,10 @@ const signupHref =
     : undefined;
 const instagramHref =
   workshop.data.status === "open" && site.instagram ? instagramDmLink(site.instagram) : undefined;
+const waitlistHref =
+  workshop.data.status === "full" && site.whatsapp
+    ? whatsappLink(site.whatsapp, workshopWaitlistMessage(workshop.data.title))
+    : undefined;
 const dateParts = [workshop.data.dateDisplay, workshop.data.time].filter(Boolean);
 
 const eventSchema = workshop.data.startDate
@@ -133,7 +137,12 @@ const eventSchema = workshop.data.startDate
         ) : isPast ? (
           <p class="rounded-xl bg-status-past-bg px-4 py-3 text-center text-sm font-semibold text-status-past">این کارگاه برگزار شده است.</p>
         ) : (
-          <p class="rounded-xl bg-status-full-bg px-4 py-3 text-center text-sm font-semibold text-status-full">ظرفیت این کارگاه تکمیل شده است.</p>
+          <>
+            <p class="rounded-xl bg-status-full-bg px-4 py-3 text-center text-sm font-semibold text-status-full">ظرفیت این کارگاه تکمیل شده است.</p>
+            {waitlistHref && (
+              <a href={waitlistHref} target="_blank" rel="noopener" class="btn btn-whatsapp w-full">ثبت‌نام در لیست انتظار</a>
+            )}
+          </>
         )}
         <a href={telHref(site.phones[0].number)} class="btn btn-call w-full">
           <Icon name="phone" size={18} /> تماس با کلینیک

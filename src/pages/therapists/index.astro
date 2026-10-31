@@ -13,12 +13,12 @@ const withIssues = therapists.map((t) => ({ therapist: t, issues: issuesFor(t.da
 ---
 <BaseLayout
   title="روانشناسان کلینیک پندار نیم‌رخ قم"
-  description="روانشناسان و درمانگران کلینیک پندار نیم‌رخ قم؛ متخصصان دارای پروانه در حوزه‌های روان‌درمانی فردی، زوج‌درمانی، خانواده و کودک و نوجوان."
+  description="روانشناسان و درمانگران کلینیک پندار نیم‌رخ قم؛ با حوزه‌های کاری مشخص در روان‌درمانی فردی، زوج‌درمانی، خانواده و کودک و نوجوان."
 >
   <PageHeader
     title="روانشناسان کلینیک پندار نیم‌رخ قم"
     breadcrumbs={[{ label: "خانه", href: "/" }, { label: "درمانگران" }]}
-    intro="همه درمانگران ما دارای پروانه فعالیت معتبر هستند."
+    intro="هر درمانگر حوزه کاری و رویکرد خودش را دارد. موضوع خود را انتخاب کنید تا ببینید چه کسی در آن زمینه کار می‌کند؛ بعد پروفایل را بخوانید و اگر تردید داشتید، در فرم درخواست نوبت بنویسید تا راهنمایی شوید."
   />
   <section class="container-site section">
     <div class="mb-8">
@@ -27,6 +27,7 @@ const withIssues = therapists.map((t) => ({ therapist: t, issues: issuesFor(t.da
         <button
           type="button"
           data-issue-filter=""
+          data-hint=""
           aria-pressed="true"
           class="rounded-full border border-primary-700 bg-primary-700 px-3.5 py-1.5 text-sm font-medium text-white transition-colors"
         >
@@ -36,6 +37,7 @@ const withIssues = therapists.map((t) => ({ therapist: t, issues: issuesFor(t.da
           <button
             type="button"
             data-issue-filter={topic.id}
+            data-hint={topic.hint}
             aria-pressed="false"
             class="rounded-full border border-primary-200 bg-surface px-3.5 py-1.5 text-sm font-medium text-ink transition-colors hover:border-primary-400 hover:text-primary-700 aria-pressed:border-primary-700 aria-pressed:bg-primary-700 aria-pressed:text-white"
           >
@@ -43,7 +45,10 @@ const withIssues = therapists.map((t) => ({ therapist: t, issues: issuesFor(t.da
           </button>
         ))}
       </div>
-      <p class="mt-3 text-sm text-ink-muted" aria-live="polite">
+      <p data-issue-hint class="mt-3 text-sm leading-6 text-ink-muted">
+        یکی از موضوع‌ها را انتخاب کنید؛ فقط درمانگرانی که همان حوزه را کار می‌کنند نمایش داده می‌شوند.
+      </p>
+      <p class="mt-1 text-sm font-semibold text-primary-700" aria-live="polite">
         <span data-therapist-count>{toPersianDigits(therapists.length)}</span> درمانگر
       </p>
     </div>
@@ -75,6 +80,8 @@ const withIssues = therapists.map((t) => ({ therapist: t, issues: issuesFor(t.da
   const cards = [...document.querySelectorAll<HTMLElement>("[data-therapist-card]")];
   const count = document.querySelector<HTMLElement>("[data-therapist-count]");
   const empty = document.querySelector<HTMLElement>("[data-therapist-empty]");
+  const hint = document.querySelector<HTMLElement>("[data-issue-hint]");
+  const defaultHint = hint?.textContent?.trim() ?? "";
   const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
 
   const apply = (issue: string) => {
@@ -100,6 +107,7 @@ const withIssues = therapists.map((t) => ({ therapist: t, issues: issuesFor(t.da
       for (const other of buttons) {
         other.setAttribute("aria-pressed", String(other === active));
       }
+      if (hint) hint.textContent = active.dataset.hint || defaultHint;
       apply(active.dataset.issueFilter ?? "");
     });
   }

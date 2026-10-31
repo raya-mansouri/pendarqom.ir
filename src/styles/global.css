@@ -28,6 +28,8 @@
   --color-clay: #8a651c;
   /* Logo navy — reserved for trust/privacy callouts; white on it = 12.3:1 */
   --color-navy: #2a2585;
+  /* Pale tint of the same hue for callout backgrounds; navy text on it = 10.4:1 */
+  --color-navy-50: #e6ecfb;
   /* status fg tokens ≥4.5:1 on their bg tints (AA for 12px badge text) */
   --color-status-open: #2f6b45;
   --color-status-open-bg: #e9f2e6;

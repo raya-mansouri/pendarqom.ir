@@ -27,7 +27,7 @@ const primaryPhone = site.phones[0];
           href={item.href}
           aria-current={isActive(item.href) ? "page" : undefined}
           class:list={[
-            "relative mx-1 my-2 flex h-12 flex-col items-center justify-center gap-0.5 rounded-xl text-[11px] leading-none transition-colors",
+            "relative mx-0.5 my-2 flex h-16 flex-col items-center justify-center gap-1 rounded-xl text-[13px] leading-none transition-colors",
             isActive(item.href)
               ? "bg-primary-100 font-extrabold text-primary-800"
               : "font-medium text-ink-muted hover:bg-primary-50 hover:text-primary-700",
@@ -39,7 +39,7 @@ const primaryPhone = site.phones[0];
               aria-hidden="true"
             />
           )}
-          <Icon name={item.icon} size={22} class={isActive(item.href) ? "text-primary-700" : undefined} />
+          <Icon name={item.icon} size={26} class={isActive(item.href) ? "text-primary-700" : undefined} />
           <span class={isActive(item.href) ? "text-primary-800" : undefined}>{item.label}</span>
         </a>
       </li>
@@ -47,10 +47,10 @@ const primaryPhone = site.phones[0];
     <li>
       <a
         href={telHref(primaryPhone.number)}
-        class="flex h-16 flex-col items-center justify-center gap-1 text-[11px] leading-none text-primary-700"
+        class="flex h-20 flex-col items-center justify-center gap-1 text-[13px] leading-none text-primary-700"
       >
-        <span class="grid size-9 place-items-center rounded-full bg-primary-600 text-white">
-          <Icon name="phone" size={19} />
+        <span class="grid size-11 place-items-center rounded-full bg-primary-600 text-white">
+          <Icon name="phone" size={22} />
         </span>
         <span class="font-bold">تماس</span>
       </a>

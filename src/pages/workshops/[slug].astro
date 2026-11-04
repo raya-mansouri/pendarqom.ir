@@ -20,6 +20,7 @@ export async function getStaticPaths() {
 const { workshop } = Astro.props;
 const { Content } = await render(workshop);
 const poster = workshopPosters[workshop.id];
+const shareImage = `/og/workshops/${workshop.id}.jpg`;
 const isPast = workshop.data.status === "past";
 const signupHref =
   workshop.data.status === "open" && site.whatsapp
@@ -43,7 +44,7 @@ const eventSchema = workshop.data.startDate
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       location: { "@type": "Place", name: workshop.data.location, address: site.address },
-      image: poster ? new URL(poster.src, site.url).href : undefined,
+      image: new URL(shareImage, site.url).href,
       description: `کارگاه «${workshop.data.title}» با مدرسی ${workshop.data.instructor}`,
       organizer: { "@type": "Organization", name: site.name, url: site.url },
       performer: { "@type": "Person", name: workshop.data.instructor },
@@ -56,7 +57,7 @@ const eventSchema = workshop.data.startDate
 <BaseLayout
   title={`${workshop.data.title} | کارگاه‌های پندار نیم‌رخ`}
   description={`کارگاه «${workshop.data.title}» با مدرسی ${workshop.data.instructor}${workshop.data.dateDisplay ? ` — ${workshop.data.dateDisplay}` : ""}، ${workshop.data.location}`}
-  ogImage={poster?.src}
+  ogImage={shareImage}
   jsonLd={[
     {
       "@context": "https://schema.org",

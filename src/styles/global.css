@@ -101,7 +101,7 @@ h1, h2, h3, h4 {
     @apply text-primary-700 hover:bg-primary-50;
   }
   .btn-whatsapp {
-    @apply bg-[#1fa855] text-white hover:bg-[#178a44];
+    @apply bg-[#0f7a4f] text-white hover:bg-[#0c6a44];
   }
   .btn-call {
     @apply bg-ink text-white hover:bg-primary-900;

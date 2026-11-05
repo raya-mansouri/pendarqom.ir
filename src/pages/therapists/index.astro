@@ -3,8 +3,9 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import TherapistCard from "../../components/cards/TherapistCard.astro";
-import { issueTopics, issuesFor } from "../../utils/issues";
-import { toPersianDigits } from "../../utils/persian";
+// import { issueTopics, issuesFor } from "../../utils/issues";
+// import { toPersianDigits } from "../../utils/persian";
+import { issuesFor } from "../../utils/issues";
 
 const therapists = (await getCollection("therapists")).sort(
   (a, b) => Number(b.data.featured) - Number(a.data.featured) || a.data.order - b.data.order,

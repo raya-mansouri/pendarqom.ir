@@ -19,7 +19,7 @@ const articles = (await getCollection("articles"))
     intro="خواندنی‌هایی برای آگاهی بیشتر درباره سلامت روان."
   />
   <section class="container-site section">
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {articles.map((a) => (
         <ArticleCard
           id={a.id}

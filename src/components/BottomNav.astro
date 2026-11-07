@@ -47,9 +47,10 @@ const primaryPhone = site.phones[0];
     <li>
       <a
         href={telHref(primaryPhone.number)}
-        class="flex h-20 flex-col items-center justify-center gap-1 text-[13px] leading-none text-primary-700"
+        aria-label={`تماس با ${site.name}`}
+        class="flex h-20 flex-col items-center justify-center gap-1 text-[13px] leading-none text-call-strong"
       >
-        <span class="grid size-11 place-items-center rounded-full bg-primary-600 text-white">
+        <span class="grid size-11 place-items-center rounded-full bg-call text-white motion-safe:animate-[call-pulse_3s_ease-out_infinite]">
           <Icon name="phone" size={22} />
         </span>
         <span class="font-bold">تماس</span>

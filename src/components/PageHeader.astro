@@ -14,12 +14,12 @@ const hasMeta = Astro.slots.has("meta");
 ---
 <div class="container-site pt-10">
   <Breadcrumbs items={breadcrumbs} />
-  <div class="mt-6 flex max-w-3xl items-start gap-3 sm:gap-5">
+  <div class="mt-6 grid max-w-3xl grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-3 sm:gap-x-5 sm:gap-y-4">
     <Picture
       src={logo}
       formats={["avif", "webp"]}
       densities={[1, 2, 3]}
-      alt=""
+      alt="لوگوی کلینیک پندار نیم‌رخ"
       width={96}
       height={96}
       class="size-14 shrink-0 sm:size-24"

@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import { Picture } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import ArticleCard from "../../components/cards/ArticleCard.astro";
@@ -78,7 +79,19 @@ const description = article.data.description;
       </div>
       <h1 class="mt-4 text-3xl leading-snug sm:text-4xl">{article.data.title}</h1>
       {cover && (
-        <img src={cover.src} alt="" width="1200" height="630" loading="eager" class="card mt-8 aspect-[1200/630] w-full object-cover" />
+        <Picture
+          src={cover}
+          formats={["avif", "webp"]}
+          fallbackFormat="webp"
+          widths={[480, 720, 960, 1200]}
+          sizes="(min-width: 48rem) 48rem, calc(100vw - 2rem)"
+          quality={82}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          alt={`تصویر شاخص مقاله «${article.data.title}»`}
+          class="card mt-8 aspect-[1200/630] w-full object-cover"
+        />
       )}
     </header>
 
@@ -93,7 +106,7 @@ const description = article.data.description;
       <div class="mt-4 flex flex-wrap items-center gap-3">
         <span class="text-sm font-bold">اشتراک‌گذاری:</span>
         <a
-          class="flex size-10 items-center justify-center rounded-full border border-primary-100 bg-surface transition-colors hover:border-primary-300 hover:bg-primary-50"
+          class="flex size-11 items-center justify-center rounded-full border border-primary-100 bg-surface transition-colors hover:border-primary-300 hover:bg-primary-50"
           href={`https://t.me/share/url?url=${shareUrl}&text=${shareText}`}
           target="_blank"
           rel="noopener"
@@ -103,7 +116,7 @@ const description = article.data.description;
           <Icon name="telegram" size={20} />
         </a>
         <a
-          class="flex size-10 items-center justify-center rounded-full border border-primary-100 bg-surface transition-colors hover:border-primary-300 hover:bg-primary-50"
+          class="flex size-11 items-center justify-center rounded-full border border-primary-100 bg-surface transition-colors hover:border-primary-300 hover:bg-primary-50"
           href={`https://wa.me/?text=${shareText}%20${shareUrl}`}
           target="_blank"
           rel="noopener"

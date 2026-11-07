@@ -107,20 +107,20 @@ const eventSchema = workshop.data.startDate
       <h2 class="text-lg font-bold">مشخصات کارگاه</h2>
       <dl class="mt-4 space-y-3 text-sm">
         {dateParts.length > 0 && (
-          <div class="flex justify-between gap-4"><dt class="text-ink-muted">زمان</dt><dd>{dateParts.join("، ")}</dd></div>
+          <div class="grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-x-3"><dt class="text-ink-muted">زمان</dt><dd>{dateParts.join("، ")}</dd></div>
         )}
         {workshop.data.sessions && (
-          <div class="flex justify-between gap-4"><dt class="text-ink-muted">تعداد جلسات</dt><dd>{toPersianDigits(workshop.data.sessions)} جلسه</dd></div>
+          <div class="grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-x-3"><dt class="text-ink-muted">تعداد جلسات</dt><dd>{toPersianDigits(workshop.data.sessions)} جلسه</dd></div>
         )}
         {workshop.data.audience && (
-          <div class="flex justify-between gap-4"><dt class="text-ink-muted">مخاطب</dt><dd>{workshop.data.audience}</dd></div>
+          <div class="grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-x-3"><dt class="text-ink-muted">مخاطب</dt><dd>{workshop.data.audience}</dd></div>
         )}
-        <div class="flex justify-between gap-4"><dt class="text-ink-muted">مکان</dt><dd>{workshop.data.location}</dd></div>
+        <div class="grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-x-3"><dt class="text-ink-muted">مکان</dt><dd>{workshop.data.location}</dd></div>
         {workshop.data.capacity && (
-          <div class="flex justify-between gap-4"><dt class="text-ink-muted">ظرفیت</dt><dd>{toPersianDigits(workshop.data.capacity)} نفر</dd></div>
+          <div class="grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-x-3"><dt class="text-ink-muted">ظرفیت</dt><dd>{toPersianDigits(workshop.data.capacity)} نفر</dd></div>
         )}
         {workshop.data.fee && (
-          <div class="flex justify-between gap-4"><dt class="text-ink-muted">شهریه</dt><dd class="font-semibold">{workshop.data.fee}</dd></div>
+          <div class="grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-x-3"><dt class="text-ink-muted">شهریه</dt><dd class="font-semibold">{workshop.data.fee}</dd></div>
         )}
       </dl>
       <div class="mt-6 space-y-3">

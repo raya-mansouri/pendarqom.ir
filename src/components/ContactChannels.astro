@@ -6,8 +6,9 @@ import Icon from "./Icon.astro";
 interface Props {
   compact?: boolean;
   stacked?: boolean;
+  showCall?: boolean;
 }
-const { compact = false, stacked = false } = Astro.props;
+const { compact = false, stacked = false, showCall = true } = Astro.props;
 
 const primaryPhone = site.phones[0];
 const isHttpUrl = (url?: string): url is string => !!url && /^https?:\/\/[^\s[\]]+$/.test(url);
@@ -20,10 +21,12 @@ const socials = [
 ].filter(Boolean) as { label: string; href: string; icon: string }[];
 ---
 <div class:list={["flex gap-3", stacked ? "flex-col items-start" : "flex-wrap items-center"]}>
-  <a href={telHref(primaryPhone.number)} class:list={["btn btn-call", compact && "px-3.5 py-2 text-xs"]}>
-    <Icon name="phone" size={compact ? 16 : 18} />
-    {primaryPhone.label}
-  </a>
+  {showCall && (
+    <a href={telHref(primaryPhone.number)} class:list={["btn btn-call whitespace-nowrap", compact && "px-3.5 py-2 text-xs"]}>
+      <Icon name="phone" size={compact ? 16 : 18} />
+      {primaryPhone.label}
+    </a>
+  )}
   {socials.length > 0 && (
     <ul class="flex flex-wrap items-center gap-2">
       {socials.map((s) => (
@@ -36,7 +39,7 @@ const socials = [
             title={s.label}
             class:list={[
               "flex items-center justify-center rounded-full border border-primary-100 bg-surface transition-colors hover:border-primary-300 hover:bg-primary-50",
-              compact ? "size-9" : "size-10",
+              compact ? "size-10" : "size-11",
             ]}
           >
             <Icon name={s.icon} size={compact ? 18 : 20} />

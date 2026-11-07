@@ -4,12 +4,14 @@ import { toPersianDigits } from "../utils/persian";
 import { telHref } from "../utils/links";
 ---
 <div class="bg-primary-900 text-primary-50">
-  <div class="container-site flex flex-wrap items-center justify-center gap-x-6 gap-y-1 py-3 text-sm">
+  <div class="container-site flex flex-col items-center gap-y-1 py-3 text-center text-sm sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6">
     <span class="font-semibold">در شرایط بحرانی تنها نیستید:</span>
-    {site.crisisLines.map((line) => (
-      <a href={telHref(line.number)} class="inline-flex items-center gap-1.5 py-1 underline underline-offset-4 hover:text-white">
-        {line.label}: <bdi>{toPersianDigits(line.number)}</bdi>
-      </a>
-    ))}
+    <span class="flex flex-wrap items-center justify-center gap-x-6 gap-y-1">
+      {site.crisisLines.map((line) => (
+        <a href={telHref(line.number)} class="inline-flex items-center gap-1.5 py-1 underline underline-offset-4 hover:text-white">
+          {line.label}: <bdi>{toPersianDigits(line.number)}</bdi>
+        </a>
+      ))}
+    </span>
   </div>
 </div>

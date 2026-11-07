@@ -26,6 +26,8 @@ const times = ["اولین نوبت آزاد", "صبح (۱۰ تا ۱۳)", "بع�
   data-whatsapp={site.whatsapp}
   novalidate
 >
+  <p id={`${id}-error`} class="hidden rounded-lg border border-danger/30 bg-danger-bg px-3 py-2 text-sm font-medium text-danger sm:col-span-2" role="alert"></p>
+
   <div>
     <label for={`${id}-name`} class="block text-sm font-semibold">نام</label>
     <input
@@ -34,7 +36,8 @@ const times = ["اولین نوبت آزاد", "صبح (۱۰ تا ۱۳)", "بع�
       type="text"
       autocomplete="name"
       required
-      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+      aria-describedby={`${id}-error`}
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-base outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100 sm:text-sm"
     />
   </div>
 
@@ -44,11 +47,13 @@ const times = ["اولین نوبت آزاد", "صبح (۱۰ تا ۱۳)", "بع�
       id={`${id}-phone`}
       name="phone"
       type="tel"
+      dir="ltr"
       inputmode="tel"
       autocomplete="tel"
       placeholder="۰۹۱۲۳۴۵۶۷۸۹"
       required
-      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+      aria-describedby={`${id}-error`}
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-base outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100 sm:text-sm"
     />
   </div>
 
@@ -57,7 +62,7 @@ const times = ["اولین نوبت آزاد", "صبح (۱۰ تا ۱۳)", "بع�
     <select
       id={`${id}-service`}
       name="service"
-      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-base outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100 sm:text-sm"
     >
       <option value="">هنوز مطمئن نیستم</option>
       {services.map((s) => <option value={s.title}>{s.title}</option>)}
@@ -69,7 +74,7 @@ const times = ["اولین نوبت آزاد", "صبح (۱۰ تا ۱۳)", "بع�
     <select
       id={`${id}-therapist`}
       name="therapist"
-      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-base outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100 sm:text-sm"
     >
       <option value="">تفاوتی ندارد</option>
       {therapists.map((t) => <option value={t.slug}>{t.name}</option>)}
@@ -81,7 +86,7 @@ const times = ["اولین نوبت آزاد", "صبح (۱۰ تا ۱۳)", "بع�
     <select
       id={`${id}-mode`}
       name="mode"
-      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-base outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100 sm:text-sm"
     >
       <option value="حضوری در کلینیک">حضوری در کلینیک</option>
       <option value="آنلاین">آنلاین</option>
@@ -94,7 +99,7 @@ const times = ["اولین نوبت آزاد", "صبح (۱۰ تا ۱۳)", "بع�
     <select
       id={`${id}-time`}
       name="time"
-      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-base outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100 sm:text-sm"
     >
       {times.map((t) => <option value={t}>{t}</option>)}
     </select>
@@ -106,14 +111,12 @@ const times = ["اولین نوبت آزاد", "صبح (۱۰ تا ۱۳)", "بع�
       id={`${id}-note`}
       name="note"
       rows="3"
-      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-sm outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+      class="mt-1.5 w-full rounded-lg border border-primary-100 bg-white px-3 py-2.5 text-base outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100 sm:text-sm"
     ></textarea>
     <p class="mt-1.5 text-xs leading-5 text-ink-muted">
       جزئیات حساس را در این کادر ننویسید؛ در تماس اول با درمانگر صحبت می‌کنید.
     </p>
   </div>
-
-  <p id={`${id}-error`} class="hidden rounded-lg bg-surface px-3 py-2 text-sm font-medium text-primary-800 sm:col-span-2" role="alert"></p>
 
   <div class="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center">
     <button type="submit" class="btn btn-whatsapp justify-center">
@@ -136,6 +139,8 @@ const times = ["اولین نوبت آزاد", "صبح (۱۰ تا ۱۳)", "بع�
   document.querySelectorAll<HTMLFormElement>("form[data-whatsapp]").forEach((form) => {
     const error = form.querySelector<HTMLElement>("[role=alert]");
     const whatsapp = form.dataset.whatsapp ?? "";
+    const nameField = form.querySelector<HTMLInputElement>("input[name=name]");
+    const phoneField = form.querySelector<HTMLInputElement>("input[name=phone]");
 
     const params = new URLSearchParams(window.location.search);
     const therapist = form.querySelector<HTMLSelectElement>("select[name=therapist]");
@@ -143,6 +148,16 @@ const times = ["اولین نوبت آزاد", "صبح (۱۰ تا ۱۳)", "بع�
     if (therapist && preselected && [...therapist.options].some((o) => o.value === preselected)) {
       therapist.value = preselected;
     }
+
+    const clearError = () => {
+      error?.classList.add("hidden");
+      nameField?.removeAttribute("aria-invalid");
+      phoneField?.removeAttribute("aria-invalid");
+    };
+
+    form.addEventListener("input", () => {
+      if (error && !error.classList.contains("hidden")) clearError();
+    });
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -152,17 +167,20 @@ const times = ["اولین نوبت آزاد", "صبح (۱۰ تا ۱۳)", "بع�
       const name = value("name");
       const phoneDigits = toLatin(value("phone")).replace(/\D/g, "").replace(/^98/, "0").replace(/^9/, "0");
       const phone = /^09\d{9}$/.test(phoneDigits);
-      const fail = (message: string) => {
+      const fail = (message: string, field: HTMLInputElement | null) => {
+        clearError();
         if (error) {
           error.textContent = message;
           error.classList.remove("hidden");
         }
+        field?.setAttribute("aria-invalid", "true");
+        field?.focus();
       };
 
-      if (name.length < 2) return fail("نام را کامل وارد کنید.");
-      if (!phone) return fail("شماره تماس را به شکل یک موبایل معتبر وارد کنید؛ مثلاً ۰۹۱۲۳۴۵۶۷۸۹.");
+      if (name.length < 2) return fail("نام را کامل وارد کنید.", nameField);
+      if (!phone) return fail("شماره تماس را به شکل یک موبایل معتبر وارد کنید؛ مثلاً ۰۹۱۲۳۴۵۶۷۸۹.", phoneField);
 
-      error?.classList.add("hidden");
+      clearError();
 
       const lines = [
         "درخواست نوبت از سایت پندار نیم‌رخ",

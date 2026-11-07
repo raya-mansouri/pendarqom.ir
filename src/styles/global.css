@@ -30,6 +30,12 @@
   --color-navy: #2a2585;
   /* Pale tint of the same hue for callout backgrounds; navy text on it = 10.4:1 */
   --color-navy-50: #e6ecfb;
+  /* Destructive/error; danger on danger-bg = 6.4:1 */
+  --color-danger: #a3231b;
+  --color-danger-bg: #fbe9e6;
+  /* Green call action; white on it = 5.2:1 */
+  --color-call: #0f7a4f;
+  --color-call-strong: #0c6a44;
   /* status fg tokens ≥4.5:1 on their bg tints (AA for 12px badge text) */
   --color-status-open: #2f6b45;
   --color-status-open-bg: #e9f2e6;
@@ -45,10 +51,10 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Keep content clear of the fixed mobile bottom nav (4rem bar + iOS safe area). */
+/* Keep content clear of the fixed mobile bottom nav (5rem bar + iOS safe area). */
 @media (width < 64rem) {
   body {
-    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
   }
 }
 
@@ -67,6 +73,10 @@ h1, h2, h3, h4 {
 :focus-visible {
   outline: 2px solid var(--color-primary-600);
   outline-offset: 2px;
+}
+
+[aria-invalid="true"] {
+  border-color: var(--color-danger);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -101,7 +111,7 @@ h1, h2, h3, h4 {
     @apply text-primary-700 hover:bg-primary-50;
   }
   .btn-whatsapp {
-    @apply bg-[#0f7a4f] text-white hover:bg-[#0c6a44];
+    @apply bg-call text-white hover:bg-call-strong;
   }
   .btn-call {
     @apply bg-ink text-white hover:bg-primary-900;
@@ -110,7 +120,7 @@ h1, h2, h3, h4 {
     @apply rounded-2xl bg-surface shadow-soft;
   }
   .badge {
-    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold;
+    @apply inline-flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold;
   }
   .prose-fa {
     @apply max-w-[70ch];
@@ -140,6 +150,17 @@ h1, h2, h3, h4 {
    fails to run. .reveal.is-visible only sets visible styles, so it needs no
    prefix; the reduced-motion override must match the .js specificity to keep
    winning over the hidden state. */
+@keyframes card-nudge {
+  0%, 100% { transform: translateX(0); }
+  30% { transform: translateX(-3px); }
+  60% { transform: translateX(2px); }
+}
+@keyframes call-pulse {
+  0%, 72%, 100% { box-shadow: 0 0 0 0 rgb(15 122 79 / 0); }
+  80% { box-shadow: 0 0 0 4px rgb(15 122 79 / 0.4); }
+  94% { box-shadow: 0 0 0 10px rgb(15 122 79 / 0); }
+}
+
 .js .reveal {
   opacity: 0;
   translate: 0 16px;

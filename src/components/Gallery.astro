@@ -1,23 +1,70 @@
 ---
-import { toPersianDigits } from "../utils/persian";
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
-const modules = import.meta.glob<{ default: { src: string } }>("../assets/gallery/*.svg", { eager: true });
-const photos = Object.entries(modules).map(([, mod]) => ({ src: mod.default.src }));
+const modules = import.meta.glob<{ default: ImageMetadata }>("../assets/gallery/*.webp", { eager: true });
+const byKey = Object.fromEntries(
+  Object.entries(modules).map(([path, mod]) => [path.split("/").pop()!.replace(".webp", ""), mod.default]),
+);
+
+const photos = [
+  {
+    key: "room-waiting-qom",
+    caption: "فضای انتظار",
+    alt: "فضای انتظار کلینیک روان‌شناسی پندار نیم‌رخ در قم با پیشخوان چوبی و صندلی‌های انتظار",
+  },
+  {
+    key: "room-session-qom",
+    caption: "اتاق جلسه",
+    alt: "اتاق جلسهٔ مشاوره با دو صندلی راحتی و گواهی‌های درمانگران روی دیوار",
+  },
+  {
+    key: "room-consultation-qom",
+    caption: "اتاق مشاوره",
+    alt: "اتاق مشاورهٔ کلینیک پندار نیم‌رخ با میز کار و پنجرهٔ قوسی",
+  },
+  {
+    key: "terrace-qom",
+    caption: "تراس کلینیک",
+    alt: "تراس کلینیک پندار نیم‌رخ با میز و صندلی‌های رنگی",
+  },
+  {
+    key: "logo-plaque-qom",
+    caption: "نشان پندار",
+    alt: "نشان گلدوزی‌شدهٔ پندار نیم‌رخ در قاب چوبی روی میز",
+  },
+  {
+    key: "plants-detail-qom",
+    caption: "جزئیات فضا",
+    alt: "گلدان گیاه در فضای کلینیک پندار نیم‌رخ",
+  },
+].map(({ key, ...photo }) => ({ ...photo, src: byKey[key] }));
 ---
 <div class="grid grid-cols-2 gap-4 md:grid-cols-3">
-  {photos.map((photo, i) => (
-    <button
-      type="button"
-      class="group overflow-hidden rounded-2xl shadow-soft"
-      data-lightbox-trigger={photo.src}
-    >
-      <img src={photo.src} alt={`تصویر ${toPersianDigits(i + 1)} از فضای کلینیک`} width="800" height="600" loading="lazy" class="aspect-[4/3] w-full object-cover transition-transform group-hover:scale-105" />
-    </button>
+  {photos.map((photo) => (
+    <figure class="group">
+      <button
+        type="button"
+        class="block w-full overflow-hidden rounded-2xl shadow-soft"
+        data-lightbox-trigger={photo.src.src}
+      >
+        <Picture
+          src={photo.src}
+          formats={["avif", "webp"]}
+          widths={[320, 480, 720]}
+          sizes="(min-width: 768px) 30vw, 45vw"
+          alt={photo.alt}
+          loading="lazy"
+          class="aspect-[4/5] w-full object-cover transition-transform group-hover:scale-105"
+        />
+      </button>
+      <figcaption class="mt-2 text-center text-xs text-ink-muted sm:text-sm">{photo.caption}</figcaption>
+    </figure>
   ))}
 </div>
 <dialog id="lightbox" class="mx-auto my-auto max-w-4xl bg-transparent p-0 backdrop:bg-ink/80" aria-label="نمایش تصویر">
   <div class="relative">
-    <img id="lightbox-img" src="" alt="" width="1200" height="900" class="rounded-2xl" />
+    <img id="lightbox-img" alt="" width="1200" height="1500" class="rounded-2xl" />
     <button id="lightbox-close" type="button" class="btn btn-call absolute end-3 top-3 px-3 py-1.5">بستن</button>
   </div>
 </dialog>

@@ -27,7 +27,7 @@ const {
 } = Astro.props;
 const poster = workshopPosters[id];
 ---
-<a href={href} class:list={["card reveal group block overflow-hidden transition-transform hover:-translate-y-1", status === "past" && "opacity-75"]}>
+<a href={href} class:list={["card reveal group block overflow-hidden transition-transform hover:-translate-y-1"]}>
   {poster && (
     <Picture
       src={poster}
@@ -39,7 +39,7 @@ const poster = workshopPosters[id];
       quality={82}
       loading="lazy"
       decoding="async"
-      class="aspect-[3/4] w-full bg-surface object-contain"
+      class:list={["aspect-[3/4] w-full bg-surface object-contain", status === "past" && "opacity-60"]}
     />
   )}
   <div class="p-5">

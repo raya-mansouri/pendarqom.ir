@@ -19,30 +19,30 @@ const socials = [
 ].filter((s): s is { label: string; href: string; icon: string } => s !== null);
 ---
 <footer class="mt-auto border-t border-primary-100 bg-surface">
-  <div class="container-site grid gap-x-8 gap-y-8 py-10 sm:grid-cols-2 sm:gap-y-10 sm:py-14 lg:grid-cols-[1.75fr_1.1fr_1fr]">
+  <div class="container-site grid gap-x-8 gap-y-6 py-8 sm:grid-cols-2 sm:gap-y-10 sm:py-14 lg:grid-cols-[1.75fr_1.1fr_1fr]">
     <section aria-label="درباره کلینیک" class="text-center sm:col-span-2 sm:text-start lg:col-span-1">
       <Picture
         src={logo}
         formats={["avif", "webp"]}
         densities={[1, 2, 3]}
-        alt=""
+        alt={`لوگوی ${site.brandName}`}
         width={56}
         height={56}
         class="mx-auto size-14 sm:mx-0"
       />
       <p class="mt-3 text-base font-extrabold text-primary-700">{site.name}</p>
-      <p class="mt-2 text-sm leading-7 text-ink-muted">{site.tagline[0]}<br />{site.tagline[1]}</p>
+      <p class="mt-2 text-pretty text-sm leading-7 text-ink-muted">{site.tagline[0]}<br class="hidden sm:inline" />{" "}{site.tagline[1]}</p>
       <ul class="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-ink-muted sm:justify-start">
         <li>از سال {toPersianDigits(site.foundedYear)}</li>
         <li>حضوری، تلفنی و آنلاین</li>
       </ul>
     </section>
 
-    <section aria-label="تماس" class="border-t border-primary-100/80 pt-8 text-center sm:border-0 sm:pt-0 sm:text-start">
+    <section aria-label="تماس" class="border-t border-primary-100/80 pt-6 text-center sm:border-0 sm:pt-0 sm:text-start">
       <h2 class="mb-3 text-sm font-bold text-ink">تماس با پندار</h2>
       <ul class="space-y-1.5 text-sm leading-7 text-ink-muted">
         {site.phones.map((p) => (
-          <li><a class="inline-block py-0.5 hover:text-primary-700" href={telHref(p.number)}><bdi>{toPersianDigits(p.number)}</bdi></a></li>
+          <li><a class="inline-block py-0.5 whitespace-nowrap hover:text-primary-700" href={telHref(p.number)}><bdi>{toPersianDigits(p.number)}</bdi></a></li>
         ))}
       </ul>
 
@@ -66,7 +66,7 @@ const socials = [
       )}
     </section>
 
-    <div class="space-y-7 border-t border-primary-100/80 pt-8 text-center sm:border-0 sm:pt-0 sm:text-start">
+    <div class="space-y-5 border-t border-primary-100/80 pt-6 text-center sm:space-y-7 sm:border-0 sm:pt-0 sm:text-start">
       <section aria-label="ساعت کاری">
         <h2 class="mb-3 text-sm font-bold text-ink">ساعت کاری</h2>
         <ul class="mx-auto grid w-fit grid-cols-[auto_auto] gap-x-6 gap-y-1.5 text-sm text-ink-muted sm:mx-0 sm:flex sm:w-full sm:flex-col sm:gap-1.5">
@@ -108,7 +108,7 @@ const socials = [
 
   <CrisisStrip />
 
-  <div class="border-t border-primary-100 py-6">
+  <div class="border-t border-primary-100 py-5 sm:py-6">
     <p class="container-site text-center text-sm text-ink-muted">
       اگر نمی‌دانید از کجا شروع کنید، همین حالا تماس بگیرید؛ در اولین گفت‌وگو با هم راه را پیدا می‌کنیم.
     </p>

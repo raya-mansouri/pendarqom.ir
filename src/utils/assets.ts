@@ -1,9 +1,5 @@
 import type { ImageMetadata } from "astro";
 
-export interface AssetEntry {
-  src: string;
-}
-
 const therapistModules = import.meta.glob<{ default: ImageMetadata }>(
   "../assets/therapists/*.webp",
   { eager: true },
@@ -26,13 +22,13 @@ export const workshopPosters: Record<string, ImageMetadata> = Object.fromEntries
   ]),
 );
 
-const articleModules = import.meta.glob<{ default: { src: string } }>(
+const articleModules = import.meta.glob<{ default: ImageMetadata }>(
   "../assets/articles/*.webp",
   { eager: true },
 );
-export const articleCovers: Record<string, AssetEntry> = Object.fromEntries(
+export const articleCovers: Record<string, ImageMetadata> = Object.fromEntries(
   Object.entries(articleModules).map(([path, mod]) => [
     path.split("/").pop()!.replace(".webp", ""),
-    { src: mod.default.src },
+    mod.default,
   ]),
 );

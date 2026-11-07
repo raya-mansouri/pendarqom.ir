@@ -11,11 +11,12 @@ import TestimonialCard from "../components/cards/TestimonialCard.astro";
 import CtaStrip from "../components/CtaStrip.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
+import { faqs } from "../data/faq";
 import { testimonials } from "../data/testimonials";
 import { telHref } from "../utils/links";
 import { toPersianDigits } from "../utils/persian";
 import { readingTimeMinutes } from "../utils/readingtime";
-import logo from "../assets/logo.png";
+import sessionRoom from "../assets/gallery/room-session-qom.webp";
 
 const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
 const allTherapists = (await getCollection("therapists")).sort((a, b) => a.data.order - b.data.order);
@@ -32,6 +33,8 @@ const articles = (await getCollection("articles"))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
   .slice(0, 3);
 const shownTestimonials = testimonials.filter((t) => t.consent && !t.placeholder).slice(0, 4);
+const homeFaqOrders = [1, 3, 4, 5, 6];
+const homeFaqs = homeFaqOrders.map((order) => faqs.find((f) => f.order === order)).filter((f) => f !== undefined);
 const primaryPhone = site.phones[0];
 const telephone = "+98" + primaryPhone.number.replace(/\D/g, "").replace(/^0/, "");
 
@@ -57,55 +60,62 @@ const whyUs = [
       logo: new URL("/logo.png", site.url).href,
       image: new URL("/og-default.png", site.url).href,
     },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: homeFaqs.map((f) => ({
+        "@type": "Question",
+        name: f.question,
+        acceptedAnswer: { "@type": "Answer", text: f.answer },
+      })),
+    },
   ]}
 >
   <!-- ۱. Hero -->
   <section class="relative overflow-hidden">
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-bl from-primary-50 via-bg to-primary-100" aria-hidden="true"></div>
     <div class="container-site relative grid gap-12 py-16 sm:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-      <div class="@container">
+      <div class="@container text-center sm:text-start">
         <p class="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-surface/70 px-4 py-1.5 text-sm font-semibold text-primary-700">
           کلینیک روانشناسی در قم
         </p>
-        <h1 class="mt-5 text-[min(30px,calc(100cqw/15.8))] leading-[1.35] sm:text-[min(48px,calc(100cqw/15.8))] sm:leading-[1.25] lg:text-[30px] lg:leading-[1.3] xl:text-[36px]">
+        <h1 class="mt-5 text-[clamp(26px,7.5vw,32px)] leading-[1.35] sm:text-[min(48px,calc(100cqw/15.8))] sm:leading-[1.25] lg:text-[30px] lg:leading-[1.3] xl:text-[36px]">
           کلینیک علمی روانشناسی پندار نیم‌رخ قم
         </h1>
-        <p class="mt-5 text-lg font-semibold text-ink sm:text-2xl">
+        <p class="mt-5 text-balance text-lg font-semibold text-ink sm:text-2xl">
           اینجا می‌توانید بدون قضاوت، از خودتان و رابطه‌تان حرف بزنید
         </p>
-        <p class="mt-4 max-w-xl text-lg leading-8 text-ink-muted">
+        <p class="mt-4 max-w-xl text-balance text-lg leading-8 text-ink-muted">
           روان‌درمانی فردی، زوج‌درمانی، مشاوره کودک و نوجوان و ارزیابی روانشناختی؛ حضوری، تلفنی و آنلاین.
         </p>
-        <div class="mt-8 flex flex-wrap gap-3">
+        <div class="mt-8 flex flex-wrap justify-center gap-3 sm:justify-start">
           <a href={telHref(primaryPhone.number)} class="btn btn-primary px-7 py-3 text-base">رزرو نوبت</a>
           <a href="/services/" class="btn btn-secondary px-7 py-3 text-base">خدمات کلینیک</a>
         </div>
         <p class="mt-3 text-sm text-ink-muted">
           نمی‌دانید از کجا شروع کنید؟ کافی است تماس بگیرید؛ در اولین گفت‌وگو راهنمایی‌تان می‌کنیم.
         </p>
-        <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-muted">
+        <ul class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-ink-muted sm:justify-start">
           <li class="flex items-center gap-1.5">از سال {toPersianDigits(site.foundedYear)}</li>
           <li class="flex items-center gap-1.5">حضوری، تلفنی و آنلاین</li>
         </ul>
       </div>
-      <div class="relative hidden lg:block" aria-hidden="true">
-        <div class="absolute -inset-6 rounded-t-[13rem] rounded-b-[3rem] bg-primary-100"></div>
-        <div class="relative flex min-h-[24rem] flex-col items-center justify-center gap-8 rounded-t-[10rem] rounded-b-[2.5rem] bg-gradient-to-bl from-primary-200 via-primary-50 to-surface px-10 text-center shadow-soft">
-          <div class="absolute inset-4 rounded-t-[9rem] rounded-b-[2rem] border border-surface/70"></div>
+      <div class="relative hidden lg:block">
+        <div class="absolute -inset-6 rounded-t-[13rem] rounded-b-[3rem] bg-primary-100" aria-hidden="true"></div>
+        <figure class="relative overflow-hidden rounded-t-[10rem] rounded-b-[2.5rem] bg-surface shadow-soft">
           <Picture
-            src={logo}
+            src={sessionRoom}
             formats={["avif", "webp"]}
-            densities={[1, 2]}
-            alt=""
-            width={160}
-            height={160}
+            widths={[400, 640, 900]}
+            sizes="(min-width: 1024px) 40vw, 0px"
+            alt="اتاق جلسهٔ مشاورهٔ کلینیک پندار نیم‌رخ با دو صندلی راحتی و گواهی‌های درمانگران"
             loading="eager"
-            class="relative w-40 drop-shadow-sm"
+            class="h-[26rem] w-full object-cover"
           />
-          <p class="relative max-w-[15rem] text-base leading-8 text-primary-800">
+          <figcaption class="border-t border-primary-100 bg-surface px-8 py-5 text-center text-base leading-8 text-primary-800">
             فضایی آرام و محرمانه، برای گفت‌وگویی صادقانه دربارهٔ آنچه برایتان مهم است.
-          </p>
-        </div>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -162,10 +172,12 @@ const whyUs = [
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {whyUs.map((item) => (
           <div class="card reveal p-6">
-            <span class="grid size-11 place-items-center rounded-xl bg-primary-50 text-primary-600">
-              <Icon name={item.icon} size={22} />
-            </span>
-            <h3 class="mt-4 font-bold text-primary-700">{item.title}</h3>
+            <div class="flex items-center gap-3">
+              <span class="grid size-11 shrink-0 place-items-center rounded-xl bg-primary-50 text-primary-600">
+                <Icon name={item.icon} size={22} />
+              </span>
+              <h3 class="font-bold text-primary-700">{item.title}</h3>
+            </div>
             <p class="mt-2 text-sm leading-7 text-ink-muted">{item.text}</p>
           </div>
         ))}
@@ -177,7 +189,7 @@ const whyUs = [
   <section class="section" aria-labelledby="workshops-title">
     <div class="container-site">
       <SectionHeading id="workshops-title" eyebrow="آموزش" title="کارگاه‌های پیشِ رو" lead="مهارت‌های روانی را در محیطی گروهی و کاربردی تمرین کنید" />
-      <div class="grid gap-6 md:grid-cols-3">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {workshops.map((w) => (
           <WorkshopCard
             id={w.id}
@@ -187,7 +199,7 @@ const whyUs = [
             dateDisplay={w.data.dateDisplay}
             sessions={w.data.sessions}
             status={w.data.status}
-            sizes="(min-width: 72rem) 22rem, (min-width: 48rem) calc((100vw - 6rem) / 3), (min-width: 40rem) calc(100vw - 3rem), calc(100vw - 2rem)"
+            sizes="(min-width: 72rem) 22rem, (min-width: 64rem) calc((100vw - 6rem) / 3), (min-width: 40rem) calc((100vw - 4.5rem) / 2), calc(100vw - 2rem)"
           />
         ))}
       </div>
@@ -202,7 +214,7 @@ const whyUs = [
     <section class="section bg-surface" aria-labelledby="testimonials-title">
       <div class="container-site">
         <SectionHeading id="testimonials-title" eyebrow="تجربه مراجعین" title="آنچه مراجعان پندار می‌گویند" />
-        <div class="grid gap-6 md:grid-cols-3">
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {shownTestimonials.map((t) => (
             <TestimonialCard quote={t.quote} attribution={t.attribution} />
           ))}
@@ -218,7 +230,7 @@ const whyUs = [
   <section class="section" aria-labelledby="articles-title">
     <div class="container-site">
       <SectionHeading id="articles-title" eyebrow="خواندنی‌ها" title="آخرین مقالات" />
-      <div class="grid gap-6 md:grid-cols-3">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {articles.map((a) => (
           <ArticleCard
             id={a.id}
@@ -230,6 +242,33 @@ const whyUs = [
           />
         ))}
       </div>
+    </div>
+  </section>
+  <!-- ۹. پرسش‌های متداول -->
+  <section class="section bg-surface" aria-labelledby="faq-title">
+    <div class="container-site max-w-3xl">
+      <SectionHeading
+        id="faq-title"
+        eyebrow="پرسش‌های متداول"
+        title="پاسخ پرسش‌های رایج پیش از اولین جلسه"
+        lead="اگر پاسخ سؤال خود را پیدا نکردید، با کلینیک تماس بگیرید یا صفحه سؤالات متداول را ببینید."
+      />
+      {homeFaqs.map((f) => (
+        <details class="card group mb-3 p-5">
+          <summary class="flex min-h-11 cursor-pointer list-none items-center font-bold marker:hidden">
+            <span class="flex w-full items-center justify-between gap-4">
+              {f.question}
+              <span aria-hidden="true" class="shrink-0 text-primary-600 transition-transform group-open:rotate-45">
+                <Icon name="plus" size={20} />
+              </span>
+            </span>
+          </summary>
+          <p class="mt-3 text-sm leading-7 text-ink-muted">{f.answer}</p>
+        </details>
+      ))}
+      <p class="mt-6 text-center">
+        <a href="/faq/" class="btn btn-secondary">همه سؤالات متداول</a>
+      </p>
     </div>
   </section>
 </BaseLayout>
